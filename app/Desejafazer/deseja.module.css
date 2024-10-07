@@ -1,0 +1,32 @@
+
+
+.content {
+   text-align: center;
+   margin-top: 5%;
+}
+
+.buttonContainer {
+    margin-top: 8%;
+}
+
+.title {
+    text-align: center; 
+}
+
+.button{
+   height: 60px;
+   width: 130px;
+   background-color: #6E0000;
+   border-radius: 10PX;
+   color: aliceblue;
+}
+
+.button2 {
+    margin-left: 5%;
+    height: 60px;
+    width: 130px;
+    background-color: #6E0000;
+    border-radius: 10PX;
+    color: aliceblue;
+}
+
