@@ -7,14 +7,11 @@ import Header from './components/header/Header'
 
 export default function Comecar() {
   return (
-
     <div className={styles.container}>
+      <Header />
     <div className={styles.div1}>
     <img src={imagem1} alt="Clique para começar !" className={styles.imagem1} />
     </div>
-
-    <div>
-        <Header />
     </div>
   )
 }
