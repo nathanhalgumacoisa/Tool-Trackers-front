@@ -32,8 +32,8 @@ const App = () => (
       trigger={['click']}
     >
       <a onClick={(e) => e.preventDefault()} className={styles.dropdown_link}>
-        <Space>
-          Carrinho 01
+        <Space className={styles.title}>
+          Carrinhos
           <DownOutlined />
         </Space>
       </a>
