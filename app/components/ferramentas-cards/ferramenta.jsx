@@ -1,15 +1,19 @@
 import React from 'react';
-import { Card } from 'antd';
+import { Card, Flex } from 'antd';
 const { Meta } = Card;
+
 const App = () => (
   <Card
     hoverable
     style={{
       width: 240,
+      height: 320,
+      marginTop: 20,
     }}
-    cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+    cover={<img alt="foto da ferramenta" src="" />}
   >
-    <Meta title="Europe Street beat" description="www.instagram.com" />
+    <Meta title="Nome da ferramenta" description="Disponível..." />
+    
   </Card>
 );
 export default App;

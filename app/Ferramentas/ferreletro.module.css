@@ -1,0 +1,39 @@
+.contant{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.card{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.h1{
+    font-size: 3rem;
+    margin-top: 5%;
+    text-align: center;
+}
+
+.p1 {
+    margin-top: 5%;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.cards{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin-top: -16%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
