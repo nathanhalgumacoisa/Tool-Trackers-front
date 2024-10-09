@@ -1,8 +1,8 @@
+"use client";
 // app/components/card/Card.jsx
 // app/components/card/Card.jsx
-"use client"; // Adicione isso no topo do seu arquivo
+// Adicione isso no topo do seu arquivo
 
-import React from 'react';
 import { Card } from 'antd';
 import { useRouter } from 'next/navigation'; // Importando useRouter
 import styles from './card.module.css'; // Importando o CSS Module
