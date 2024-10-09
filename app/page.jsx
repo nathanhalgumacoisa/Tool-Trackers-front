@@ -10,7 +10,7 @@ export default function Comecar() {
       <Header />
       <div className={styles.container}>
         <div className={styles.div1}>
-          <Link href="/Desejafazer"> {/* Envolvendo a imagem com o Link */}
+          <Link href="/Desejafazer"> 
             <img src="./clique.png" alt="Clique para começar !" className={styles.imagem1} />
           </Link>
         </div>
