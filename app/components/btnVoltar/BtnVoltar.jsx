@@ -2,9 +2,11 @@ import styles from './btnVoltar.module.css'
 
 const BtnVoltar = ({rota}) => {
     return(
-        <div className={styles.container}>
-            <button onClick={rota}>Voltar</button>
-        </div>
+        <>
+            <a href={rota}>
+                <button className={styles.btn}>Voltar</button>
+            </a>
+        </>
     )
 }
 export default BtnVoltar
