@@ -4,6 +4,8 @@ import styles from "./page.module.css"
 
 import Header from './components/header/Header'
 
+import Footer from './components/footer/Footer'
+
 
 export default function Comecar() {
   return (
@@ -16,7 +18,9 @@ export default function Comecar() {
         </div>
       </div>
       </>
+      <Footer />
     </div>
+    
 
   )
 }
