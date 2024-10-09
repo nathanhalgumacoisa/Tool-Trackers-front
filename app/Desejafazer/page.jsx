@@ -1,18 +1,14 @@
-import styles from './deseja.module.css';
+// app/Desejafazer/page.jsx
 import React from 'react';
+import App from '../components/card/Card'; // Ajuste o caminho conforme necessário
 
-const desejafazer = () => {
-  return (
-    <div className={styles.container}>
-      <div className={styles.content}>
-        <h1 className={styles.title}>O que deseja fazer?</h1>
-        <div className={styles.buttonContainer}>
-          <button className={styles.button}>Empréstimos</button>
-          <button className={styles.button}>Conferências</button>
+const Desejafazer = () => {
+    return (
+        <div>
+            <h1>Deseja Fazer</h1>
+            <App /> {/* Aqui você renderiza o componente */}
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
-export default desejafazer;
+export default Desejafazer;
