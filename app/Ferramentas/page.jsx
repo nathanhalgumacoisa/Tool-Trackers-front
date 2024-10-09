@@ -3,7 +3,7 @@ import Card from '../components/ferramentas-cards/ferramenta.jsx'
 import styles from './ferreletro.module.css';
 import React from 'react';
 import Header from '../components/header/header.jsx';
-import Footer from '../components/footer/footer.jsx';
+
 
 
 const Ferramentas= () => {
@@ -41,7 +41,7 @@ const Ferramentas= () => {
            
           </div>
         </div>
-        <Footer></Footer>
+    
       </div>
     );
   };
