@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from "./page.module.css";
 import Header from './components/header/Header';
-import Footer from './components/footer/Footer';
 import Link from 'next/link'; // Importando o Link do Next.js
 
 export default function Comecar() {
@@ -15,7 +14,6 @@ export default function Comecar() {
           </Link>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
