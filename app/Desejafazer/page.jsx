@@ -7,7 +7,7 @@ const Desejafazer = () => {
         <div>
             <h1 className={styles.cards1}>O que deseja fazer ?</h1>
             <div className={styles.cardsContainer}> {/* Contêiner flexível para os cards */}
-                <App title="Empréstimo" link="/Emprestimo" /> {/* Primeiro card */}
+                <App title="Empréstimo" link="/Emprestimos" /> {/* Primeiro card */}
                 <App title="Conferência" link="/Conferencia" /> {/* Segundo card */}
             </div>
         </div>
