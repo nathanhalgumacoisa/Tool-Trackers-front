@@ -3,6 +3,13 @@
     background-color: #f4f4f4; /* Cor de fundo para contraste */
 }
 
+.container{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
 
 
 .h1 {
@@ -15,13 +22,6 @@
     margin-bottom: 5px;
     color: #333;
 }
-
-.input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 2px solid red; /* Borda vermelha */
-    border-radius: 5px; /* Arredondamento */
-    outline: none; /* Remove a borda de foco padrão */
-    transition: border-color 0.3s; 
-        }
+.input{
+    margin-left: 50px;
+}

@@ -71,19 +71,20 @@ const CadastroFerr = () => {
       
     return (
         
-        <div className={styles.container}>
+        <div className={styles.conjunto}>
           <Header/>  
-            <h1>Cadastro de Ferramentas</h1>
+           
             <form onSubmit={handleSubmit}>
-
+                <div className={styles.container}> 
+                     <h1>Cadastro de Ferramentas</h1>
                 <div>
-                 <App title="Nome:"></App>
+                 <App title="Nome:" className={styles.input}></App>
 
                 </div>
 
 
                 <div>
-                 <App title="Imagem URL:"></App>
+                 <App title="Imagem URL:" ></App>
 
                 </div>
 
@@ -117,7 +118,9 @@ const CadastroFerr = () => {
                 <div>
                  <App title="Localização ID:"></App>
 
-                </div>
+                </div> </div>
+                    
+               
 
 
                 <button type="submit" className={styles.submitButton}>Enviar</button>
@@ -138,7 +141,10 @@ const CadastroFerr = () => {
                     </li>
                 ))}
             </ul>
+            
+            
         </div>
+        
     );
 };
 
