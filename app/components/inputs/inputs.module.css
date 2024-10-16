@@ -1,0 +1,11 @@
+.input {
+    width: 100%;
+    background-color: rgb(156, 0, 0);
+    color: aliceblue;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px ; /* Borda vermelha */
+    border-radius: 5px; /* Arredondamento */
+    outline: none; /* Remove a borda de foco padrão */
+    transition: border-color 0.3s; 
+        }
