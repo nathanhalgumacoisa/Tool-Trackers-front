@@ -18,7 +18,7 @@ const App = ({ title }) => {
         className={styles.input}
         value={inputValue}
         onChange={handleInputChange}
-        placeholder={title}
+        placeholder="Digite aqui..."
       />
     </>
   );

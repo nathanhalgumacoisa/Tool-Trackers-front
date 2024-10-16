@@ -84,39 +84,39 @@ const CadastroFerr = () => {
 
 
                 <div>
-                 <App title="Imagem URL:" ></App>
+                 <App title="Imagem URL:" subtitle="digite algo" className={styles.input}></App>
 
                 </div>
 
 
                 <div>
-                 <App title="Conjunto:"></App>
+                 <App title="Conjunto:" className={styles.input}></App>
 
                 </div>
 
                 <div>
-                 <App title="Número:"></App>
+                 <App title="Número:" className={styles.input}></App>
 
                 </div>
 
                 <div>
-                 <App title="Patrimônio:"></App>
+                 <App title="Patrimônio:" className={styles.input}></App>
 
                 </div>
 
 
                 <div>
-                 <App title="Modelo:"></App>
+                 <App title="Modelo:" className={styles.input}></App>
 
                 </div>
 
                 <div>
-                 <App title="Descrição:"></App>
+                 <App title="Descrição:" className={styles.input}></App>
 
                 </div>
 
                 <div>
-                 <App title="Localização ID:"></App>
+                 <App title="Localização ID:" className={styles.input}></App>
 
                 </div> </div>
                     
