@@ -5,7 +5,15 @@
     padding: 10px;
     margin: 10px 0;
     border: 2px ; /* Borda vermelha */
-    border-radius: 5px; /* Arredondamento */
+    border-radius: 50px; /* Arredondamento */
     outline: none; /* Remove a borda de foco padrão */
     transition: border-color 0.3s; 
         }
+
+.title{
+    font-size: 15px;
+}
+
+#placeholder{
+    color: rgb(255, 255, 255);
+}

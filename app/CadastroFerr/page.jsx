@@ -4,7 +4,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './cadastroferr.module.css'; // Certifique-se de que o caminho do CSS esteja correto
 import Header from '../components/header/Header';
-import { App } from '../components/inputs/inputs';
+import App from '../components/inputs/inputs.jsx';
+
 
 
 const CadastroFerr = () => {
@@ -74,98 +75,50 @@ const CadastroFerr = () => {
           <Header/>  
             <h1>Cadastro de Ferramentas</h1>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Nome:</label>
-                    <input
-                        type="text"
-                        className={styles.input}
-                        value={nome}
-                        onChange={(e) => setNome(e.target.value)}
-                        placeholder="Digite seu nome"
-                        required
-                    />
-                </div>
 
                 <div>
-                  <App/>
+                 <App title="Nome:"></App>
 
                 </div>
 
+
                 <div>
-                    <label>Imagem URL:</label>
-                    <input
-                        type="text"
-                        className={styles.input}
-                        value={imagemUrl}
-                        onChange={(e) => setImagemUrl(e.target.value)}
-                        placeholder="Digite a URL da imagem"
-                    />
+                 <App title="Imagem URL:"></App>
+
+                </div>
+
+
+                <div>
+                 <App title="Conjunto:"></App>
+
                 </div>
 
                 <div>
-                    <label>Conjunto:</label>
-                    <input
-                        type="text"
-                        className={styles.input}
-                        value={conjunto}
-                        onChange={(e) => setConjunto(e.target.value)}
-                        placeholder="Digite o conjunto"
-                    />
+                 <App title="Número:"></App>
+
                 </div>
 
                 <div>
-                    <label>Número:</label>
-                    <input
-                        type="text"
-                        className={styles.input}
-                        value={numero}
-                        onChange={(e) => setNumero(e.target.value)}
-                        placeholder="Digite o número"
-                    />
+                 <App title="Patrimônio:"></App>
+
+                </div>
+
+
+                <div>
+                 <App title="Modelo:"></App>
+
                 </div>
 
                 <div>
-                    <label>Patrimônio:</label>
-                    <input
-                        type="text"
-                        className={styles.input}
-                        value={patrimonio}
-                        onChange={(e) => setPatrimonio(e.target.value)}
-                        placeholder="Digite o patrimônio"
-                    />
+                 <App title="Descrição:"></App>
+
                 </div>
 
                 <div>
-                    <label>Modelo:</label>
-                    <input
-                        type="text"
-                        className={styles.input}
-                        value={modelo}
-                        onChange={(e) => setModelo(e.target.value)}
-                        placeholder="Digite o modelo"
-                    />
+                 <App title="Localização ID:"></App>
+
                 </div>
 
-                <div>
-                    <label>Descrição:</label>
-                    <textarea
-                        className={styles.input}
-                        value={descricao}
-                        onChange={(e) => setDescricao(e.target.value)}
-                        placeholder="Digite a descrição"
-                    />
-                </div>
-
-                <div>
-                    <label>Localização ID:</label>
-                    <input
-                        type="text"
-                        className={styles.input}
-                        value={localizacaoId}
-                        onChange={(e) => setLocalizacaoId(e.target.value)}
-                        placeholder="Digite a localização ID"
-                    />
-                </div>
 
                 <button type="submit" className={styles.submitButton}>Enviar</button>
             </form>
