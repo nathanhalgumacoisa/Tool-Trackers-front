@@ -121,12 +121,14 @@ const CadastroFerr = () => {
                 </div> </div>
                     
                
+               <div>
 
-
-                <button type="submit" className={styles.submitButton}>Enviar</button>
+                <button type="submit" className={styles.submitButton}>Enviar</button>  </div>
             </form>
 
             <h2>Ferramentas Cadastradas:</h2>
+            
+
             <ul>
                 {ferramentas.map((ferramenta, index) => (
                     <li key={index}>

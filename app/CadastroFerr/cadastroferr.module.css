@@ -25,3 +25,11 @@
 .input{
     margin-left: 50px;
 }
+
+
+.submitButton{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
