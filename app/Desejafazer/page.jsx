@@ -7,8 +7,8 @@ const Desejafazer = () => {
         <div>
             <h1 className={styles.cards1}>O que deseja fazer ?</h1>
             <div className={styles.cardsContainer}> {/* Contêiner flexível para os cards */}
-                <App title="Empréstimo" link="/Emprestimos" /> {/* Primeiro card */}
-                <App title="Conferência" link="/Conferencia" /> {/* Segundo card */}
+                <App title="Empréstimo" link="/opcoesEmprestimos" /> {/* Primeiro card */}
+                <App title="Conferência" link="/opcoesConferencia" /> {/* Segundo card */}
             </div>
         </div>
     );
