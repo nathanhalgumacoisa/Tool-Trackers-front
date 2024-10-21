@@ -6,10 +6,10 @@ import styles from './gerenciamentousuarios.module.css';
 
 function Usuarios() {
     const [locals, setLocals] = useState([]); // Estado para armazenar usuários
-    const [nome, setNome] = useState(''); // Estado para o nome do usuário
-    const [tipoUsuario, setTipoUsuario] = useState(''); // Estado para o tipo de usuário
-    const [numeroNif, setNumeroNif] = useState(''); // Estado para o número do NIF
-    const [numeroQrCode, setNumeroQrCode] = useState(''); // Estado para o número do QRCODE
+    const [nome, setNome] = useState(''); 
+    const [tipoUsuario, setTipoUsuario] = useState(''); 
+    const [numeroNif, setNumeroNif] = useState(''); 
+    const [numeroQrCode, setNumeroQrCode] = useState(''); 
     const [editingUserId, setEditingUserId] = useState(null); // Estado para o usuário em edição
     const [userToDelete, setUserToDelete] = useState(null); // Estado para o usuário a ser excluído
 
@@ -42,11 +42,11 @@ function Usuarios() {
                 numero_qrcode: numeroQrCode
             });
             setEditingUserId(null); // Reseta o id de edição
-            setNome(''); // Limpa o campo de nome
-            setTipoUsuario(''); // Limpa o campo de tipo de usuário
-            setNumeroNif(''); // Limpa o campo de número NIF
-            setNumeroQrCode(''); // Limpa o campo de número QRCODE
-            getUsuarios(); // Atualiza a lista de usuários
+            setNome(''); 
+            setTipoUsuario(''); 
+            setNumeroNif(''); 
+            setNumeroQrCode(''); 
+            getUsuarios(); 
         } catch (error) {
             console.log("Erro ao atualizar usuário:", error);
         }
@@ -56,8 +56,8 @@ function Usuarios() {
     function editUser(user) {
         setNome(user.nome);
         setTipoUsuario(user.tipo_usuario);
-        setNumeroNif(user.numero_nif); // Define o número NIF
-        setNumeroQrCode(user.numero_qrcode); // Define o número QRCODE
+        setNumeroNif(user.numero_nif); 
+        setNumeroQrCode(user.numero_qrcode); 
         setEditingUserId(user.user_id); // Define o usuário que está sendo editado
     }
 
@@ -94,7 +94,6 @@ function Usuarios() {
                             <button onClick={() => editUser(l)}>Editar</button>
                             <button onClick={() => confirmDelete(l.user_id)}>Excluir</button>
 
-                            {/* Formulário para edição visível apenas quando o usuário é selecionado */}
                             {editingUserId === l.user_id && (
                                 <form onSubmit={handleSubmit}>
                                     <input
@@ -136,7 +135,6 @@ function Usuarios() {
                 )}
             </div>
 
-            {/* Modal de Confirmação */}
             {userToDelete !== null && (
                 <div className={styles.modal}>
                     <div className={styles.modalContent}>
