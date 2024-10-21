@@ -10,7 +10,7 @@ import App from '../components/inputs/inputs.jsx';
 
 const CadastroFerr = () => {
     const [nome, setNome] = useState('');
-    const [imagemUrl, setImagemUrl] = useState('');
+    const [imagem_url, setImagemUrl] = useState('');
     const [conjunto, setConjunto] = useState('');
     const [numero, setNumero] = useState('');
     const [patrimonio, setPatrimonio] = useState('');
@@ -39,7 +39,7 @@ const CadastroFerr = () => {
         e.preventDefault();
         const data = {
             nome,
-            imagemUrl,
+            imagem_url,
             conjunto,
             numero,
             patrimonio,
@@ -50,9 +50,18 @@ const CadastroFerr = () => {
         console.log(data)
 
         try {
-            await axios.post('http://localhost:3003/ferramentas', data);
+            await axios.post('http://localhost:3003/ferramentas', {
+                nome,
+                imagem_url,
+                conjunto,
+                numero,
+                patrimonio,
+                modelo,
+                descricao,
+                localizacaoId
+            });
             setSuccessMessage('Cadastrado com sucesso!');
-            fetchCadastrarFerr();
+            //fetchCadastrarFerr();
             clearInputs();
         } catch (error) {
             console.error(error);
@@ -71,84 +80,125 @@ const CadastroFerr = () => {
     };
       
     return (
-        
         <div className={styles.conjunto}>
-          <Header/>  
-           
+            <Header />
             <form onSubmit={handleSubmit}>
-                <div className={styles.container}> 
-                     <h1>Cadastro de Ferramentas</h1>
-                <div>
-                 <App title="Nome:" className={styles.input}></App>
+                <div className={styles.container}>
+                    <h1>Cadastro de Ferramentas</h1>
 
+                    <div>
+                        <label>
+                            Nome:
+                            <input
+                                type="text"
+                                className={styles.input}
+                                value={nome}
+                                onChange={(e) => setNome(e.target.value)}
+                                required
+                            />
+                        </label>
+                    </div>
+
+                    <div>
+                        <label>
+                            Imagem URL:
+                            <input
+                                type="text"
+                                className={styles.input}
+                                value={imagem_url}
+                                onChange={(e) => setImagemUrl(e.target.value)}
+                                placeholder="digite algo"
+                                required
+                            />
+                        </label>
+                    </div>
+
+                    <div>
+                        <label>
+                            Conjunto:
+                            <input
+                                type="text"
+                                className={styles.input}
+                                value={conjunto}
+                                onChange={(e) => setConjunto(e.target.value)}
+                                required
+                            />
+                        </label>
+                    </div>
+
+                    <div>
+                        <label>
+                            Número:
+                            <input
+                                type="number"
+                                className={styles.input}
+                                value={numero}
+                                onChange={(e) => setNumero(e.target.value)}
+                                required
+                            />
+                        </label>
+                    </div>
+
+                    <div>
+                        <label>
+                            Patrimônio:
+                            <input
+                                type="text"
+                                className={styles.input}
+                                value={patrimonio}
+                                onChange={(e) => setPatrimonio(e.target.value)}
+                                required
+                            />
+                        </label>
+                    </div>
+
+                    <div>
+                        <label>
+                            Modelo:
+                            <input
+                                type="text"
+                                className={styles.input}
+                                value={modelo}
+                                onChange={(e) => setModelo(e.target.value)}
+                                required
+                            />
+                        </label>
+                    </div>
+
+                    <div>
+                        <label>
+                            Descrição:
+                            <textarea
+                                className={styles.input}
+                                value={descricao}
+                                onChange={(e) => setDescricao(e.target.value)}
+                                required
+                            ></textarea>
+                        </label>
+                    </div>
+
+                    <div>
+                        <label>
+                            Localização ID:
+                            <input
+                                type="text"
+                                className={styles.input}
+                                value={localizacaoId}
+                                onChange={(e) => setLocalizacaoId(e.target.value)}
+                                required
+                            />
+                        </label>
+                    </div>
                 </div>
 
-
                 <div>
-                 <App title="Imagem URL:" subtitle="digite algo" className={styles.input}></App>
-
+                    <button type="submit" className={styles.submitButton}>Enviar</button>
                 </div>
-
-
-                <div>
-                 <App title="Conjunto:" className={styles.input}></App>
-
-                </div>
-
-                <div>
-                 <App title="Número:" className={styles.input}></App>
-
-                </div>
-
-                <div>
-                 <App title="Patrimônio:" className={styles.input}></App>
-
-                </div>
-
-
-                <div>
-                 <App title="Modelo:" className={styles.input}></App>
-
-                </div>
-
-                <div>
-                 <App title="Descrição:" className={styles.input}></App>
-
-                </div>
-
-                <div>
-                 <App title="Localização ID:" className={styles.input}></App>
-
-                </div> </div>
-                    
-               
-               <div>
-
-                <button type="submit" className={styles.submitButton}>Enviar</button>  </div>
             </form>
-
-            <h2>Ferramentas Cadastradas:</h2>
-            
-
-            {/* <ul>
-                {ferramentas.map((ferramenta, index) => (
-                    <li key={index}>
-                        <strong>Nome:</strong> {ferramenta.nome} <br />
-                        <strong>Imagem URL:</strong> {ferramenta.imagemUrl} <br />
-                        <strong>Conjunto:</strong> {ferramenta.conjunto} <br />
-                        <strong>Número:</strong> {ferramenta.numero} <br />
-                        <strong>Patrimônio:</strong> {ferramenta.patrimonio} <br />
-                        <strong>Modelo:</strong> {ferramenta.modelo} <br />
-                        <strong>Descrição:</strong> {ferramenta.descricao} <br />
-                        <strong>Localização ID:</strong> {ferramenta.localizacaoId} <br />
-                    </li>
-                ))}
-            </ul> */}
-            
-            
+            {successMessage && <p>{successMessage}</p>}
         </div>
-        
     );
+
 };
 
 export default CadastroFerr;
