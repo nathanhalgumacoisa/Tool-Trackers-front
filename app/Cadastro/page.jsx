@@ -2,7 +2,7 @@ import React from 'react'
 import App from '../components/inputUser/InputsUser'
 import Header from '../components/header/Header'
 import styles from './cadastro.module.css'
-import Scanner from '../Scanner/page.jsx'
+import BtnScanner from '../components/btnScanner/BtnScanner'
 import Link from 'next/link'
 
 export default function Cadastro() {
@@ -10,13 +10,8 @@ export default function Cadastro() {
     <div>
         <Header />
         <div className={styles.container}>
-          <App title="Nome"></App>
-          <div className={styles.btnScanner}>
-            <p>Cadastrar com...</p>
-            <Link href="/scanner">
-              <button>Escanear QRcode</button>
-            </Link>
-          </div>
+          <App title="Digite o seu nome"></App>
+          <BtnScanner />
           <App title="Cadastrar numero do NIF"></App>
           <App title="Cadastrar numero QRcode do aluno"></App>
         </div>
