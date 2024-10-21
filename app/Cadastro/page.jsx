@@ -12,6 +12,7 @@ export default function Cadastro() {
   const [nif, setNif] = useState('');
   const [qrCode, setQrCode] = useState('');
   const [usuarios, setUsuarios] = useState([]);
+  const [successMensage, setSuccessMensage] = useState('');
 
   useEffect(() => {
     fetchCadastrar();
@@ -26,9 +27,36 @@ export default function Cadastro() {
     }
   }
 
-  const handleSubmit = (e) => {
-    
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = {
+      nome,
+      numero_nif,
+      numero_qrcode,
+      tipo_usuario
+    };
+    console.log(data);
+
+    try{
+      await axios.post('http://localhost:3000/api/usuarios', {
+        nome,
+        numero_nif,
+        numero_qrcode,
+        tipo_usuario
+      });
+      setSuccessMensage('Cadastro realizado com sucesso!');
+      clearInputs()
+    }catch(error){
+      console.error(error);
+    }
+  };
+
+  const clearInputs = () => {
+    setName('');
+    setNif('');
+    setQrCode('');
   }
+
   return (
     <div>
         <Header />
