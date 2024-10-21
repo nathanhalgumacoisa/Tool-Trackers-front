@@ -84,48 +84,49 @@ function Usuarios() {
         <div>
             <Header />
             <div className={styles.App}>
+                <h1 className={styles.h1}>Usuários Cadastrados</h1>
                 {locals.length > 0 ? (
                     locals.map((l) => (
                         <div className={styles.usuarios} key={l.user_id}>
-                            <h3>Nome: {l.nome}</h3>
-                            <h4>Tipo: {l.tipo_usuario}</h4>
-                            <h4>Número do NIF: {l.numero_nif}</h4>
-                            <h4>Número do QRCODE: {l.numero_qrcode}</h4>
-                            <button onClick={() => editUser(l)}>Editar</button>
-                            <button onClick={() => confirmDelete(l.user_id)}>Excluir</button>
+                            <h3 className={styles.h3}>Nome: {l.nome}</h3>
+                            <h4 className={styles.h4}>Tipo: {l.tipo_usuario}</h4>
+                            <h4 className={styles.h4}>Número do NIF: {l.numero_nif}</h4>
+                            <h4 className={styles.h4}>Número do QRCODE: {l.numero_qrcode}</h4>
+                            <button className={styles.editarbutton} onClick={() => editUser(l)}>Editar</button>
+                            <button className={styles.excluirbutton} onClick={() => confirmDelete(l.user_id)}>Excluir</button>
 
                             {editingUserId === l.user_id && (
-                                <form onSubmit={handleSubmit}>
-                                    <input
+                                <form className={styles.formeditar} onSubmit={handleSubmit}>
+                                    <input className={styles.inputs}
                                         type="text"
                                         placeholder="Nome"
                                         value={nome}
                                         onChange={(e) => setNome(e.target.value)}
                                         required
                                     />
-                                    <input
+                                    <input className={styles.inputs}
                                         type="text"
                                         placeholder="Tipo de Usuário"
                                         value={tipoUsuario}
                                         onChange={(e) => setTipoUsuario(e.target.value)}
                                         required
                                     />
-                                    <input
+                                    <input className={styles.inputs}
                                         type="text"
                                         placeholder="Número do NIF"
                                         value={numeroNif}
                                         onChange={(e) => setNumeroNif(e.target.value)}
                                         required
                                     />
-                                    <input
+                                    <input className={styles.inputs}
                                         type="text"
                                         placeholder="Número do QRCODE"
                                         value={numeroQrCode}
                                         onChange={(e) => setNumeroQrCode(e.target.value)}
                                         required
                                     />
-                                    <button type="submit">Atualizar</button>
-                                    <button type="button" onClick={() => setEditingUserId(null)}>Cancelar</button>
+                                    <button className={styles.buttonseditar} type="submit">Atualizar</button>
+                                    <button className={styles.buttonseditar} type="button" onClick={() => setEditingUserId(null)}>Cancelar</button>
                                 </form>
                             )}
                         </div>
