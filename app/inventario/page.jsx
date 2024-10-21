@@ -1,14 +1,11 @@
 "use client";
-
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-import styles from './cadastroferr.module.css'; // Certifique-se de que o caminho do CSS esteja correto
-import Header from '../components/header/Header';
-import App from '../components/inputs/inputs.jsx';
+import Header from '../components/header/Header.jsx';
+import styles from './inventario.module.css';
 
-
-
-const CadastroFerr = () => {
+function Ferramentas() {
+    const [locals, setLocals] = useState([]); // Estado para armazenar usuários
     const [nome, setNome] = useState('');
     const [imagem_url, setImagemUrl] = useState('');
     const [conjunto, setConjunto] = useState('');
@@ -19,186 +16,184 @@ const CadastroFerr = () => {
     const [localizacaoId, setLocalizacaoId] = useState('');
     const [ferramentas, setFerramentas] = useState([]);
     const [successMessage, setSuccessMessage] = useState('');
-
-    // const apiURL = "http://192.168.15.138:3003";
+    const [editingFerrId, setEditingFerrId] = useState(null); // Estado para o usuário em edição
+    const [ferrToDelete, setFerrToDelete] = useState(null); // Estado para o usuário a ser excluído
 
     useEffect(() => {
-        fetchCadastrarFerr();
+        getFerramentas(); // Chamada da função para obter usuários na montagem do componente
     }, []);
 
-    const fetchCadastrarFerr = async () => {
+    // Função para obter frramenta
+    async function getFerramentas() {
         try {
-            const response = await axios.get('http://localhost:3003/ferramentas');
-            setFerramentas(response.data);
+            const response = await axios.get(`http://localhost:3003/ferramentas`);
+            if (response.data && response.data.ferramentas) {
+                setLocals(response.data.ferramentas); // Armazenando os usuários no estado
+            } else {
+                console.log("Nenhum ferramenta encontrado na resposta.");
+            }
         } catch (error) {
-            console.error(error);
+            console.log("Erro ao buscar ferramentas:", error);
         }
-    };
+    }
 
-    const handleSubmit = async (e) => {
+    // Função para atualizar um ferramentas
+    async function handleSubmit(e) {
         e.preventDefault();
-        const data = {
-            nome,
-            imagem_url,
-            conjunto,
-            numero,
-            patrimonio,
-            modelo,
-            descricao,
-            localizacaoId
-        };
-        console.log(data)
-
         try {
-            await axios.post('http://localhost:3003/ferramentas', {
+            await axios.put(`http://localhost:3003/ferramentas/${editingFerrId}`, {
                 nome,
-                imagem_url,
-                conjunto,
-                numero,
-                patrimonio,
-                modelo,
-                descricao,
-                localizacaoId
+                imagem_url: imagem_url,
+                conjunto : conjunto,
+                numero : numero,
+                patrimonio : patrimonio,
+                modelo : modelo,
+                descricao : descricao,
+                localizacao_id: localizacaoId
             });
-            setSuccessMessage('Cadastrado com sucesso!');
-            //fetchCadastrarFerr();
-            clearInputs();
+        
+            setEditingFerrId(null); // Reseta o id de edição
+            setImagemUrl('');
+            setConjunto('');
+            setNumero('');
+            setPatrimonio('');
+            setModelo('');
+            setDescricao('');
+            setLocalizacaoId('');
+            setFerramentas('');
+            setSuccessMessage('');
+            getFerramentas();
         } catch (error) {
-            console.error(error);
+            console.log("Erro ao atualizar ferramenta:", error);
         }
-    };
+    }
 
-    const clearInputs = () => {
-        setNome('');
-        setImagemUrl('');
-        setConjunto('');
-        setNumero('');
-        setPatrimonio('');
-        setModelo('');
-        setDescricao('');
-        setLocalizacaoId('');
-    };
-      
+    // Função para iniciar a edição de um usuário
+    function editFerr(ferramenta) {
+        setImagemUrl(ferramenta.imagem_url);
+        setConjunto(ferramenta.conjunto);
+        setNumero(ferramenta.numero);
+        setPatrimonio(ferramenta.patrimonio);
+        setModelo(ferramenta.modelo);
+        setDescricao(ferramenta.descricao);
+        setLocalizacaoId(ferramenta.localizacaoId);
+        setFerramentas(ferramenta.ferramentas);
+        setSuccessMessage(ferramenta.successMessage);
+        setEditingFerrId(ferramenta.ferramenta_id); // Define o usuário que está sendo editado
+    }
+
+    // Função para abrir o modal de confirmação
+    function confirmDelete(ferramentaId) {
+        setFerrToDelete(ferramentaId); // Define o usuário a ser excluído
+    }
+
+    // Função para excluir um ferramenta
+    async function deleteFerr() {
+        if (ferrToDelete) {
+            try {
+                await axios.delete(`http://localhost:3003/ferramentas/${ferrToDelete}`);
+                // Atualiza a lista de ferraments localmente, removendo a ferramenta excluída
+                setLocals((prevLocals) => prevLocals.filter((ferramenta) => ferramenta.ferramenta_id !== ferrToDelete));
+                setFerrToDelete(null); // Reseta a ferramenta a ser excluída
+            } catch (error) {
+                console.log("Erro ao excluir ferramenta:", error);
+            }
+        }
+    }
+
     return (
-        <div className={styles.conjunto}>
+        <div>
             <Header />
-            <form onSubmit={handleSubmit}>
-                <div className={styles.container}>
-                    <h1>Cadastro de Ferramentas</h1>
+            <div className={styles.App}>
+                {locals.length > 0 ? (
+                    locals.map((ferr) => (
+                        <div className={styles.ferramentas} key={ferr.ferramenta_id}>
+                            <h3>Nome: {ferr.nome}</h3>
+                            <h4>Link da imagem: {ferr.imagem_url}</h4>
+                            <h4>Conjunto: {ferr.conjunto}</h4>
+                            <h4>Número (tamanho): {ferr.numero}</h4>
+                            <h4>Número do patrimônio: {ferr.patrimonio}</h4>
+                            <h4>Modelo: {ferr.modelo}</h4>
+                            <h4>Descrição: {ferr.descricao}</h4>
+                            <h4>Localização id: {ferr.localizacaoId}</h4>
+                            
+                            <button onClick={() => editFerr(ferr)}>Editar</button>
+                            <button onClick={() => confirmDelete(ferr.ferramenta_id)}>Excluir</button>
 
-                    <div>
-                        <label>
-                            Nome:
-                            <input
-                                type="text"
-                                className={styles.input}
-                                value={nome}
-                                onChange={(e) => setNome(e.target.value)}
-                                required
-                            />
-                        </label>
-                    </div>
+                            {editingFerrId === ferr.ferramenta_id && (
+                                <form onSubmit={handleSubmit}>
+                                    <input
+                                        type="text"
+                                        placeholder="Nome"
+                                        value={nome}
+                                        onChange={(e) => setNome(e.target.value)}
+                                        required
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder="Link da imagem"
+                                        value={imagem_url}
+                                        onChange={(e) => setImagemUrl(e.target.value)}
+                                        required
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder="Conjunto"
+                                        value={conjunto}
+                                        onChange={(e) => setConjunto(e.target.value)}
+                                        required
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder="Número do patrimônio"
+                                        value={patrimonio}
+                                        onChange={(e) => setPatrimonio(e.target.value)}
+                                        required
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder="Modelo"
+                                        value={modelo}
+                                        onChange={(e) => setModelo(e.target.value)}
+                                        required
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder="Descrição"
+                                        value={descricao}
+                                        onChange={(e) => setDescricao(e.target.value)}
+                                        required
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder="Localização ID"
+                                        value={localizacaoId}
+                                        onChange={(e) => setLocalizacaoId(e.target.value)}
+                                        required
+                                    />
+                                    
+                                    <button type="submit">Atualizar</button>
+                                    <button type="button" onClick={() => setEditingFerrId(null)}>Cancelar</button>
+                                </form>
+                            )}
+                        </div>
+                    ))
+                ) : (
+                    <p>Nenhum ferramenta cadastrado.</p>
+                )}
+            </div>
 
-                    <div>
-                        <label>
-                            Imagem URL:
-                            <input
-                                type="text"
-                                className={styles.input}
-                                value={imagem_url}
-                                onChange={(e) => setImagemUrl(e.target.value)}
-                                placeholder="digite algo"
-                                required
-                            />
-                        </label>
-                    </div>
-
-                    <div>
-                        <label>
-                            Conjunto:
-                            <input
-                                type="text"
-                                className={styles.input}
-                                value={conjunto}
-                                onChange={(e) => setConjunto(e.target.value)}
-                                required
-                            />
-                        </label>
-                    </div>
-
-                    <div>
-                        <label>
-                            Número:
-                            <input
-                                type="number"
-                                className={styles.input}
-                                value={numero}
-                                onChange={(e) => setNumero(e.target.value)}
-                                required
-                            />
-                        </label>
-                    </div>
-
-                    <div>
-                        <label>
-                            Patrimônio:
-                            <input
-                                type="text"
-                                className={styles.input}
-                                value={patrimonio}
-                                onChange={(e) => setPatrimonio(e.target.value)}
-                                required
-                            />
-                        </label>
-                    </div>
-
-                    <div>
-                        <label>
-                            Modelo:
-                            <input
-                                type="text"
-                                className={styles.input}
-                                value={modelo}
-                                onChange={(e) => setModelo(e.target.value)}
-                                required
-                            />
-                        </label>
-                    </div>
-
-                    <div>
-                        <label>
-                            Descrição:
-                            <textarea
-                                className={styles.input}
-                                value={descricao}
-                                onChange={(e) => setDescricao(e.target.value)}
-                                required
-                            ></textarea>
-                        </label>
-                    </div>
-
-                    <div>
-                        <label>
-                            Localização ID:
-                            <input
-                                type="text"
-                                className={styles.input}
-                                value={localizacaoId}
-                                onChange={(e) => setLocalizacaoId(e.target.value)}
-                                required
-                            />
-                        </label>
+            {ferrToDelete !== null && (
+                <div className={styles.modal}>
+                    <div className={styles.modalContent}>
+                        <h4>Você tem certeza que deseja excluir esta ferramenta?</h4>
+                        <button onClick={deleteFerr}>Sim</button>
+                        <button onClick={() => setFerrToDelete(null)}>Cancelar</button>
                     </div>
                 </div>
-
-                <div>
-                    <button type="submit" className={styles.submitButton}>Enviar</button>
-                </div>
-            </form>
-            {successMessage && <p>{successMessage}</p>}
+            )}
         </div>
     );
+}
 
-};
-
-export default CadastroFerr;
+export default Ferramentas;
