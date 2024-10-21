@@ -60,12 +60,15 @@ export default function Cadastro() {
   return (
     <div>
         <Header />
-        <div className={styles.container}>
-          <App title="Digite o seu nome"></App>
-          <BtnScanner />
-          <App title="Cadastrar numero do NIF"></App>
-          <App title="Cadastrar numero QRcode do aluno"></App>
-        </div>
+        <form onSubmit={handleSubmit}>
+          <div className={styles.container}>
+            <App title="Digite o seu nome"></App>
+            <BtnScanner />
+            <App title="Cadastrar numero do NIF"></App>
+            <App title="Cadastrar numero QRcode do aluno"></App>
+          </div>
+        </form>
+        {successMensage && <p className={styles.success}>{successMensage}</p>}
     </div>
   )
 }
