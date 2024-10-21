@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useState } from 'react';
-import styles from './login.module.css';
 
 const Login = () => {
   const [name, setName] = useState('');
@@ -9,7 +8,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
- 
+  
     console.log('Name:', name);
     console.log('NIF:', nif);
   };

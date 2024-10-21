@@ -20,7 +20,7 @@ const CadastroFerr = () => {
     const [ferramentas, setFerramentas] = useState([]);
     const [successMessage, setSuccessMessage] = useState('');
 
-    const apiURL = "http://192.168.15.138:3000";
+    // const apiURL = "http://192.168.15.138:3003";
 
     useEffect(() => {
         fetchCadastrarFerr();
@@ -28,7 +28,7 @@ const CadastroFerr = () => {
 
     const fetchCadastrarFerr = async () => {
         try {
-            const response = await axios.get(`${apiURL}/CadastroFerr`);
+            const response = await axios.get('http://localhost:3003/ferramentas');
             setFerramentas(response.data);
         } catch (error) {
             console.error(error);
@@ -47,9 +47,10 @@ const CadastroFerr = () => {
             descricao,
             localizacaoId
         };
+        console.log(data)
 
         try {
-            await axios.post(`${apiURL}/CadastroFerr`, data);
+            await axios.post('http://localhost:3003/ferramentas', data);
             setSuccessMessage('Cadastrado com sucesso!');
             fetchCadastrarFerr();
             clearInputs();
@@ -129,7 +130,7 @@ const CadastroFerr = () => {
             <h2>Ferramentas Cadastradas:</h2>
             
 
-            <ul>
+            {/* <ul>
                 {ferramentas.map((ferramenta, index) => (
                     <li key={index}>
                         <strong>Nome:</strong> {ferramenta.nome} <br />
@@ -142,7 +143,7 @@ const CadastroFerr = () => {
                         <strong>Localização ID:</strong> {ferramenta.localizacaoId} <br />
                     </li>
                 ))}
-            </ul>
+            </ul> */}
             
             
         </div>
