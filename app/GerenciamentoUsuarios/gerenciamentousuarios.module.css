@@ -1,0 +1,80 @@
+/* styles.css */
+.App {
+    font-family: Arial, sans-serif; 
+    max-width: 800px; 
+    margin: 0 auto; 
+    padding: 20px; 
+    background-color: #f9f9f9; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    margin-top: 20px;
+}
+
+.usuarios {
+    background-color: #ffffff; 
+    margin: 10px 0; 
+    padding: 15px; 
+    border-radius: 5px; 
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s; 
+}
+
+.usuarios:hover {
+    transform: scale(1.02); 
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Modal acima de outros elementos */
+}
+
+.modalContent {
+    background-color: white; /* Fundo branco */
+    padding: 20px;
+    border-radius: 10px; /* Bordas arredondadas */
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    width: 300px; /* Largura fixa */
+    max-width: 80%; /* Responsivo em telas menores */
+    animation: fadeIn 0.3s; /* Animação de entrada */
+}
+
+.modal h4 {
+    margin-bottom: 20px; /* Espaçamento abaixo do título */
+    font-size: 18px; /* Tamanho da fonte */
+}
+
+.modal button {
+    background-color: #6E0000; /* Cor do botão */
+    color: white; /* Cor do texto do botão */
+    border: none; /* Sem borda */
+    border-radius: 5px; /* Bordas arredondadas */
+    padding: 10px 15px; /* Espaçamento interno */
+    cursor: pointer; /* Cursor de mão ao passar */
+    transition: background-color 0.3s; /* Transição suave */
+    margin: 0 10px; /* Margem entre os botões */
+}
+
+.modal button:hover {
+    background-color: #ac0b0b; /* Cor ao passar o mouse */
+}
+
+/* Animação de Fade In */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px); /* Leve deslocamento para cima */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
