@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Input } from 'antd';
 import styles from './inputUser.module.css';
 
-const App = ({ title }) => {
+const App = ({ title, set }) => {
   const [inputValue, setInputValue] = useState('');
 
   const handleInputChange = (e) => {
@@ -18,7 +18,7 @@ const App = ({ title }) => {
         <Input
           className={styles.input}
           value={inputValue}
-          onChange={handleInputChange}
+          onChange={(e) => {set(e.target.value)}}
           placeholder="Digite aqui..."
         />
       </div>
