@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Input } from 'antd';
-import styles from '';
+import styles from './inputUser.module.css';
 
 const App = ({ title }) => {
   const [inputValue, setInputValue] = useState('');
@@ -13,13 +13,15 @@ const App = ({ title }) => {
 
   return (
     <>
-      <h2 className={styles.title}>{title}</h2>
-      <Input
-        className={styles.input}
-        value={inputValue}
-        onChange={handleInputChange}
-        placeholder={title}
-      />
+      <div className={styles.input_container}>
+        <h2 className={styles.title}>{title}</h2>
+        <Input
+          className={styles.input}
+          value={inputValue}
+          onChange={handleInputChange}
+          placeholder="Digite aqui..."
+        />
+      </div>
     </>
   );
 };
