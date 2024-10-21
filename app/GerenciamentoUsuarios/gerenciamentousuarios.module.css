@@ -11,11 +11,11 @@
 }
 
 .usuarios {
-    background-color: #ffffff; 
-    margin: 10px 0; 
+    background-color: rgb(228, 228, 228); 
+    margin: 20px 0; 
     padding: 15px; 
     border-radius: 5px; 
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
     transition: transform 0.2s; 
 }
 
@@ -29,44 +29,96 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
+    background-color: rgba(0, 0, 0, 0.9); 
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* Modal acima de outros elementos */
+    z-index: 1000; 
 }
 
 .modalContent {
-    background-color: white; /* Fundo branco */
+    background-color: rgb(197, 197, 197); 
     padding: 20px;
-    border-radius: 10px; /* Bordas arredondadas */
+    border-radius: 10px; 
     text-align: center;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra suave */
-    width: 300px; /* Largura fixa */
-    max-width: 80%; /* Responsivo em telas menores */
-    animation: fadeIn 0.3s; /* Animação de entrada */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+    width: 300px; 
+    max-width: 80%; 
+    animation: fadeIn 0.3s; 
 }
 
 .modal h4 {
-    margin-bottom: 20px; /* Espaçamento abaixo do título */
-    font-size: 18px; /* Tamanho da fonte */
+    margin-bottom: 20px; 
+    font-size: 18px; 
 }
 
 .modal button {
-    background-color: #6E0000; /* Cor do botão */
-    color: white; /* Cor do texto do botão */
-    border: none; /* Sem borda */
-    border-radius: 5px; /* Bordas arredondadas */
-    padding: 10px 15px; /* Espaçamento interno */
-    cursor: pointer; /* Cursor de mão ao passar */
-    transition: background-color 0.3s; /* Transição suave */
-    margin: 0 10px; /* Margem entre os botões */
+    background-color: #6E0000; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    padding: 10px 15px; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+    margin: 0 10px; 
 }
 
 .modal button:hover {
-    background-color: #ac0b0b; /* Cor ao passar o mouse */
+    background-color: #ac0b0b; 
 }
 
+.h3 {
+    font-size: medium;
+}
+
+.h4 {
+    font-size: medium;
+}
+
+.h1 {
+   margin-bottom: 30px; 
+   text-align: center;
+}
+
+.editarbutton {
+    background-color: #c20000; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    padding: 10px 15px; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+    margin-top: 10px;
+    margin: 10 0 px; 
+}
+
+.excluirbutton {
+    background-color: #c20000; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    padding: 10px 15px; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+    margin: 0 10px; 
+}
+ .buttonseditar {
+    width: 70px;
+    background-color: rgb(189, 189, 189);
+    border-radius: 5px;
+ }
+
+.formeditar {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column; 
+    gap: 10px; 
+    width: 260px;
+}
+
+.inputs {
+    font-size: 15px;
+}
 /* Animação de Fade In */
 @keyframes fadeIn {
     from {
