@@ -1,5 +1,5 @@
 import React from 'react';
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import { RetweetOutlined, HarmonyOSOutlined, ToolOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import { Card } from 'antd';
 const { Meta } = Card;
 
@@ -15,9 +15,10 @@ const CardFerr = ({ nome, imagem_url, conjunto, numero, patrimonio, modelo, desc
       />
     }
     actions={[
-      <SettingOutlined key="setting" />,
-      <EditOutlined key="edit" />,
-      <EllipsisOutlined key="ellipsis" />,
+      <HarmonyOSOutlined key="harmonyos" />,
+      <CheckCircleOutlined key="check" />,
+      <RetweetOutlined key="retweet"/>,
+      <ToolOutlined  key="tool" />
     ]}
   >
     <Meta

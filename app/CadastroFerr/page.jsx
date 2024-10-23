@@ -4,9 +4,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './cadastroferr.module.css'; // Certifique-se de que o caminho do CSS esteja correto
 import Header from '../components/header/Header';
-import App from '../components/inputs/inputs.jsx';
-
-
 
 const CadastroFerr = () => {
     const [nome, setNome] = useState('');
@@ -16,20 +13,40 @@ const CadastroFerr = () => {
     const [patrimonio, setPatrimonio] = useState('');
     const [modelo, setModelo] = useState('');
     const [descricao, setDescricao] = useState('');
-    const [localizacaoId, setLocalizacaoId] = useState('');
+    const [organizadorId, setOrganizadorId] = useState('');
+    const [subOrganizadorId, setSubOrganizadorId] = useState('');
     const [ferramentas, setFerramentas] = useState([]);
+    const [organizador, setOrganizadores] = useState([]);
+    const [sub_rganizador, setSubOrganizadores] = useState([]);
     const [successMessage, setSuccessMessage] = useState('');
-
-    // const apiURL = "http://192.168.15.138:3003";
 
     useEffect(() => {
         fetchCadastrarFerr();
+        fetchOrganizadores();
     }, []);
 
     const fetchCadastrarFerr = async () => {
         try {
             const response = await axios.get('http://localhost:3003/ferramentas');
             setFerramentas(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const fetchOrganizadores = async () => {
+        try {
+            const response = await axios.get('http://localhost:3003/organizador');
+            setOrganizadores(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const fetchSubOrganizadores = async (organizadorId) => {
+        try {
+            const response = await axios.get(`http://localhost:3003/sub_organizador?organizador_id=${organizadorId}`);
+            setSubOrganizadores(response.data);
         } catch (error) {
             console.error(error);
         }
@@ -45,23 +62,13 @@ const CadastroFerr = () => {
             patrimonio,
             modelo,
             descricao,
-            localizacaoId
+            organizador_id,
+            suborganizador_id
         };
-        console.log(data)
-
+        
         try {
-            await axios.post('http://localhost:3003/ferramentas', {
-                nome,
-                imagem_url,
-                conjunto,
-                numero,
-                patrimonio,
-                modelo,
-                descricao,
-                localizacaoId
-            });
+            await axios.post('http://localhost:3003/ferramentas', data);
             setSuccessMessage('Cadastrado com sucesso!');
-            //fetchCadastrarFerr();
             clearInputs();
         } catch (error) {
             console.error(error);
@@ -76,9 +83,10 @@ const CadastroFerr = () => {
         setPatrimonio('');
         setModelo('');
         setDescricao('');
-        setLocalizacaoId('');
+        setOrganizadorId('');
+        setSubOrganizadorId('');
     };
-      
+
     return (
         <div className={styles.conjunto}>
             <Header />
@@ -179,14 +187,38 @@ const CadastroFerr = () => {
 
                     <div>
                         <label>
-                            Localização ID:
-                            <input
-                                type="text"
+                            Organizador:
+                            <select
                                 className={styles.input}
-                                value={localizacaoId}
-                                onChange={(e) => setLocalizacaoId(e.target.value)}
+                                value={organizadorId}
+                                onChange={(e) => {
+                                    setOrganizadorId(e.target.value);
+                                    fetchSubOrganizadores(e.target.value);
+                                }}
                                 required
-                            />
+                            >
+                                <option value="">Selecione um organizador</option>
+                                {organizador.map((org) => (
+                                    <option key={org.id} value={org.id}>{org.nome}</option>
+                                ))}
+                            </select>
+                        </label>
+                    </div>
+
+                    <div>
+                        <label>
+                            Sub-Organizador:
+                            <select
+                                className={styles.input}
+                                value={subOrganizadorId}
+                                onChange={(e) => setSubOrganizadorId(e.target.value)}
+                                required
+                            >
+                                <option value="">Selecione um sub-organizador</option>
+                                {subOrganizadores.map((subOrg) => (
+                                    <option key={subOrg.id} value={subOrg.id}>{subOrg.nome}</option>
+                                ))}
+                            </select>
                         </label>
                     </div>
                 </div>
@@ -198,7 +230,6 @@ const CadastroFerr = () => {
             {successMessage && <p>{successMessage}</p>}
         </div>
     );
-
 };
 
 export default CadastroFerr;
