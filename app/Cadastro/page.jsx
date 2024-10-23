@@ -9,6 +9,7 @@ import axios from 'axios'
 
 export default function Cadastro() {
   const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
   const [numero_nif, setNumero_nif] = useState('');
   const [numero_qrcode, setNumero_qrCode] = useState('');
   const [tipo_usuario, setTipo_usuario] = useState('');
@@ -78,6 +79,19 @@ export default function Cadastro() {
               </label>
             </div>
 
+            <div className={styles.input_container}>
+              <label>
+                <h2 className={styles.title}>Digite seu email</h2>
+                <Input
+                  className={styles.input}
+                  value={nome}
+                  onChange={(e) => setNome(e.target.value)}
+                  placeholder="Digite aqui..."
+                  required
+                />
+              </label>
+            </div>
+
             <BtnScanner />
 
             <div className={styles.input_container}>
@@ -110,15 +124,16 @@ export default function Cadastro() {
               <label>
                 <h2 className={styles.title}>Selecione o tipo de usuário</h2>
                 <select
-                  className={styles.input}
+                  className={styles.select}
                   value={tipo_usuario}
                   onChange={(e) => setTipo_usuario(e.target.value)}
                   required
                 >
-                    <option className={styles.op} value="aluno">Aluno</option>
-                    <option className={styles.op} value="instrutor">Instrutor</option>
-                    <option className={styles.op} value="administracao">Administração</option>
-                    <option className={styles.op} value="manutencao">Manutenção</option>	
+                    <option value="" disabled>Selecione um tipo</option>
+                    <option value="aluno">Aluno</option>
+                    <option value="instrutor">Instrutor</option>
+                    <option value="administracao">Administração</option>
+                    <option value="manutencao">Manutenção</option>
                 </select>
               </label>
             </div>

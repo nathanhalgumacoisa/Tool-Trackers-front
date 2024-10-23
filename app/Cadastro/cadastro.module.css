@@ -40,6 +40,26 @@
     color: rgb(255, 255, 255); /* Altere para a cor desejada */
 }
 
+.select {
+    width: 60vw;
+    background-color: rgb(156, 0, 0);
+    color: rgb(255, 255, 255);
+    border: 2px solid transparent; /* Ajuste a borda se necessário */
+    border-radius: 50px;
+    outline: none;
+    transition: border-color 0.3s;
+    max-width: 50%;
+    margin: -1rem auto;
+    padding: 1rem;
+    margin-left: 16rem;
+    margin-top: 0.5rem;
+}
+
+.select option {
+    background-color: rgb(156, 0, 0);
+    color: rgb(255, 255, 255);
+}
+
 .btn_cadastro {
     background-color: rgb(156, 0, 0);
     color: rgb(255, 255, 255);
@@ -49,14 +69,16 @@
     transition: border-color 0.3s; 
     max-width: 50%;
     align-items: center;
+    margin-right: 12rem;
     margin-top: 2rem;
     padding: 1rem;
 }
 
-.op {
-    color: rgb(255, 255, 255);
-}
-
-#placeholder{
-    color: rgb(154, 154, 154);
+.btn_cadastro:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgb(156, 0, 0);
+    border: 2px ; /* Borda vermelha */
+    border-radius: 50px; /* Arredondamento */
+    outline: none; /* Remove a borda de foco padrão */
+    transition: border-color 0.3s; 
 }
