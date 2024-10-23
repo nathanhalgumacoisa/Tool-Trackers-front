@@ -51,3 +51,25 @@
 .title1 {
     color: #fff;
 }
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    margin: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer; /* Adiciona um cursor pointer para indicar que é clicável */
+}
+
+.cardImage {
+    width: 90px; /* Ajusta a largura da imagem para caber no card */
+    height: 90px;
+    margin-top: 20px; /* Mantém a proporção da imagem */
+    border-radius: 8px 8px 0 0; /* Arredonda o topo da imagem */
+}
+
+.title1 {
+    margin-top: 10px; /* Adiciona um espaço acima do título */
+    font-size: 16px; /* Ajusta o tamanho do texto */
+}

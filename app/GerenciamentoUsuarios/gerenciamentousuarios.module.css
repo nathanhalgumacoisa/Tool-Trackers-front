@@ -45,6 +45,7 @@
     width: 300px; 
     max-width: 80%; 
     animation: fadeIn 0.3s; 
+
 }
 
 .modal h4 {
@@ -69,10 +70,12 @@
 
 .h3 {
     font-size: medium;
+    margin-bottom: 3px;
 }
 
 .h4 {
     font-size: medium;
+    margin-bottom: 3px;
 }
 
 .h1 {
@@ -103,22 +106,49 @@
     margin: 0 10px; 
 }
  .buttonseditar {
-    width: 70px;
-    background-color: rgb(189, 189, 189);
-    border-radius: 5px;
+    background-color: #c20000; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    padding: 5px 10px; 
+    width: 80px;
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+    margin-top: 10px;
+    margin: 10 0 px; 
  }
 
 .formeditar {
-    margin-top: 10px;
+    margin-top: 23px;
     display: flex;
     flex-direction: column; 
     gap: 10px; 
     width: 260px;
 }
 
+.formeditar button:hover {
+    background-color: #ac0b0b; 
+}
+
 .inputs {
     font-size: 15px;
 }
+
+.editarImagem {
+    margin-top: 10px;
+    margin-bottom: -15px;
+    width: 30px;  /* Ajuste conforme necessário */
+    height: 30px; /* Ajuste conforme necessário */
+}
+
+.excluirImagem {
+    margin-top: 10px;
+    margin-bottom: -10px;
+    margin-left: 10px;
+    width: 25px;  /* Ajuste conforme necessário */
+    height: 25px; /* Ajuste conforme necessário */
+}
+
 /* Animação de Fade In */
 @keyframes fadeIn {
     from {

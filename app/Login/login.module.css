@@ -1,0 +1,37 @@
+.logincontainer {
+    background-color: white;
+    
+  }
+  
+  .logintitle {
+    color: black;
+    font-size: 24px;
+    text-align: center;
+    margin-top: 2rem;
+  }
+  
+  .inputgroup {
+    margin-top: 3rem;
+  }
+  
+  .label {
+    color: white;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .submitbutton {
+    background-color: #6E0000;
+    color: white;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center;
+    
+  }
+
+  .button{
+    text-align: center;
+    margin-top: 4rem;
+  }
