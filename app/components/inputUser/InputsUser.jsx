@@ -18,8 +18,9 @@ const App = ({ title, set }) => {
         <Input
           className={styles.input}
           value={inputValue}
-          onChange={(e) => {set(e.target.value)}}
+          onChange={(e) => setName(e.target.value)}
           placeholder="Digite aqui..."
+          required
         />
       </div>
     </>
