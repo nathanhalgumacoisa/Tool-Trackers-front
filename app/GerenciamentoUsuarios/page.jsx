@@ -6,10 +6,10 @@ import styles from './gerenciamentousuarios.module.css';
 
 function Usuarios() {
     const [locals, setLocals] = useState([]); // Estado para armazenar usuários
-    const [nome, setNome] = useState(''); 
-    const [tipoUsuario, setTipoUsuario] = useState(''); 
-    const [numeroNif, setNumeroNif] = useState(''); 
-    const [numeroQrCode, setNumeroQrCode] = useState(''); 
+    const [nome, setNome] = useState('');
+    const [tipoUsuario, setTipoUsuario] = useState('');
+    const [numeroNif, setNumeroNif] = useState('');
+    const [numeroQrCode, setNumeroQrCode] = useState('');
     const [editingUserId, setEditingUserId] = useState(null); // Estado para o usuário em edição
     const [userToDelete, setUserToDelete] = useState(null); // Estado para o usuário a ser excluído
 
@@ -35,18 +35,18 @@ function Usuarios() {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            await axios.put(`http://localhost:3003/usuarios/${editingUserId}`, { 
-                nome, 
+            await axios.put(`http://localhost:3003/usuarios/${editingUserId}`, {
+                nome,
                 tipo_usuario: tipoUsuario,
                 numero_nif: numeroNif,
                 numero_qrcode: numeroQrCode
             });
             setEditingUserId(null); // Reseta o id de edição
-            setNome(''); 
-            setTipoUsuario(''); 
-            setNumeroNif(''); 
-            setNumeroQrCode(''); 
-            getUsuarios(); 
+            setNome('');
+            setTipoUsuario('');
+            setNumeroNif('');
+            setNumeroQrCode('');
+            getUsuarios();
         } catch (error) {
             console.log("Erro ao atualizar usuário:", error);
         }
@@ -56,8 +56,8 @@ function Usuarios() {
     function editUser(user) {
         setNome(user.nome);
         setTipoUsuario(user.tipo_usuario);
-        setNumeroNif(user.numero_nif); 
-        setNumeroQrCode(user.numero_qrcode); 
+        setNumeroNif(user.numero_nif);
+        setNumeroQrCode(user.numero_qrcode);
         setEditingUserId(user.user_id); // Define o usuário que está sendo editado
     }
 
@@ -92,8 +92,26 @@ function Usuarios() {
                             <h4 className={styles.h4}>Tipo: {l.tipo_usuario}</h4>
                             <h4 className={styles.h4}>Número do NIF: {l.numero_nif}</h4>
                             <h4 className={styles.h4}>Número do QRCODE: {l.numero_qrcode}</h4>
-                            <button className={styles.editarbutton} onClick={() => editUser(l)}>Editar</button>
-                            <button className={styles.excluirbutton} onClick={() => confirmDelete(l.user_id)}>Excluir</button>
+                            {/* <button className={styles.editarbutton} onClick={() => editUser(l)}>
+                                <img src="caminho/para/imagem-editar.png" alt="Editar" />
+                            </button> */}
+                            <img
+                                src="/editar.png"
+                                alt="Editar"
+                                className={styles.editarImagem}
+                                onClick={() => editUser(l)}
+                                style={{ cursor: 'pointer' }}
+                            />
+                            {/* <button className={styles.excluirbutton} onClick={() => confirmDelete(l.user_id)}>
+                                <img src="caminho/para/imagem-excluir.png" alt="Excluir" />
+                            </button> */}
+                            <img
+                                src="/excluir.png"
+                                alt="Editar"
+                                className={styles.excluirImagem}
+                                onClick={() => confirmDelete(l.user_id)}
+                                style={{ cursor: 'pointer' }}
+                            />
 
                             {editingUserId === l.user_id && (
                                 <form className={styles.formeditar} onSubmit={handleSubmit}>
