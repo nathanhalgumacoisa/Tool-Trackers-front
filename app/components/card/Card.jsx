@@ -1,13 +1,11 @@
 "use client";
 // app/components/card/Card.jsx
-// app/components/card/Card.jsx
-// Adicione isso no topo do seu arquivo
 
 import { Card } from 'antd';
 import { useRouter } from 'next/navigation'; // Importando useRouter
 import styles from './card.module.css'; // Importando o CSS Module
 
-const App = ({ title, link }) => {
+const App = ({ title, link, image }) => {
     const router = useRouter(); // Inicializando o router
 
     const handleClick = () => {
@@ -17,10 +15,11 @@ const App = ({ title, link }) => {
     return (
         <Card
             className={styles.card}
-            style={{ width: 200 }}
+            style={{ width: 250, height: 250 }}
             onClick={handleClick} // Adicionando um manipulador de clique
         >
             <p className={styles.title1}>{title}</p>
+            <img src={image} alt={title} className={styles.cardImage} />
         </Card>
     );
 };
