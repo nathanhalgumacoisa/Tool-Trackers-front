@@ -1,6 +1,5 @@
 'use client'
 import React from 'react'
-import App from '../components/inputUser/InputsUser'
 import Header from '../components/header/Header'
 import styles from './cadastro.module.css'
 import Input from 'antd/es/input/Input'
