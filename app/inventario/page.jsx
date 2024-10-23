@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Header from '../components/header/Header.jsx';
 import styles from './inventario.module.css';
+import CardFerr from '../components/cardFerramenta/CardFerr.jsx';
 
 function Ferramentas() {
     const [locals, setLocals] = useState([]); // Estado para armazenar usuários
@@ -13,7 +14,7 @@ function Ferramentas() {
     const [patrimonio, setPatrimonio] = useState('');
     const [modelo, setModelo] = useState('');
     const [descricao, setDescricao] = useState('');
-    const [localizacaoId, setLocalizacaoId] = useState('');
+    // const [localizacaoId, setLocalizacaoId] = useState('');
     const [ferramentas, setFerramentas] = useState([]);
     const [successMessage, setSuccessMessage] = useState('');
     const [editingFerrId, setEditingFerrId] = useState(null); // Estado para o usuário em edição
@@ -42,14 +43,14 @@ function Ferramentas() {
         e.preventDefault();
         try {
             await axios.put(`http://localhost:3003/ferramentas/${editingFerrId}`, {
-                nome,
+                nome: nome,
                 imagem_url: imagem_url,
                 conjunto : conjunto,
                 numero : numero,
                 patrimonio : patrimonio,
                 modelo : modelo,
                 descricao : descricao,
-                localizacao_id: localizacaoId
+                // localizacao_id: localizacaoId
             });
         
             setEditingFerrId(null); // Reseta o id de edição
@@ -59,7 +60,7 @@ function Ferramentas() {
             setPatrimonio('');
             setModelo('');
             setDescricao('');
-            setLocalizacaoId('');
+            // setLocalizacaoId('');
             setFerramentas('');
             setSuccessMessage('');
             getFerramentas();
@@ -70,13 +71,14 @@ function Ferramentas() {
 
     // Função para iniciar a edição de um usuário
     function editFerr(ferramenta) {
+        setNome(ferramenta.nome);
         setImagemUrl(ferramenta.imagem_url);
         setConjunto(ferramenta.conjunto);
         setNumero(ferramenta.numero);
         setPatrimonio(ferramenta.patrimonio);
         setModelo(ferramenta.modelo);
         setDescricao(ferramenta.descricao);
-        setLocalizacaoId(ferramenta.localizacaoId);
+        // setLocalizacaoId(ferramenta.localizacaoId);
         setFerramentas(ferramenta.ferramentas);
         setSuccessMessage(ferramenta.successMessage);
         setEditingFerrId(ferramenta.ferramenta_id); // Define o usuário que está sendo editado
@@ -105,75 +107,69 @@ function Ferramentas() {
         <div>
             <Header />
             <div className={styles.App}>
+                <h1 className={styles.h1}>Ferramentas Cadastradas</h1>
                 {locals.length > 0 ? (
-                    locals.map((ferr) => (
-                        <div className={styles.ferramentas} key={ferr.ferramenta_id}>
-                            <h3>Nome: {ferr.nome}</h3>
-                            <h4>Link da imagem: {ferr.imagem_url}</h4>
-                            <h4>Conjunto: {ferr.conjunto}</h4>
-                            <h4>Número (tamanho): {ferr.numero}</h4>
-                            <h4>Número do patrimônio: {ferr.patrimonio}</h4>
-                            <h4>Modelo: {ferr.modelo}</h4>
-                            <h4>Descrição: {ferr.descricao}</h4>
-                            <h4>Localização id: {ferr.localizacaoId}</h4>
-                            
-                            <button onClick={() => editFerr(ferr)}>Editar</button>
-                            <button onClick={() => confirmDelete(ferr.ferramenta_id)}>Excluir</button>
+  locals.map((ferr) => (
+    <div className={styles.ferramentas} key={ferr.ferramenta_id}>
+      <CardFerr
+        nome={ferr.nome}
+        imagem_url={ferr.imagem_url}
+        conjunto={ferr.conjunto}
+        numero={ferr.numero}
+        patrimonio={ferr.patrimonio}
+        modelo={ferr.modelo}
+        descricao={ferr.descricao}
+      />
+      <button className={styles.editarbutton} onClick={() => editFerr(ferr)}>Editar</button>
+      <button className={styles.excluirbutton} onClick={() => confirmDelete(ferr.ferramenta_id)}>Excluir</button>
 
-                            {editingFerrId === ferr.ferramenta_id && (
-                                <form onSubmit={handleSubmit}>
-                                    <input
+      {editingFerrId === ferr.ferramenta_id && (
+        <form className={styles.formeditar} onSubmit={handleSubmit}>
+                                    <input className={styles.inputs}
                                         type="text"
                                         placeholder="Nome"
                                         value={nome}
                                         onChange={(e) => setNome(e.target.value)}
                                         required
                                     />
-                                    <input
+                                    <input className={styles.inputs}
                                         type="text"
                                         placeholder="Link da imagem"
                                         value={imagem_url}
                                         onChange={(e) => setImagemUrl(e.target.value)}
                                         required
                                     />
-                                    <input
+                                    <input className={styles.inputs}
                                         type="text"
                                         placeholder="Conjunto"
                                         value={conjunto}
                                         onChange={(e) => setConjunto(e.target.value)}
                                         required
                                     />
-                                    <input
+                                    <input className={styles.inputs}
                                         type="text"
                                         placeholder="Número do patrimônio"
                                         value={patrimonio}
                                         onChange={(e) => setPatrimonio(e.target.value)}
                                         required
                                     />
-                                    <input
+                                    <input className={styles.inputs}
                                         type="text"
                                         placeholder="Modelo"
                                         value={modelo}
                                         onChange={(e) => setModelo(e.target.value)}
                                         required
                                     />
-                                    <input
+                                    <input className={styles.inputs}
                                         type="text"
                                         placeholder="Descrição"
                                         value={descricao}
                                         onChange={(e) => setDescricao(e.target.value)}
                                         required
                                     />
-                                    <input
-                                        type="text"
-                                        placeholder="Localização ID"
-                                        value={localizacaoId}
-                                        onChange={(e) => setLocalizacaoId(e.target.value)}
-                                        required
-                                    />
                                     
-                                    <button type="submit">Atualizar</button>
-                                    <button type="button" onClick={() => setEditingFerrId(null)}>Cancelar</button>
+                                    <button className={styles.buttonseditar} type="submit">Atualizar</button>
+                                    <button className={styles.buttonseditar} type="button" onClick={() => setEditingFerrId(null)}>Cancelar</button>
                                 </form>
                             )}
                         </div>
