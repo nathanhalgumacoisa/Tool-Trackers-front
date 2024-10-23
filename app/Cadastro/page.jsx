@@ -115,10 +115,10 @@ export default function Cadastro() {
                   onChange={(e) => setTipo_usuario(e.target.value)}
                   required
                 >
-                    <option value="aluno">Aluno</option>
-                    <option value="instrutor">Instrutor</option>
-                    <option value="administracao">Administração</option>
-                    <option value="manutencao">Manutenção</option>	
+                    <option className={styles.op} value="aluno">Aluno</option>
+                    <option className={styles.op} value="instrutor">Instrutor</option>
+                    <option className={styles.op} value="administracao">Administração</option>
+                    <option className={styles.op} value="manutencao">Manutenção</option>	
                 </select>
               </label>
             </div>
