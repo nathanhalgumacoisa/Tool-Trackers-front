@@ -15,14 +15,14 @@ const Desejafazer = () => {
 
             <div className={styles.cardsContainer}>
                 <App
-                    title="Empréstimo"
+                    title={<span style={{ fontSize: '18px' }}>Emprèstimo</span>}
                     link="/opcoesEmprestimos"
-                    image="/caixaferramentas.png" // Substitua pelo caminho correto da imagem
+                    image="/ferramentas2.png" // Substitua pelo caminho correto da imagem
                 />
                 <App
-                    title="Conferência"
+                    title={<span style={{ fontSize: '18px' }}>Conferência</span>}
                     link="/OpcoesConferencias"
-                    image="/listatarefas.png" // Substitua pelo caminho correto da imagem
+                    image="/lista.png"
                 />
             </div>
         </div>

@@ -27,7 +27,7 @@
 
 /* Efeito de hover para o Card */
 .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
     /* Levanta o card ao passar o mouse */
 }
 
