@@ -44,6 +44,7 @@ export default function Cadastro() {
     try{
       await axios.post('http://localhost:3003/usuarios', {
         nome,
+        email,
         numero_nif,
         numero_qrcode,
         tipo_usuario
@@ -57,6 +58,7 @@ export default function Cadastro() {
 
   const clearInputs = () => {
     setNome('');
+    setEmail('');
     setNumero_nif('');
     setNumero_qrCode('');
   }
@@ -84,8 +86,8 @@ export default function Cadastro() {
                 <h2 className={styles.title}>Digite seu email</h2>
                 <Input
                   className={styles.input}
-                  value={nome}
-                  onChange={(e) => setNome(e.target.value)}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Digite aqui..."
                   required
                 />
