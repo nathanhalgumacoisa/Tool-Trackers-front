@@ -35,6 +35,7 @@ export default function Cadastro() {
     e.preventDefault();
     const data = {
       nome,
+      email,
       numero_nif,
       numero_qrcode,
       tipo_usuario
