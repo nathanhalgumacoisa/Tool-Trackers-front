@@ -13,61 +13,62 @@ const CadastroFerr = () => {
     const [patrimonio, setPatrimonio] = useState('');
     const [modelo, setModelo] = useState('');
     const [descricao, setDescricao] = useState('');
-    const [organizadorId, setOrganizadorId] = useState('');
-    const [subOrganizadorId, setSubOrganizadorId] = useState('');
-    const [ferramentas, setFerramentas] = useState([]);
-    const [organizador, setOrganizadores] = useState([]);
-    const [sub_rganizador, setSubOrganizadores] = useState([]);
+    const [ambiente, setAmbiente] = useState('');
+    
+    // Novos estados
+    const [nome_organizador, setNomeOrganizador] = useState('');
+    const [numero_organizador, setNumeroOrganizador] = useState('');
+    const [nome_suborganizador, setNomeSubOrganizador] = useState('');
+    const [numero_suborganizador, setNumeroSubOrganizador] = useState('');
+    const [foto_url, setFotoUrl] = useState('');
+    
+    const [organizadores, setOrganizadores] = useState([]);
+    const [sub_organizadores, setSubOrganizadores] = useState([]);
     const [successMessage, setSuccessMessage] = useState('');
 
     useEffect(() => {
-        fetchCadastrarFerr();
         fetchOrganizadores();
     }, []);
-
-    const fetchCadastrarFerr = async () => {
-        try {
-            const response = await axios.get('http://localhost:3003/ferramentas');
-            setFerramentas(response.data);
-        } catch (error) {
-            console.error(error);
-        }
-    };
 
     const fetchOrganizadores = async () => {
         try {
             const response = await axios.get('http://localhost:3003/organizador');
-            setOrganizadores(response.data);
+            console.log('Dados dos organizadores:', response.data); // Para depuração
+            setOrganizadores(Array.isArray(response.data) ? response.data : []);
         } catch (error) {
             console.error(error);
         }
     };
 
-    const fetchSubOrganizadores = async (organizadorId) => {
+    const fetchSubOrganizadores = async () => {
         try {
-            const response = await axios.get(`http://localhost:3003/sub_organizador?organizador_id=${organizadorId}`);
-            setSubOrganizadores(response.data);
+            const response = await axios.get('http://localhost:3003/sub_organizadores');
+            console.log('Dados dos sub-organizadores:', response.data); // Para depuração
+            setSubOrganizadores(Array.isArray(response.data) ? response.data : []);
         } catch (error) {
             console.error(error);
         }
     };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const data = {
-            nome,
-            imagem_url,
-            conjunto,
-            numero,
-            patrimonio,
-            modelo,
-            descricao,
-            organizador_id,
-            suborganizador_id
-        };
-        
+
+        const ferramentaData = { nome, imagem_url, conjunto, numero, patrimonio, modelo, descricao };
+        const localizacaoData = { ambiente }; // Dados para a tabela de localizações
+
         try {
-            await axios.post('http://localhost:3003/ferramentas', data);
+            await axios.post('http://localhost:3003/ferramentas', ferramentaData);
+            await axios.post('http://localhost:3003/organizador', {
+                nome: nome_organizador,
+                numero: numero_organizador
+            });
+            await axios.post('http://localhost:3003/sub_organizador', {
+                nome: nome_suborganizador,
+                numero: numero_suborganizador,
+            });
+            await axios.post('http://localhost:3003/localizacoes', localizacaoData);
+
             setSuccessMessage('Cadastrado com sucesso!');
             clearInputs();
         } catch (error) {
@@ -83,8 +84,14 @@ const CadastroFerr = () => {
         setPatrimonio('');
         setModelo('');
         setDescricao('');
-        setOrganizadorId('');
-        setSubOrganizadorId('');
+        // setOrganizadorId('');
+        // setSubOrganizadorId('');
+        setAmbiente('');
+        setNomeOrganizador('');
+        setNumeroOrganizador('');
+        setNomeSubOrganizador('');
+        setNumeroSubOrganizador('');
+        setFotoUrl('');
     };
 
     return (
@@ -94,19 +101,12 @@ const CadastroFerr = () => {
                 <div className={styles.container}>
                     <h1>Cadastro de Ferramentas</h1>
 
+                    {/* Campos do formulário */}
                     <div>
-                        <label>
-                            Nome:
-                            <input
-                                type="text"
-                                className={styles.input}
-                                value={nome}
-                                onChange={(e) => setNome(e.target.value)}
-                                required
-                            />
+                        <label>Nome:
+                            <input type="text" className={styles.input} value={nome} onChange={(e) => setNome(e.target.value)} required />
                         </label>
                     </div>
-
                     <div>
                         <label>
                             Imagem URL:
@@ -115,7 +115,6 @@ const CadastroFerr = () => {
                                 className={styles.input}
                                 value={imagem_url}
                                 onChange={(e) => setImagemUrl(e.target.value)}
-                                placeholder="digite algo"
                                 required
                             />
                         </label>
@@ -138,7 +137,7 @@ const CadastroFerr = () => {
                         <label>
                             Número:
                             <input
-                                type="number"
+                                type="text"
                                 className={styles.input}
                                 value={numero}
                                 onChange={(e) => setNumero(e.target.value)}
@@ -187,46 +186,74 @@ const CadastroFerr = () => {
 
                     <div>
                         <label>
-                            Organizador:
-                            <select
+                            Ambiente:
+                            <input
+                                type="text"
                                 className={styles.input}
-                                value={organizadorId}
-                                onChange={(e) => {
-                                    setOrganizadorId(e.target.value);
-                                    fetchSubOrganizadores(e.target.value);
-                                }}
+                                value={ambiente}
+                                onChange={(e) => setAmbiente(e.target.value)}
                                 required
-                            >
-                                <option value="">Selecione um organizador</option>
-                                {organizador.map((org) => (
-                                    <option key={org.id} value={org.id}>{org.nome}</option>
-                                ))}
-                            </select>
+                            />
                         </label>
                     </div>
 
                     <div>
-                        <label>
-                            Sub-Organizador:
-                            <select
+                        <label>Nome do Organizador:
+                            <input
+                                type="text"
                                 className={styles.input}
-                                value={subOrganizadorId}
-                                onChange={(e) => setSubOrganizadorId(e.target.value)}
+                                value={nome_organizador}
+                                onChange={(e) => setNomeOrganizador(e.target.value)}
                                 required
-                            >
-                                <option value="">Selecione um sub-organizador</option>
-                                {subOrganizadores.map((subOrg) => (
-                                    <option key={subOrg.id} value={subOrg.id}>{subOrg.nome}</option>
-                                ))}
-                            </select>
+                            />
                         </label>
                     </div>
-                </div>
+                    <div>
+                        <label>Numero do Organizador:
+                            <input
+                                type="text"
+                                className={styles.input}
+                                value={numero_organizador}
+                                onChange={(e) => setNumeroOrganizador(e.target.value)}
+                                required
+                            />
+                        </label>
+                    </div>
+                    <div>
+                        <label>Nome do Sub-organizador:
+                            <input
+                                type="text"
+                                className={styles.input}
+                                value={nome_suborganizador}
+                                onChange={(e) => setNomeSubOrganizador(e.target.value)}
+                                required
+                            />
+                        </label>
+                    </div>
+                    <div>
+                        <label>Numero do Sub-organizador:
+                            <input
+                                type="text"
+                                className={styles.input}
+                                value={numero_suborganizador}
+                                onChange={(e) => setNumeroSubOrganizador(e.target.value)}
+                                required
+                            />
+                        </label>
+                    </div>
 
-                <div>
-                    <button type="submit" className={styles.submitButton}>Enviar</button>
+                    <div>
+                        <label>Foto de referência do sub-organizador:
+                            <input type="text" className={styles.input} value={foto_url} onChange={(e) => setFotoUrl(e.target.value)} required />
+                        </label>
+                    </div>
+
+                    <div>
+                        <button type="submit" className={styles.submitButton}>Enviar</button>
+                    </div>
                 </div>
             </form>
+
             {successMessage && <p>{successMessage}</p>}
         </div>
     );
