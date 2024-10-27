@@ -17,19 +17,69 @@
     color: #333;
 }
 
-.label {
+/*.label {
     display: block;
     margin-bottom: 5px;
     color: #333;
-}
-.input{
-    margin-left: 50px;
+}*/
+
+.title{
+    font-size: 15px;
+    max-width: 40.35vw;
+    margin: 1.25px auto;
+    padding: 1.25rem;
+    margin-left: 17rem;
+    margin-top: 1rem;  
 }
 
+.input {
+    width: 60vw;
+    background-color: rgb(156, 0, 0);
+    color: rgb(0, 0, 0);
+    border: 2px ; /* Borda vermelha */
+    border-radius: 50px; /* Arredondamento */
+    outline: none; /* Remove a borda de foco padrão */
+    transition: border-color 0.3s; 
+    max-width: 50%;
+    align-items: center;
+    margin: -1rem auto;
+    padding: 1rem;
+    align-items: center;
+    margin-left: 16rem;
+    margin-top: 0.1rem;
+}
+
+.input::placeholder {
+    color: rgb(255, 255, 255); /* Altere para a cor desejada */
+}
 
 .submitButton{
     align-items: center;
     justify-content: center;
     display: flex;
     flex-direction: column;
+}
+
+.submitButton {
+    background-color: rgb(156, 0, 0);
+    color: rgb(255, 255, 255);
+    border: 2px ; /* Borda vermelha */
+    border-radius: 50px; /* Arredondamento */
+    outline: none; /* Remove a borda de foco padrão */
+    transition: border-color 0.3s; 
+    max-width: 50%;
+    width: 15vw;
+    align-items: center;
+    margin-left: 3rem;
+    margin-top: 2rem;
+    padding: 1rem;
+}
+
+.submitButton:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgb(156, 0, 0);
+    border: 2px ; /* Borda vermelha */
+    border-radius: 50px; /* Arredondamento */
+    outline: none; /* Remove a borda de foco padrão */
+    transition: border-color 0.3s; 
 }

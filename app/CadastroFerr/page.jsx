@@ -103,18 +103,20 @@ const CadastroFerr = () => {
 
                     {/* Campos do formulário */}
                     <div>
-                        <label>Nome:
-                            <input type="text" className={styles.input} value={nome} onChange={(e) => setNome(e.target.value)} required />
+                        <label>
+                            <h2 className={styles.title}>Nome:</h2>
+                            <input type="text" className={styles.input} value={nome} onChange={(e) => setNome(e.target.value)} placeholder="Digite aqui..." required />
                         </label>
                     </div>
                     <div>
                         <label>
-                            Imagem URL:
+                        <h2 className={styles.title}>Imagem URL:</h2>
                             <input
                                 type="text"
                                 className={styles.input}
                                 value={imagem_url}
                                 onChange={(e) => setImagemUrl(e.target.value)}
+                                placeholder="Digite aqui..."
                                 required
                             />
                         </label>
@@ -122,12 +124,13 @@ const CadastroFerr = () => {
 
                     <div>
                         <label>
-                            Conjunto:
+                        <h2 className={styles.title}>Conjunto:</h2>
                             <input
                                 type="text"
                                 className={styles.input}
                                 value={conjunto}
                                 onChange={(e) => setConjunto(e.target.value)}
+                                placeholder="Digite aqui..."
                                 required
                             />
                         </label>
@@ -135,12 +138,13 @@ const CadastroFerr = () => {
 
                     <div>
                         <label>
-                            Número:
+                        <h2 className={styles.title}>Número:</h2>
                             <input
                                 type="text"
                                 className={styles.input}
                                 value={numero}
                                 onChange={(e) => setNumero(e.target.value)}
+                                placeholder="Digite aqui..."
                                 required
                             />
                         </label>
@@ -148,12 +152,13 @@ const CadastroFerr = () => {
 
                     <div>
                         <label>
-                            Patrimônio:
+                        <h2 className={styles.title}>Patrimônio:</h2>
                             <input
                                 type="text"
                                 className={styles.input}
                                 value={patrimonio}
                                 onChange={(e) => setPatrimonio(e.target.value)}
+                                placeholder="Digite aqui..."
                                 required
                             />
                         </label>
@@ -161,12 +166,13 @@ const CadastroFerr = () => {
 
                     <div>
                         <label>
-                            Modelo:
+                        <h2 className={styles.title}>Modelo:</h2>
                             <input
                                 type="text"
                                 className={styles.input}
                                 value={modelo}
                                 onChange={(e) => setModelo(e.target.value)}
+                                placeholder="Digite aqui..."
                                 required
                             />
                         </label>
@@ -174,11 +180,12 @@ const CadastroFerr = () => {
 
                     <div>
                         <label>
-                            Descrição:
+                        <h2 className={styles.title}>Descrição:</h2>
                             <textarea
                                 className={styles.input}
                                 value={descricao}
                                 onChange={(e) => setDescricao(e.target.value)}
+                                placeholder="Digite aqui..."
                                 required
                             ></textarea>
                         </label>
@@ -186,65 +193,75 @@ const CadastroFerr = () => {
 
                     <div>
                         <label>
-                            Ambiente:
+                        <h2 className={styles.title}>Ambiente:</h2>
                             <input
                                 type="text"
                                 className={styles.input}
                                 value={ambiente}
                                 onChange={(e) => setAmbiente(e.target.value)}
+                                placeholder="Digite aqui..."
                                 required
                             />
                         </label>
                     </div>
 
                     <div>
-                        <label>Nome do Organizador:
+                        <label>
+                        <h2 className={styles.title}>Nome do Organizador:</h2>
                             <input
                                 type="text"
                                 className={styles.input}
                                 value={nome_organizador}
                                 onChange={(e) => setNomeOrganizador(e.target.value)}
+                                placeholder="Digite aqui..."
                                 required
                             />
                         </label>
                     </div>
                     <div>
-                        <label>Numero do Organizador:
+                        <label>
+                        <h2 className={styles.title}>Numero do Organizador:</h2>
                             <input
                                 type="text"
                                 className={styles.input}
                                 value={numero_organizador}
                                 onChange={(e) => setNumeroOrganizador(e.target.value)}
+                                placeholder="Digite aqui..."
                                 required
                             />
                         </label>
                     </div>
                     <div>
-                        <label>Nome do Sub-organizador:
+                        <label>
+                        <h2 className={styles.title}>Nome do Sub-organizador:</h2>
                             <input
                                 type="text"
                                 className={styles.input}
                                 value={nome_suborganizador}
                                 onChange={(e) => setNomeSubOrganizador(e.target.value)}
+                                placeholder="Digite aqui..."
                                 required
                             />
                         </label>
                     </div>
                     <div>
-                        <label>Numero do Sub-organizador:
+                        <label>
+                        <h2 className={styles.title}>Numero do Sub-organizador:</h2>
                             <input
                                 type="text"
                                 className={styles.input}
                                 value={numero_suborganizador}
                                 onChange={(e) => setNumeroSubOrganizador(e.target.value)}
+                                placeholder="Digite aqui..."
                                 required
                             />
                         </label>
                     </div>
 
                     <div>
-                        <label>Foto de referência do sub-organizador:
-                            <input type="text" className={styles.input} value={foto_url} onChange={(e) => setFotoUrl(e.target.value)} required />
+                        <label>
+                        <h2 className={styles.title}>Foto de referência do sub-organizador:</h2>
+                            <input type="text" className={styles.input} value={foto_url} onChange={(e) => setFotoUrl(e.target.value)} placeholder="Digite aqui..." required />
                         </label>
                     </div>
 
