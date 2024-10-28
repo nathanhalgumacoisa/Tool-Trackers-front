@@ -4,6 +4,7 @@ import axios from 'axios';
 import Header from '../components/header/Header.jsx';
 import styles from './inventario.module.css';
 import CardFerr from '../components/cardFerramenta/CardFerr.jsx';
+import CompLoc from '../components/comploc/CompLoc.jsx';
 
 function Ferramentas() {
     const [locals, setLocals] = useState([]); // Estado para armazenar usuários
@@ -14,6 +15,7 @@ function Ferramentas() {
     const [patrimonio, setPatrimonio] = useState('');
     const [modelo, setModelo] = useState('');
     const [descricao, setDescricao] = useState('');
+
     // const [localizacaoId, setLocalizacaoId] = useState('');
     const [ferramentas, setFerramentas] = useState([]);
     const [successMessage, setSuccessMessage] = useState('');
@@ -120,6 +122,13 @@ function Ferramentas() {
         modelo={ferr.modelo}
         descricao={ferr.descricao}
       />
+    <CompLoc
+        ambiente={ferr.ambiente}
+        nome_organizador={ferr.nome_organizador}
+        numero_organizador={ferr.numero_organizador}
+        nome_suborganizador={ferr.nome_suborganizador}
+        numero_suborganizador={ferr.numero_suborganizador}
+    />
       <button className={styles.editarbutton} onClick={() => editFerr(ferr)}>Editar</button>
       <button className={styles.excluirbutton} onClick={() => confirmDelete(ferr.ferramenta_id)}>Excluir</button>
 
@@ -175,7 +184,7 @@ function Ferramentas() {
                         </div>
                     ))
                 ) : (
-                    <p>Nenhum ferramenta cadastrado.</p>
+                    <p>Nenhum ferramenta cadastrada.</p>
                 )}
             </div>
 

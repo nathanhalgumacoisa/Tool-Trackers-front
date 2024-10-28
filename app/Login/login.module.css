@@ -1,15 +1,58 @@
-.logincontainer {
-    background-color: white;
+
+  .input {
+    width: 60vw;
+    background-color: rgb(157, 41, 41);
+    color: rgb(0, 0, 0);
+    border: 2px ; /* Borda vermelha */
+    border-radius: 50px; /* Arredondamento */
+    outline: none; /* Remove a borda de foco padrão */
+    transition: border-color 0.3s; 
+    max-width: 50%;
+    align-items: center;
+    margin: -1rem auto;
+    padding: 1rem;
+    align-items: center;
+    margin-left: 19,5rem;
+    margin-top: 1rem;
+
+        }
+        .textlabel{
+            color: black;
+            font-size: 20px;
+            margin-bottom: 5px;
+            margin-top: 2rem;
+
+        }
+
+  .textlabel{
+    color: black;
     
   }
   
   .logintitle {
     color: black;
     font-size: 24px;
+    
+    margin-top: 2rem;
+  }
+  .formDiv02{
+    display: flex;
+    flex-direction: column;
+    
+  }
+  .formDiv01{
+    display: flex;
+    flex-direction: column;
+    margin-top: -1rem;
+  }
+  .link{
     text-align: center;
     margin-top: 2rem;
   }
-  
+  .cadastro{
+    text-align: center;
+    margin-top: 2rem;
+  }
   .inputgroup {
     margin-top: 3rem;
   }
@@ -20,18 +63,29 @@
     margin-bottom: 5px;
   }
   
-  .submitbutton {
-    background-color: #6E0000;
-    color: white;
-    font-size: 16px;
-    padding: 10px;
-    border-radius: 30px;
-    cursor: pointer;
-    text-align: center;
-    
+  .textlabel{
+    margin-left: 18rem;
+    margin-top: 4rem;
+
   }
+
 
   .button{
     text-align: center;
     margin-top: 4rem;
+    width: 6vw;
+    height: 3vw;
+    align-items: center;
+    margin-left: 37rem;
+    background-color: rgb(157, 41, 41);
+    color: rgb(255, 255, 255);
+    border-radius: 2rem;
+    border-color: rgb(129, 28, 0);
+  }
+
+  .H1text{
+    color: black;
+    font-size: 24px;
+    text-align: center;
+    margin-top: 3rem;
   }

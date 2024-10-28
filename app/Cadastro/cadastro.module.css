@@ -82,3 +82,7 @@
     outline: none; /* Remove a borda de foco padrão */
     transition: border-color 0.3s; 
 }
+
+.required {
+    border: 2px solid red; /* Por exemplo, uma borda vermelha */
+  }

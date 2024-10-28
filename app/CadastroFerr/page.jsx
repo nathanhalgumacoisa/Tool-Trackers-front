@@ -14,14 +14,16 @@ const CadastroFerr = () => {
     const [modelo, setModelo] = useState('');
     const [descricao, setDescricao] = useState('');
     const [ambiente, setAmbiente] = useState('');
-    
+    const [organizador_id, setOrganizadorId] = useState('');
+    const [slug, setSlug] = useState('');
+
     // Novos estados
     const [nome_organizador, setNomeOrganizador] = useState('');
     const [numero_organizador, setNumeroOrganizador] = useState('');
     const [nome_suborganizador, setNomeSubOrganizador] = useState('');
     const [numero_suborganizador, setNumeroSubOrganizador] = useState('');
     const [foto_url, setFotoUrl] = useState('');
-    
+
     const [organizadores, setOrganizadores] = useState([]);
     const [sub_organizadores, setSubOrganizadores] = useState([]);
     const [successMessage, setSuccessMessage] = useState('');
@@ -55,19 +57,25 @@ const CadastroFerr = () => {
         e.preventDefault();
 
         const ferramentaData = { nome, imagem_url, conjunto, numero, patrimonio, modelo, descricao };
-        const localizacaoData = { ambiente }; // Dados para a tabela de localizações
 
         try {
             await axios.post('http://localhost:3003/ferramentas', ferramentaData);
             await axios.post('http://localhost:3003/organizador', {
-                nome: nome_organizador,
-                numero: numero_organizador
+                 nome_organizador,
+                 numero_organizador
+
             });
             await axios.post('http://localhost:3003/sub_organizador', {
-                nome: nome_suborganizador,
-                numero: numero_suborganizador,
+                nome_suborganizador,
+                numero_suborganizador,
             });
-            await axios.post('http://localhost:3003/localizacoes', localizacaoData);
+            await axios.post('http://localhost:3003/localizacoes', {
+                ambiente,
+                organizador_id: ambiente == "oficina mecanica de usinagem" ? 1 : ambiente == "oficina eletro eletronica" 
+                ? 2 : ambiente == "especo maker" ? 3 : 4 ,
+                slug: ambiente == "oficina mecanica de usinagem" ? "ofm" : ambiente == "oficina eletro eletronica" 
+                ? "oee" : ambiente == "especo maker" ? "em" : "manut" 
+            });
 
             setSuccessMessage('Cadastrado com sucesso!');
             clearInputs();
@@ -110,7 +118,7 @@ const CadastroFerr = () => {
                     </div>
                     <div>
                         <label>
-                        <h2 className={styles.title}>Imagem URL:</h2>
+                            <h2 className={styles.title}>Imagem URL:</h2>
                             <input
                                 type="text"
                                 className={styles.input}
@@ -124,7 +132,7 @@ const CadastroFerr = () => {
 
                     <div>
                         <label>
-                        <h2 className={styles.title}>Conjunto:</h2>
+                            <h2 className={styles.title}>Conjunto:</h2>
                             <input
                                 type="text"
                                 className={styles.input}
@@ -138,7 +146,7 @@ const CadastroFerr = () => {
 
                     <div>
                         <label>
-                        <h2 className={styles.title}>Número:</h2>
+                            <h2 className={styles.title}>Número:</h2>
                             <input
                                 type="text"
                                 className={styles.input}
@@ -152,7 +160,7 @@ const CadastroFerr = () => {
 
                     <div>
                         <label>
-                        <h2 className={styles.title}>Patrimônio:</h2>
+                            <h2 className={styles.title}>Patrimônio:</h2>
                             <input
                                 type="text"
                                 className={styles.input}
@@ -166,7 +174,7 @@ const CadastroFerr = () => {
 
                     <div>
                         <label>
-                        <h2 className={styles.title}>Modelo:</h2>
+                            <h2 className={styles.title}>Modelo:</h2>
                             <input
                                 type="text"
                                 className={styles.input}
@@ -180,7 +188,7 @@ const CadastroFerr = () => {
 
                     <div>
                         <label>
-                        <h2 className={styles.title}>Descrição:</h2>
+                            <h2 className={styles.title}>Descrição:</h2>
                             <textarea
                                 className={styles.input}
                                 value={descricao}
@@ -191,36 +199,44 @@ const CadastroFerr = () => {
                         </label>
                     </div>
 
-                    <div>
+                    <div className={styles.input_container}>
                         <label>
-                        <h2 className={styles.title}>Ambiente:</h2>
-                            <input
-                                type="text"
-                                className={styles.input}
+                            <h2 className={styles.title}>Selecione o ambiente</h2>
+                            <select
+                                className={styles.select}
                                 value={ambiente}
                                 onChange={(e) => setAmbiente(e.target.value)}
-                                placeholder="Digite aqui..."
                                 required
-                            />
+                            >
+                                <option value="" disabled>Selecione um tipo</option>
+                                <option value="oficina mecanica de usinagem">Oficina de mecânica de Usinagem</option>
+                                <option value="oficna eletro eletronica">Oficina Eletro eletrônica</option>
+                                <option value="especo maker">Espaço Maker</option>
+                                <option value="manutencao">Manutenção</option>
+                            </select>
                         </label>
                     </div>
 
-                    <div>
+                    <div className={styles.input_container}>
                         <label>
-                        <h2 className={styles.title}>Nome do Organizador:</h2>
-                            <input
-                                type="text"
-                                className={styles.input}
+                            <h2 className={styles.title}>Selecione o organizador</h2>
+                            <select
+                                className={styles.select}
                                 value={nome_organizador}
                                 onChange={(e) => setNomeOrganizador(e.target.value)}
-                                placeholder="Digite aqui..."
                                 required
-                            />
+                            >
+                                <option value="" disabled>Selecione um organizador</option>
+                                <option value="carrinhos">Carrinhos</option>
+                                <option value="armarios">Armários</option>
+                                <option value="tornos">Tornos</option>
+                                <option value="paineis">Painéis</option>
+                            </select>
                         </label>
                     </div>
                     <div>
                         <label>
-                        <h2 className={styles.title}>Numero do Organizador:</h2>
+                            <h2 className={styles.title}>Numero do Organizador:</h2>
                             <input
                                 type="text"
                                 className={styles.input}
@@ -231,22 +247,25 @@ const CadastroFerr = () => {
                             />
                         </label>
                     </div>
-                    <div>
+                    <div className={styles.input_container}>
                         <label>
-                        <h2 className={styles.title}>Nome do Sub-organizador:</h2>
-                            <input
-                                type="text"
-                                className={styles.input}
+                            <h2 className={styles.title}>Selecione o sub-organizador</h2>
+                            <select
+                                className={styles.select}
                                 value={nome_suborganizador}
                                 onChange={(e) => setNomeSubOrganizador(e.target.value)}
-                                placeholder="Digite aqui..."
                                 required
-                            />
+                            >
+                                <option value="" disabled>Selecione um sub-organizador</option>
+                                <option value="gavetas">Gavetas</option>
+                                <option value="prateleiras">Prateleiras</option>
+                                <option value="outros">Outros</option>
+                            </select>
                         </label>
                     </div>
                     <div>
                         <label>
-                        <h2 className={styles.title}>Numero do Sub-organizador:</h2>
+                            <h2 className={styles.title}>Numero do Sub-organizador:</h2>
                             <input
                                 type="text"
                                 className={styles.input}
@@ -260,7 +279,7 @@ const CadastroFerr = () => {
 
                     <div>
                         <label>
-                        <h2 className={styles.title}>Foto de referência do sub-organizador:</h2>
+                            <h2 className={styles.title}>Foto de referência do sub-organizador:</h2>
                             <input type="text" className={styles.input} value={foto_url} onChange={(e) => setFotoUrl(e.target.value)} placeholder="Digite aqui..." required />
                         </label>
                     </div>
