@@ -17,10 +17,22 @@
     border-radius: 5px; 
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
     transition: transform 0.2s; 
+    
 }
 
 .usuarios:hover {
     transform: scale(1.02); 
+}
+
+.desativado {
+    background-color: #d3d3d3; 
+    color: #a9a9a9; 
+}
+
+.mensagemInativo {
+    color: red; 
+    font-weight: bold;
+    margin-top: 10px;
 }
 
 .modal {
@@ -45,7 +57,6 @@
     width: 300px; 
     max-width: 80%; 
     animation: fadeIn 0.3s; 
-
 }
 
 .modal h4 {
@@ -136,17 +147,18 @@
 
 .editarImagem {
     margin-top: 10px;
-    margin-bottom: -15px;
-    width: 30px;  /* Ajuste conforme necessário */
-    height: 30px; /* Ajuste conforme necessário */
+    margin-bottom: -10px;
+    width: 30px;  
+    height: 30px; 
+    margin-left: 12px;
 }
 
 .excluirImagem {
     margin-top: 10px;
     margin-bottom: -10px;
     margin-left: 10px;
-    width: 25px;  /* Ajuste conforme necessário */
-    height: 25px; /* Ajuste conforme necessário */
+    width: 25px;  
+    height: 25px; 
 }
 
 /* Animação de Fade In */

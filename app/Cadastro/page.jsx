@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import styles from "./cadastro.module.css";
+import Header from "../components/header/Header";
 
 export default function Register() {
   const [email_login, setEmail] = useState("");
@@ -22,35 +23,44 @@ export default function Register() {
   };
 
   return (
-    <div className={styles.form}>
-      <div className={styles.formDiv}>
-        <label className={styles.label}>Email</label>
-        <input
-          type="email"
-          className={styles.input}
-          value={email_login}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      <div className={styles.formDiv}>
-        <label className={styles.label}>Senha</label>
-        <input
-          type="password"
-          className={styles.input}
-          value={senha}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <button className={styles.button} onClick={register}>
-        Registrar
-      </button>
+    <div>
+      <Header />
+      <div className={styles.container}>
+        <div className={styles.input_container}>
+          <label className={styles.label}>
+            <h2 className={styles.title}>Email</h2>
+        
+            <input
+            type="email"
+            className={styles.input}
+            value={email_login}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          </label>
+        </div>
+        <div className={styles.input_container}>
+          <label className={styles.label}>
+            <h2 className={styles.title}>Senha</h2>
+        
+            <input
+            type="password"
+            className={styles.input}
+            value={senha}
+            onChange={(e) => setPassword(e.target.value)}
+            />
+          </label>
+        </div>
+        <button className={styles.btn_cadastro} onClick={register}>
+          Registrar
+        </button>
 
-      <p>
-        Já tem uma conta?{" "}
-        <Link href="/login">
-          <span className={styles.link}>Entre aqui</span>
-        </Link>
-      </p>
+        <p>
+          Já tem uma conta?{" "}
+          <Link href="/login">
+            <span className={styles.link}>Entre aqui</span>
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }
