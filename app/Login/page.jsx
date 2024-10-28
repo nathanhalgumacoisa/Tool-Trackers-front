@@ -6,6 +6,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import Link from "next/link";
 import styles from "./login.module.css";
 import { useRouter }from "next/navigation";
+import Header from "../components/header/Header.jsx";
 
 export default function Login() {
   const [email_login, setEmail] = useState("");
@@ -24,8 +25,10 @@ export default function Login() {
 
   return (
     <div className={styles.form}>
+      <Header></Header>
+      <h1 className={styles.H1text}>Login</h1>
       <div className={styles.formDiv01}>
-        <label className={styles.textlabel}>Email</label>
+        <label className={styles.textlabel}>E-mail:</label>
         <input
           type="email"
           className={styles.input}
@@ -34,7 +37,7 @@ export default function Login() {
         />
       </div>
       <div className={styles.formDiv02}>
-        <label className={styles.textlabel}>Senha</label>
+        <label className={styles.textlabel}>Senha:</label>
         <input
           type="password"
           className={styles.input}
@@ -42,16 +45,18 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
+      <div className={styles.texts}>
       <button className={styles.button} onClick={logIn}>
         Login
       </button>
 
-      <p>
+      <p className={styles.cadastro}>
         Não tem uma conta?{" "}
-        <Link href="/CadastroFerr">
+        <Link href="/Cadastro">
           <span className={styles.link}>Registre-se aqui</span>
         </Link>
       </p>
+      </div>
     </div>
   );
 }
