@@ -26,6 +26,7 @@ export default function Register() {
     <div>
       <Header />
       <div className={styles.container}>
+        <h1>Cadastro</h1>
         <div className={styles.input_container}>
           <label className={styles.label}>
             <h2 className={styles.title}>Email</h2>
@@ -56,7 +57,7 @@ export default function Register() {
 
         <p>
           Já tem uma conta?{" "}
-          <Link href="/login">
+          <Link href="/Login">
             <span className={styles.link}>Entre aqui</span>
           </Link>
         </p>
