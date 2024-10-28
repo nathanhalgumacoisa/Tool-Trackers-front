@@ -14,6 +14,8 @@ const CadastroFerr = () => {
     const [modelo, setModelo] = useState('');
     const [descricao, setDescricao] = useState('');
     const [ambiente, setAmbiente] = useState('');
+    const [organizador_id, setOrganizadorId] = useState('');
+    const [slug, setSlug] = useState('');
 
     // Novos estados
     const [nome_organizador, setNomeOrganizador] = useState('');
@@ -55,19 +57,25 @@ const CadastroFerr = () => {
         e.preventDefault();
 
         const ferramentaData = { nome, imagem_url, conjunto, numero, patrimonio, modelo, descricao };
-        const localizacaoData = { ambiente }; // Dados para a tabela de localizações
 
         try {
             await axios.post('http://localhost:3003/ferramentas', ferramentaData);
             await axios.post('http://localhost:3003/organizador', {
-                nome: nome_organizador,
-                numero: numero_organizador
+                 nome_organizador,
+                 numero_organizador
+
             });
             await axios.post('http://localhost:3003/sub_organizador', {
-                nome: nome_suborganizador,
-                numero: numero_suborganizador,
+                nome_suborganizador,
+                numero_suborganizador,
             });
-            await axios.post('http://localhost:3003/localizacoes', localizacaoData);
+            await axios.post('http://localhost:3003/localizacoes', {
+                ambiente,
+                organizador_id: ambiente == "oficina mecanica de usinagem" ? 1 : ambiente == "oficina eletro eletronica" 
+                ? 2 : ambiente == "especo maker" ? 3 : 4 ,
+                slug: ambiente == "oficina mecanica de usinagem" ? "ofm" : ambiente == "oficina eletro eletronica" 
+                ? "oee" : ambiente == "especo maker" ? "em" : "manut" 
+            });
 
             setSuccessMessage('Cadastrado com sucesso!');
             clearInputs();
@@ -202,7 +210,7 @@ const CadastroFerr = () => {
                             >
                                 <option value="" disabled>Selecione um tipo</option>
                                 <option value="oficina mecanica de usinagem">Oficina de mecânica de Usinagem</option>
-                                <option value="oficna eletro eletronica">Oficna Eletro eletrônica</option>
+                                <option value="oficna eletro eletronica">Oficina Eletro eletrônica</option>
                                 <option value="especo maker">Espaço Maker</option>
                                 <option value="manutencao">Manutenção</option>
                             </select>
