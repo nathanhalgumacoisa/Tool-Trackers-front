@@ -5,7 +5,8 @@ import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import Link from "next/link";
 import styles from "./login.module.css";
-import { useRouter }from "next/router";
+import { useRouter }from "next/navigation";
+import Header from "../components/header/Header.jsx";
 
 export default function Login() {
   const [email_login, setEmail] = useState("");
@@ -16,7 +17,7 @@ export default function Login() {
     try {
       await signInWithEmailAndPassword(auth, email_login, senha);
       alert("Login realizado com sucesso!");
-      router.push("/login");
+      router.push("/Perfil");
     } catch (error) {
       alert("Erro ao logar: " + error.message);
     }
@@ -24,34 +25,38 @@ export default function Login() {
 
   return (
     <div className={styles.form}>
-      <div className={styles.formDiv}>
-        <label className={styles.label}>Email</label>
+      <Header></Header>
+      <h1 className={styles.H1text}>Login</h1>
+      <div className={styles.formDiv01}>
+        <label className={styles.textlabel}>E-mail:</label>
         <input
           type="email"
           className={styles.input}
-          value={email}
+          value={email_login}
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
-      <div className={styles.formDiv}>
-        <label className={styles.label}>Senha</label>
+      <div className={styles.formDiv02}>
+        <label className={styles.textlabel}>Senha:</label>
         <input
           type="password"
           className={styles.input}
-          value={password}
+          value={senha}
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
+      <div className={styles.texts}>
       <button className={styles.button} onClick={logIn}>
         Login
       </button>
 
-      <p>
+      <p className={styles.cadastro}>
         Não tem uma conta?{" "}
-        <Link href="/CadastroFerr">
+        <Link href="/Cadastro">
           <span className={styles.link}>Registre-se aqui</span>
         </Link>
       </p>
+      </div>
     </div>
   );
 }
