@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Header from '../components/header/Header.jsx';
 import styles from './gerenciamentousuarios.module.css';
+import { Switch } from 'antd';
 
 function Usuarios() {
     const [locals, setLocals] = useState([]); // Estado para armazenar usuários
@@ -11,10 +12,14 @@ function Usuarios() {
     const [numeroNif, setNumeroNif] = useState('');
     const [numeroQrCode, setNumeroQrCode] = useState('');
     const [editingUserId, setEditingUserId] = useState(null); // Estado para o usuário em edição
-    const [userToDelete, setUserToDelete] = useState(null); // Estado para o usuário a ser excluído
 
     useEffect(() => {
-        getUsuarios(); // Chamada da função para obter usuários na montagem do componente
+        const savedLocals = localStorage.getItem('usuarios');
+        if (savedLocals) {
+            setLocals(JSON.parse(savedLocals)); // Recupera os usuários do localStorage
+        } else {
+            getUsuarios(); // Chamada da função para obter usuários na montagem do componente
+        }
     }, []);
 
     // Função para obter usuários
@@ -23,6 +28,7 @@ function Usuarios() {
             const response = await axios.get(`http://localhost:3003/usuarios`);
             if (response.data && response.data.usuarios) {
                 setLocals(response.data.usuarios); // Armazenando os usuários no estado
+                localStorage.setItem('usuarios', JSON.stringify(response.data.usuarios)); 
             } else {
                 console.log("Nenhum usuário encontrado na resposta.");
             }
@@ -30,6 +36,20 @@ function Usuarios() {
             console.log("Erro ao buscar usuários:", error);
         }
     }
+
+    // Função para atualizar a ativação do usuário
+    const toggleUserActivation = async (userId, isActive) => {
+        try {
+            await axios.put(`http://localhost:3003/usuarios/${userId}`, { ativo: !isActive });
+            const updatedUsers = locals.map((user) =>
+                user.user_id === userId ? { ...user, ativo: !isActive } : user
+            );
+            setLocals(updatedUsers);
+            localStorage.setItem('usuarios', JSON.stringify(updatedUsers)); // Atualiza o localStorage
+        } catch (error) {
+            console.log("Erro ao atualizar status do usuário:", error);
+        }
+    };
 
     // Função para atualizar um usuário
     async function handleSubmit(e) {
@@ -41,12 +61,24 @@ function Usuarios() {
                 numero_nif: numeroNif,
                 numero_qrcode: numeroQrCode
             });
+
+
+            // Atualiza o estado local após a edição
+            const updatedUsers = locals.map(user =>
+                user.user_id === editingUserId
+                    ? { ...user, nome, tipo_usuario: tipoUsuario, numero_nif: numeroNif, numero_qrcode: numeroQrCode }
+                    : user
+            );
+
+            setLocals(updatedUsers);
+            localStorage.setItem('usuarios', JSON.stringify(updatedUsers)); // Atualiza o localStorage
+
+            // Resetar campos e editar estado
             setEditingUserId(null); // Reseta o id de edição
             setNome('');
             setTipoUsuario('');
             setNumeroNif('');
             setNumeroQrCode('');
-            getUsuarios();
         } catch (error) {
             console.log("Erro ao atualizar usuário:", error);
         }
@@ -61,25 +93,6 @@ function Usuarios() {
         setEditingUserId(user.user_id); // Define o usuário que está sendo editado
     }
 
-    // Função para abrir o modal de confirmação
-    function confirmDelete(userId) {
-        setUserToDelete(userId); // Define o usuário a ser excluído
-    }
-
-    // Função para excluir um usuário
-    async function deleteUser() {
-        if (userToDelete) {
-            try {
-                await axios.delete(`http://localhost:3003/usuarios/${userToDelete}`);
-                // Atualiza a lista de usuários localmente, removendo o usuário excluído
-                setLocals((prevLocals) => prevLocals.filter((user) => user.user_id !== userToDelete));
-                setUserToDelete(null); // Reseta o usuário a ser excluído
-            } catch (error) {
-                console.log("Erro ao excluir usuário:", error);
-            }
-        }
-    }
-
     return (
         <div>
             <Header />
@@ -87,14 +100,20 @@ function Usuarios() {
                 <h1 className={styles.h1}>Usuários Cadastrados</h1>
                 {locals.length > 0 ? (
                     locals.map((l) => (
-                        <div className={styles.usuarios} key={l.user_id}>
+                        <div
+                            className={`${styles.usuarios} ${!l.ativo ? styles.desativado : ''}`}
+                            key={l.user_id}
+                        >
                             <h3 className={styles.h3}>Nome: {l.nome}</h3>
                             <h4 className={styles.h4}>Tipo: {l.tipo_usuario}</h4>
                             <h4 className={styles.h4}>Número do NIF: {l.numero_nif}</h4>
                             <h4 className={styles.h4}>Número do QRCODE: {l.numero_qrcode}</h4>
-                            {/* <button className={styles.editarbutton} onClick={() => editUser(l)}>
-                                <img src="caminho/para/imagem-editar.png" alt="Editar" />
-                            </button> */}
+
+                            <Switch
+                                checked={l.ativo}
+                                onChange={() => toggleUserActivation(l.user_id, l.ativo)}
+                            />
+
                             <img
                                 src="/editar.png"
                                 alt="Editar"
@@ -102,16 +121,11 @@ function Usuarios() {
                                 onClick={() => editUser(l)}
                                 style={{ cursor: 'pointer' }}
                             />
-                            {/* <button className={styles.excluirbutton} onClick={() => confirmDelete(l.user_id)}>
-                                <img src="caminho/para/imagem-excluir.png" alt="Excluir" />
-                            </button> */}
-                            <img
-                                src="/excluir.png"
-                                alt="Editar"
-                                className={styles.excluirImagem}
-                                onClick={() => confirmDelete(l.user_id)}
-                                style={{ cursor: 'pointer' }}
-                            />
+
+                            {!l.ativo && (
+                                <p className={styles.mensagemInativo}>Usuário está inativo.</p>
+                            )}
+
 
                             {editingUserId === l.user_id && (
                                 <form className={styles.formeditar} onSubmit={handleSubmit}>
@@ -153,16 +167,6 @@ function Usuarios() {
                     <p>Nenhum usuário cadastrado.</p>
                 )}
             </div>
-
-            {userToDelete !== null && (
-                <div className={styles.modal}>
-                    <div className={styles.modalContent}>
-                        <h4>Você tem certeza que deseja excluir este usuário?</h4>
-                        <button onClick={deleteUser}>Sim</button>
-                        <button onClick={() => setUserToDelete(null)}>Cancelar</button>
-                    </div>
-                </div>
-            )}
         </div>
     );
 }

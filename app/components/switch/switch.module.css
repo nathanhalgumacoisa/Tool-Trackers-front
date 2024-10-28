@@ -1,0 +1,18 @@
+/* styles/Switch.module.css */
+.container {
+    display: flex;
+    justify-content: center; /* Alinha o switch no centro */
+    margin-top: 50px; /* Margem superior */
+  }
+  
+  .customSwitch {
+    background-color: #4caf50 !important; /* Cor de fundo quando ativado */
+  }
+  
+  .customSwitch.ant-switch-checked {
+    background-color: #f44336 !important; /* Cor de fundo quando desativado */
+  }
+  
+  .customSwitch .ant-switch-inner {
+    color: white !important; /* Cor do texto dentro do switch */
+  }

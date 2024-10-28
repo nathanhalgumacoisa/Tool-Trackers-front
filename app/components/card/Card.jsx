@@ -1,12 +1,11 @@
 "use client";
-// app/components/card/Card.jsx
 
 import { Card } from 'antd';
-import { useRouter } from 'next/navigation'; // Importando useRouter
-import styles from './card.module.css'; // Importando o CSS Module
+import { useRouter } from 'next/navigation'; 
+import styles from './card.module.css'; 
 
 const App = ({ title, link, image }) => {
-    const router = useRouter(); // Inicializando o router
+    const router = useRouter(); 
 
     const handleClick = () => {
         router.push(link); // Redireciona para a página especificada
