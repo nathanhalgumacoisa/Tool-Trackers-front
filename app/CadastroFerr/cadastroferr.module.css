@@ -48,7 +48,25 @@
     margin-left: 16rem;
     margin-top: 0.1rem;
 }
+.select {
+    width: 60vw;
+    background-color: rgb(156, 0, 0);
+    color: rgb(255, 255, 255);
+    border: 2px solid transparent; /* Ajuste a borda se necessário */
+    border-radius: 50px;
+    outline: none;
+    transition: border-color 0.3s;
+    max-width: 50%;
+    margin: -1rem auto;
+    padding: 1rem;
+    margin-left: 16rem;
+    margin-top: 0.5rem;
+}
 
+.select option {
+    background-color: rgb(156, 0, 0);
+    color: rgb(255, 255, 255);
+}
 .input::placeholder {
     color: rgb(255, 255, 255); /* Altere para a cor desejada */
 }
