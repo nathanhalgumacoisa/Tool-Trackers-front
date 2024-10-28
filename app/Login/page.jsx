@@ -5,7 +5,7 @@ import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import Link from "next/link";
 import styles from "./login.module.css";
-import { useRouter }from "next/router";
+import { useRouter }from "next/navigation";
 
 export default function Login() {
   const [email_login, setEmail] = useState("");
@@ -16,7 +16,7 @@ export default function Login() {
     try {
       await signInWithEmailAndPassword(auth, email_login, senha);
       alert("Login realizado com sucesso!");
-      router.push("/login");
+      router.push("/Perfil");
     } catch (error) {
       alert("Erro ao logar: " + error.message);
     }
@@ -24,21 +24,21 @@ export default function Login() {
 
   return (
     <div className={styles.form}>
-      <div className={styles.formDiv}>
-        <label className={styles.label}>Email</label>
+      <div className={styles.formDiv01}>
+        <label className={styles.textlabel}>Email</label>
         <input
           type="email"
           className={styles.input}
-          value={email}
+          value={email_login}
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
-      <div className={styles.formDiv}>
-        <label className={styles.label}>Senha</label>
+      <div className={styles.formDiv02}>
+        <label className={styles.textlabel}>Senha</label>
         <input
           type="password"
           className={styles.input}
-          value={password}
+          value={senha}
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
