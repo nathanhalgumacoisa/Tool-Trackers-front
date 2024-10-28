@@ -24,7 +24,25 @@ function Ferramentas() {
     useEffect(() => {
         getFerramentas(); // Chamada da função para obter usuários na montagem do componente
     }, []);
-
+    const [locali, setLocalis] = useState([]);
+    const searchParams = useSearchParams();
+    const ambiente = searchParams.get('ambiente');
+  
+    useEffect(() => {
+      async function getOrganizador() {
+        if (ambiente) {
+          try {
+            const response = await axios.get(`http://localhost:3003/localizacoes/lista/${ambiente}`);
+            setLocals(response.data.localizacoes);
+            console.log(response.data);
+          } catch (error) {
+            console.log(error);
+          }
+        }
+      }
+  
+      getOrganizador();
+    }, [ambiente]);
     // Função para obter frramenta
     async function getFerramentas() {
         try {
