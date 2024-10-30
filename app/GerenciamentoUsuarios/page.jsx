@@ -8,7 +8,7 @@ import { Switch } from 'antd';
 function Usuarios() {
     const [locals, setLocals] = useState([]);
     const [nome, setNome] = useState('');
-    const [email, setEmail] = useState(''); // Novo estado para o email
+    const [email, setEmail] = useState('');
     const [tipoUsuario, setTipoUsuario] = useState('');
     const [numeroNif, setNumeroNif] = useState('');
     const [numeroQrCode, setNumeroQrCode] = useState('');
@@ -37,12 +37,30 @@ function Usuarios() {
         }
     }
 
-    const toggleUserActivation = (userId, isActive) => {
-        const updatedUsers = locals.map((user) =>
-            user.user_id === userId ? { ...user, ativo: !isActive } : user
-        );
-        setLocals(updatedUsers);
-        localStorage.setItem('usuarios', JSON.stringify(updatedUsers));
+    const toggleUserActivation = async (userId, isActive) => {
+        try {
+            console.log(`Alterando status do usuário ${userId} para ${!isActive}`);
+            const user = locals.find(u => u.user_id === userId);
+
+            const response = await axios.put(`http://localhost:3003/usuarios/${userId}`, {
+                ativo: !isActive,
+                nome: user.nome,
+                email: user.email,
+                tipo_usuario: user.tipo_usuario,
+                numero_nif: user.numero_nif,
+                numero_qrcode: user.numero_qrcode
+            });
+
+            console.log("Resposta do servidor:", response.data);
+    
+            const updatedUsers = locals.map((user) =>
+                user.user_id === userId ? { ...user, ativo: !isActive } : user
+            );
+            setLocals(updatedUsers);
+            localStorage.setItem('usuarios', JSON.stringify(updatedUsers));
+        } catch (error) {
+            console.error("Erro ao atualizar status do usuário:", error);
+        }
     };
 
     async function handleSubmit(e) {
@@ -73,7 +91,7 @@ function Usuarios() {
 
             setEditingUserId(null);
             setNome('');
-            setEmail(''); // Reseta o email
+            setEmail('');
             setTipoUsuario('');
             setNumeroNif('');
             setNumeroQrCode('');
@@ -85,7 +103,7 @@ function Usuarios() {
     function editUser(user) {
         console.log("Editando usuário:", user);
         setNome(user.nome);
-        setEmail(user.email); // Adiciona o email
+        setEmail(user.email);
         setTipoUsuario(user.tipo_usuario);
         setNumeroNif(user.numero_nif);
         setNumeroQrCode(user.numero_qrcode);
@@ -104,7 +122,7 @@ function Usuarios() {
                             key={l.user_id}
                         >
                             <h3 className={styles.h3}>Nome: {l.nome}</h3>
-                            <h4 className={styles.h4}>Email: {l.email}</h4> {/* Exibe o email */}
+                            <h4 className={styles.h4}>Email: {l.email}</h4>
                             <h4 className={styles.h4}>Tipo: {l.tipo_usuario}</h4>
                             <h4 className={styles.h4}>Número do NIF: {l.numero_nif}</h4>
                             <h4 className={styles.h4}>Número do QRCODE: {l.numero_qrcode}</h4>
@@ -136,7 +154,7 @@ function Usuarios() {
                                         required
                                     />
                                     <input className={styles.inputs}
-                                        type="email" // Tipo de input para email
+                                        type="email"
                                         placeholder="Email"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
