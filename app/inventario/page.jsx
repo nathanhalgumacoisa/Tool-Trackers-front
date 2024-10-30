@@ -23,6 +23,7 @@ function Ferramentas() {
         getFerramentas();
     }, []);
 
+    // Função para obter frramenta
     async function getFerramentas() {
         try {
             const response = await axios.get(`http://localhost:3003/ferramentas`);
