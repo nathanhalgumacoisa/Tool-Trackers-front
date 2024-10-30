@@ -15,29 +15,31 @@ function Conferencias() {
     const [selectedGaveta, setSelectedGaveta] = useState(null);
     const [checkedFerramentas, setCheckedFerramentas] = useState(new Set());
     const [form] = Form.useForm();
+    const ambiente = ''; // Defina ambiente de acordo com sua lógica
 
     useEffect(() => {
         fetchFerramentas();
-        fetchLocalizacoes();
+        getOrganizador();
     }, []);
 
     const fetchFerramentas = async () => {
         try {
             const response = await axios.get('http://localhost:3003/ferramentas');
-            setFerramentas(response.data.ferramentas); // Certifique-se de que o formato da resposta é correto
+            setFerramentas(response.data.ferramentas);
         } catch (error) {
             console.error("Erro ao buscar ferramentas:", error);
             message.error('Erro ao carregar ferramentas.');
         }
     };
 
-    const fetchLocalizacoes = async () => {
-        try {
-            const response = await axios.get('http://localhost:3003/localizacoes');
-            setLocalizacoes(response.data.localizacoes);
-        } catch (error) {
-            console.error("Erro ao buscar localizações:", error);
-            message.error('Erro ao carregar localizações.');
+    const getOrganizador = async () => {
+        if (ambiente) {
+            try {
+                const response = await axios.get(`http://localhost:3003/localizacoes/lista/${ambiente}`);
+                setLocalizacoes(response.data.localizacoes);
+            } catch (error) {
+                console.error("Erro ao buscar localizações:", error);
+            }
         }
     };
 
@@ -47,11 +49,7 @@ function Conferencias() {
 
     const handleCheckboxChange = (ferramentaId) => {
         const newCheckedFerramentas = new Set(checkedFerramentas);
-        if (newCheckedFerramentas.has(ferramentaId)) {
-            newCheckedFerramentas.delete(ferramentaId);
-        } else {
-            newCheckedFerramentas.add(ferramentaId);
-        }
+        newCheckedFerramentas.has(ferramentaId) ? newCheckedFerramentas.delete(ferramentaId) : newCheckedFerramentas.add(ferramentaId);
         setCheckedFerramentas(newCheckedFerramentas);
     };
 
@@ -127,11 +125,7 @@ function Conferencias() {
                         >
                             <List.Item.Meta
                                 title={`Ferramenta ID: ${ferramenta.ferramenta_id}`}
-                                description={`Nome: ${ferramenta.nome}, 
-                                Descrição: ${ferramenta.descricao},
-                                Imagem: ${ferramenta.imagem_url},
-                                Conjunto: ${ferramenta.conjunto},
-                                Número`}
+                                description={`Nome: ${ferramenta.nome}, Descrição: ${ferramenta.descricao}, Imagem: ${ferramenta.imagem_url}, Conjunto: ${ferramenta.conjunto}, Número: ${ferramenta.numero}, Patrimônio: ${ferramenta.patrimonio}, Modelo: ${ferramenta.modelo}`}
                             />
                         </List.Item>
                     )}
