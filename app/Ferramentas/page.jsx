@@ -2,6 +2,7 @@
 // import Card from '../components/ferramentas-cards/ferramenta.jsx'
 import styles from './ferreletro.module.css';
 import React from 'react';
+import axios from 'axios';
 import Header from '../components/header/header.jsx';
 import { useState,useEffect } from 'react';
 
