@@ -6,29 +6,29 @@ import styles from './gerenciamentousuarios.module.css';
 import { Switch } from 'antd';
 
 function Usuarios() {
-    const [locals, setLocals] = useState([]); // Estado para armazenar usuários
+    const [locals, setLocals] = useState([]);
     const [nome, setNome] = useState('');
     const [tipoUsuario, setTipoUsuario] = useState('');
     const [numeroNif, setNumeroNif] = useState('');
     const [numeroQrCode, setNumeroQrCode] = useState('');
-    const [editingUserId, setEditingUserId] = useState(null); // Estado para o usuário em edição
+    const [editingUserId, setEditingUserId] = useState(null);
 
     useEffect(() => {
+        // Carrega usuários do localStorage
         const savedLocals = localStorage.getItem('usuarios');
         if (savedLocals) {
-            setLocals(JSON.parse(savedLocals)); // Recupera os usuários do localStorage
+            setLocals(JSON.parse(savedLocals));
         } else {
-            getUsuarios(); // Chamada da função para obter usuários na montagem do componente
+            getUsuarios(); // Busca usuários do servidor se não houver no localStorage
         }
     }, []);
 
-    // Função para obter usuários
     async function getUsuarios() {
         try {
             const response = await axios.get(`http://localhost:3003/usuarios`);
             if (response.data && response.data.usuarios) {
-                setLocals(response.data.usuarios); // Armazenando os usuários no estado
-                localStorage.setItem('usuarios', JSON.stringify(response.data.usuarios)); 
+                setLocals(response.data.usuarios);
+                localStorage.setItem('usuarios', JSON.stringify(response.data.usuarios)); // Atualiza localStorage
             } else {
                 console.log("Nenhum usuário encontrado na resposta.");
             }
@@ -37,21 +37,14 @@ function Usuarios() {
         }
     }
 
-    // Função para atualizar a ativação do usuário
-    const toggleUserActivation = async (userId, isActive) => {
-        try {
-            await axios.put(`http://localhost:3003/usuarios/${userId}`, { ativo: !isActive });
-            const updatedUsers = locals.map((user) =>
-                user.user_id === userId ? { ...user, ativo: !isActive } : user
-            );
-            setLocals(updatedUsers);
-            localStorage.setItem('usuarios', JSON.stringify(updatedUsers)); // Atualiza o localStorage
-        } catch (error) {
-            console.log("Erro ao atualizar status do usuário:", error);
-        }
+    const toggleUserActivation = (userId, isActive) => {
+        const updatedUsers = locals.map((user) =>
+            user.user_id === userId ? { ...user, ativo: !isActive } : user
+        );
+        setLocals(updatedUsers);
+        localStorage.setItem('usuarios', JSON.stringify(updatedUsers)); // Atualiza o localStorage
     };
 
-    // Função para atualizar um usuário
     async function handleSubmit(e) {
         e.preventDefault();
         try {
@@ -62,19 +55,11 @@ function Usuarios() {
                 numero_qrcode: numeroQrCode
             });
 
+            // Atualiza a lista de usuários após a edição
+            await getUsuarios(); // Chama a função para atualizar a lista de usuários
 
-            // Atualiza o estado local após a edição
-            const updatedUsers = locals.map(user =>
-                user.user_id === editingUserId
-                    ? { ...user, nome, tipo_usuario: tipoUsuario, numero_nif: numeroNif, numero_qrcode: numeroQrCode }
-                    : user
-            );
-
-            setLocals(updatedUsers);
-            localStorage.setItem('usuarios', JSON.stringify(updatedUsers)); // Atualiza o localStorage
-
-            // Resetar campos e editar estado
-            setEditingUserId(null); // Reseta o id de edição
+            // Reseta os campos do formulário
+            setEditingUserId(null);
             setNome('');
             setTipoUsuario('');
             setNumeroNif('');
@@ -84,13 +69,12 @@ function Usuarios() {
         }
     }
 
-    // Função para iniciar a edição de um usuário
     function editUser(user) {
         setNome(user.nome);
         setTipoUsuario(user.tipo_usuario);
         setNumeroNif(user.numero_nif);
         setNumeroQrCode(user.numero_qrcode);
-        setEditingUserId(user.user_id); // Define o usuário que está sendo editado
+        setEditingUserId(user.user_id);
     }
 
     return (
@@ -125,7 +109,6 @@ function Usuarios() {
                             {!l.ativo && (
                                 <p className={styles.mensagemInativo}>Usuário está inativo.</p>
                             )}
-
 
                             {editingUserId === l.user_id && (
                                 <form className={styles.formeditar} onSubmit={handleSubmit}>

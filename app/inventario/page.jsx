@@ -15,7 +15,6 @@ function Ferramentas() {
     const [patrimonio, setPatrimonio] = useState('');
     const [modelo, setModelo] = useState('');
     const [descricao, setDescricao] = useState('');
-
     // const [localizacaoId, setLocalizacaoId] = useState('');
     const [ferramentas, setFerramentas] = useState([]);
     const [successMessage, setSuccessMessage] = useState('');
@@ -25,7 +24,25 @@ function Ferramentas() {
     useEffect(() => {
         getFerramentas(); // Chamada da função para obter usuários na montagem do componente
     }, []);
-
+    const [locali, setLocalis] = useState([]);
+    const searchParams = useSearchParams();
+    const ambiente = searchParams.get('ambiente');
+  
+    useEffect(() => {
+      async function getOrganizador() {
+        if (ambiente) {
+          try {
+            const response = await axios.get(`http://localhost:3003/localizacoes/lista/${ambiente}`);
+            setLocals(response.data.localizacoes);
+            console.log(response.data);
+          } catch (error) {
+            console.log(error);
+          }
+        }
+      }
+  
+      getOrganizador();
+    }, [ambiente]);
     // Função para obter frramenta
     async function getFerramentas() {
         try {
@@ -37,6 +54,42 @@ function Ferramentas() {
             }
         } catch (error) {
             console.log("Erro ao buscar ferramentas:", error);
+        }
+    }
+    async function getAmbiente() {
+        try {
+            const response = await axios.get(`http://localhost:3003/localizacoes`);
+            if (response.data && response.data.localizacoes) {
+                setLocals(response.data.localizacoes); // Armazenando os usuários no estado
+            } else {
+                console.log("Nenhum ambiente encontrado na resposta.");
+            }
+        } catch (error) {
+            console.log("Erro ao buscar ambiente:", error);
+        }
+    }
+    async function getOrganizador() {
+        try {
+            const response = await axios.get(`http://localhost:3003/organizador`);
+            if (response.data && response.data.organizador) {
+                setLocals(response.data.organizador); // Armazenando os usuários no estado
+            } else {
+                console.log("Nenhum organizador encontrado na resposta.");
+            }
+        } catch (error) {
+            console.log("Erro ao buscar organizador:", error);
+        }
+    }
+    async function getSubOrganizador() {
+        try {
+            const response = await axios.get(`http://localhost:3003/sub_organizador`);
+            if (response.data && response.data.sub_organizador) {
+                setLocals(response.data.sub_organizador); // Armazenando os usuários no estado
+            } else {
+                console.log("Nenhum sub_organizador encontrado na resposta.");
+            }
+        } catch (error) {
+            console.log("Erro ao buscar sub_organizador:", error);
         }
     }
 
