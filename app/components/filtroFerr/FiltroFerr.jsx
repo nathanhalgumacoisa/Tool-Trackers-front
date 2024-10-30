@@ -7,7 +7,7 @@ const FiltroFerr = () => {
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get('/api/ferramentas', {
+      const response = await axios.get('http://localhost:3003/ferramentas', {
         params: {
           nome: searchText,
           conjunto: searchText,
@@ -21,11 +21,21 @@ const FiltroFerr = () => {
           localizacao_id: searchText,
         }
       });
-      setSearchResults(response.data.ferramentas);
+      if (response.data && response.data.ferramentas) {
+        setSearchResults(response.data.ferramentas);
+      } else {
+        console.log("Nenhuma ferramenta encontrada na resposta.");
+      }
     } catch (error) {
       console.error('Erro ao buscar ferramentas:', error);
     }
   };
+
+  useEffect(() => {
+    if (searchText) {
+      handleSearch();
+    }
+  }, [searchText]); // Executar a busca sempre que "searchText" for alterado
 
   return (
     <div>
