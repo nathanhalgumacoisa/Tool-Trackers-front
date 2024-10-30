@@ -7,7 +7,7 @@ import CardFerr from '../components/cardFerramenta/CardFerr.jsx';
 import CompLoc from '../components/comploc/CompLoc.jsx';
 
 function Ferramentas() {
-    const [locals, setLocals] = useState([]); // Estado para armazenar usuários
+    const [locals, setLocals] = useState([]);
     const [nome, setNome] = useState('');
     const [imagem_url, setImagemUrl] = useState('');
     const [conjunto, setConjunto] = useState('');
@@ -15,98 +15,69 @@ function Ferramentas() {
     const [patrimonio, setPatrimonio] = useState('');
     const [modelo, setModelo] = useState('');
     const [descricao, setDescricao] = useState('');
-    // const [localizacaoId, setLocalizacaoId] = useState('');
-    const [ferramentas, setFerramentas] = useState([]);
-    const [successMessage, setSuccessMessage] = useState('');
-    const [editingFerrId, setEditingFerrId] = useState(null); // Estado para o usuário em edição
-    const [ferrToDelete, setFerrToDelete] = useState(null); // Estado para o usuário a ser excluído
+    const [editingFerrId, setEditingFerrId] = useState(null);
+    const [ferrToDelete, setFerrToDelete] = useState(null);
+    const [ambiente, setAmbiente] = useState(''); // Adiciona estado para 'ambiente'
 
     useEffect(() => {
-        getFerramentas(); // Chamada da função para obter usuários na montagem do componente
+        getFerramentas();
     }, []);
 
-    // Função para obter frramenta
     async function getFerramentas() {
         try {
             const response = await axios.get(`http://localhost:3003/ferramentas`);
             if (response.data && response.data.ferramentas) {
-                setLocals(response.data.ferramentas); // Armazenando os usuários no estado
+                setLocals(response.data.ferramentas);
             } else {
-                console.log("Nenhum ferramenta encontrado na resposta.");
+                console.log("Nenhuma ferramenta encontrada na resposta.");
             }
         } catch (error) {
             console.log("Erro ao buscar ferramentas:", error);
         }
     }
-    async function getAmbiente() {
-        try {
-            const response = await axios.get(`http://localhost:3003/localizacoes`);
-            if (response.data && response.data.localizacoes) {
-                setLocals(response.data.localizacoes); // Armazenando os usuários no estado
-            } else {
-                console.log("Nenhum ambiente encontrado na resposta.");
-            }
-        } catch (error) {
-            console.log("Erro ao buscar ambiente:", error);
-        }
-    }
+
     async function getOrganizador() {
-        try {
-            const response = await axios.get(`http://localhost:3003/organizador`);
-            if (response.data && response.data.organizador) {
-                setLocals(response.data.organizador); // Armazenando os usuários no estado
-            } else {
-                console.log("Nenhum organizador encontrado na resposta.");
+        if (ambiente) {
+            try {
+                const response = await axios.get(`http://localhost:3003/localizacoes/lista/${ambiente}`);
+                console.log(response.data);
+                // Aqui você pode definir o estado se necessário
+            } catch (error) {
+                console.log(error);
             }
-        } catch (error) {
-            console.log("Erro ao buscar organizador:", error);
-        }
-    }
-    async function getSubOrganizador() {
-        try {
-            const response = await axios.get(`http://localhost:3003/sub_organizador`);
-            if (response.data && response.data.sub_organizador) {
-                setLocals(response.data.sub_organizador); // Armazenando os usuários no estado
-            } else {
-                console.log("Nenhum sub_organizador encontrado na resposta.");
-            }
-        } catch (error) {
-            console.log("Erro ao buscar sub_organizador:", error);
         }
     }
 
-    // Função para atualizar um ferramentas
+    useEffect(() => {
+        getOrganizador(); // Chama a função de obter organizador quando 'ambiente' mudar
+    }, [ambiente]);
+
     async function handleSubmit(e) {
         e.preventDefault();
         try {
             await axios.put(`http://localhost:3003/ferramentas/${editingFerrId}`, {
-                nome: nome,
-                imagem_url: imagem_url,
-                conjunto : conjunto,
-                numero : numero,
-                patrimonio : patrimonio,
-                modelo : modelo,
-                descricao : descricao,
-                // localizacao_id: localizacaoId
+                nome,
+                imagem_url,
+                conjunto,
+                numero,
+                patrimonio,
+                modelo,
+                descricao,
             });
-        
-            setEditingFerrId(null); // Reseta o id de edição
+
+            setEditingFerrId(null);
             setImagemUrl('');
             setConjunto('');
             setNumero('');
             setPatrimonio('');
             setModelo('');
             setDescricao('');
-            // setLocalizacaoId('');
-            setFerramentas('');
-            setSuccessMessage('');
             getFerramentas();
         } catch (error) {
             console.log("Erro ao atualizar ferramenta:", error);
         }
     }
 
-    // Função para iniciar a edição de um usuário
     function editFerr(ferramenta) {
         setNome(ferramenta.nome);
         setImagemUrl(ferramenta.imagem_url);
@@ -115,25 +86,19 @@ function Ferramentas() {
         setPatrimonio(ferramenta.patrimonio);
         setModelo(ferramenta.modelo);
         setDescricao(ferramenta.descricao);
-        // setLocalizacaoId(ferramenta.localizacaoId);
-        setFerramentas(ferramenta.ferramentas);
-        setSuccessMessage(ferramenta.successMessage);
-        setEditingFerrId(ferramenta.ferramenta_id); // Define o usuário que está sendo editado
+        setEditingFerrId(ferramenta.ferramenta_id);
     }
 
-    // Função para abrir o modal de confirmação
     function confirmDelete(ferramentaId) {
-        setFerrToDelete(ferramentaId); // Define o usuário a ser excluído
+        setFerrToDelete(ferramentaId);
     }
 
-    // Função para excluir um ferramenta
     async function deleteFerr() {
         if (ferrToDelete) {
             try {
                 await axios.delete(`http://localhost:3003/ferramentas/${ferrToDelete}`);
-                // Atualiza a lista de ferraments localmente, removendo a ferramenta excluída
                 setLocals((prevLocals) => prevLocals.filter((ferramenta) => ferramenta.ferramenta_id !== ferrToDelete));
-                setFerrToDelete(null); // Reseta a ferramenta a ser excluída
+                setFerrToDelete(null);
             } catch (error) {
                 console.log("Erro ao excluir ferramenta:", error);
             }
@@ -146,72 +111,41 @@ function Ferramentas() {
             <div className={styles.App}>
                 <h1 className={styles.h1}>Ferramentas Cadastradas</h1>
                 {locals.length > 0 ? (
-  locals.map((ferr) => (
-    <div className={styles.ferramentas} key={ferr.ferramenta_id}>
-      <CardFerr
-        nome={ferr.nome}
-        imagem_url={ferr.imagem_url}
-        conjunto={ferr.conjunto}
-        numero={ferr.numero}
-        patrimonio={ferr.patrimonio}
-        modelo={ferr.modelo}
-        descricao={ferr.descricao}
-      />
-    <CompLoc
-        ambiente={ferr.ambiente}
-        nome_organizador={ferr.nome_organizador}
-        numero_organizador={ferr.numero_organizador}
-        nome_suborganizador={ferr.nome_suborganizador}
-        numero_suborganizador={ferr.numero_suborganizador}
-    />
-      <button className={styles.editarbutton} onClick={() => editFerr(ferr)}>Editar</button>
-      <button className={styles.excluirbutton} onClick={() => confirmDelete(ferr.ferramenta_id)}>Excluir</button>
+                    locals.map((ferr) => (
+                        <div className={styles.ferramentas} key={ferr.ferramenta_id}>
+                            <CardFerr
+                                nome={ferr.nome}
+                                imagem_url={ferr.imagem_url}
+                                conjunto={ferr.conjunto}
+                                numero={ferr.numero}
+                                patrimonio={ferr.patrimonio}
+                                modelo={ferr.modelo}
+                                descricao={ferr.descricao}
+                            />
 
-      {editingFerrId === ferr.ferramenta_id && (
-        <form className={styles.formeditar} onSubmit={handleSubmit}>
-                                    <input className={styles.inputs}
-                                        type="text"
-                                        placeholder="Nome"
-                                        value={nome}
-                                        onChange={(e) => setNome(e.target.value)}
-                                        required
-                                    />
-                                    <input className={styles.inputs}
-                                        type="text"
-                                        placeholder="Link da imagem"
-                                        value={imagem_url}
-                                        onChange={(e) => setImagemUrl(e.target.value)}
-                                        required
-                                    />
-                                    <input className={styles.inputs}
-                                        type="text"
-                                        placeholder="Conjunto"
-                                        value={conjunto}
-                                        onChange={(e) => setConjunto(e.target.value)}
-                                        required
-                                    />
-                                    <input className={styles.inputs}
-                                        type="text"
-                                        placeholder="Número do patrimônio"
-                                        value={patrimonio}
-                                        onChange={(e) => setPatrimonio(e.target.value)}
-                                        required
-                                    />
-                                    <input className={styles.inputs}
-                                        type="text"
-                                        placeholder="Modelo"
-                                        value={modelo}
-                                        onChange={(e) => setModelo(e.target.value)}
-                                        required
-                                    />
-                                    <input className={styles.inputs}
-                                        type="text"
-                                        placeholder="Descrição"
-                                        value={descricao}
-                                        onChange={(e) => setDescricao(e.target.value)}
-                                        required
-                                    />
-                                    
+
+                            <CompLoc
+                                key={ferr.localizacoes_id}
+                                ambiente={ferr.ambiente}
+                                nome_organizador={ferr.nome_organizador}
+                                numero_organizador={ferr.numero_organizador}
+                                nome_suborganizador={ferr.nome_suborganizador}
+                                numero_suborganizador={ferr.numero_suborganizador}
+                            />
+
+
+                            <button className={styles.editarbutton} onClick={() => editFerr(ferr)}>Editar</button>
+                            <button className={styles.excluirbutton} onClick={() => confirmDelete(ferr.ferramenta_id)}>Excluir</button>
+
+                            {editingFerrId === ferr.ferramenta_id && (
+                                <form className={styles.formeditar} onSubmit={handleSubmit}>
+                                    <input className={styles.inputs} type="text" placeholder="Nome" value={nome} onChange={(e) => setNome(e.target.value)} required />
+                                    <input className={styles.inputs} type="text" placeholder="Link da imagem" value={imagem_url} onChange={(e) => setImagemUrl(e.target.value)} required />
+                                    <input className={styles.inputs} type="text" placeholder="Conjunto" value={conjunto} onChange={(e) => setConjunto(e.target.value)} required />
+                                    <input className={styles.inputs} type="text" placeholder="Número do patrimônio" value={patrimonio} onChange={(e) => setPatrimonio(e.target.value)} required />
+                                    <input className={styles.inputs} type="text" placeholder="Modelo" value={modelo} onChange={(e) => setModelo(e.target.value)} required />
+                                    <input className={styles.inputs} type="text" placeholder="Descrição" value={descricao} onChange={(e) => setDescricao(e.target.value)} required />
+
                                     <button className={styles.buttonseditar} type="submit">Atualizar</button>
                                     <button className={styles.buttonseditar} type="button" onClick={() => setEditingFerrId(null)}>Cancelar</button>
                                 </form>
@@ -219,7 +153,7 @@ function Ferramentas() {
                         </div>
                     ))
                 ) : (
-                    <p>Nenhum ferramenta cadastrada.</p>
+                    <p>Nenhuma ferramenta cadastrada.</p>
                 )}
             </div>
 
