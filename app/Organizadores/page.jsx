@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import Dropdown from '../components/dropdown/Dropdown.jsx';
 import Header from '../components/header/Header.jsx';
+import CompLoc from '../components/comploc/CompLoc.jsx';
 
 function App() {
   const [locals, setLocals] = useState([]);
@@ -30,50 +31,36 @@ function App() {
   return (
     <div className="App">
       <Header />
-
       {locals.map((l) => (
-        <div key={l.localizacao_id}>
-          <h3>{l.ambiente}</h3>
-          
-          {/* Renderizando organizador */}
-          <div>
-            <h4>Organizador:</h4>
-            <p>{l.nome_organizador}</p>
-            <p>Número do Organizador: {l.numero_organizador}</p>
-          </div>
+        <CompLoc
+        key={l.localizacoes_id}
+        ambiente={l.ambiente}
+        nome_organizador={l.nome_organizador}
+        numero_organizador={l.numero_organizador}
+        nome_suborganizador={l.nome_suborganizador}
+        numero_suborganizador={l.numero_suborganizador}
+        foto_url={l.foto_url}
+    />
+  // <div key={l.localizacao_id}>
+  //   <h3>{l.ambiente}</h3>
+    
+  //   {/* Renderizando organizador */}
+  //   <div>
+  //     <h4>Organizador:</h4>
+  //     <p>{l.nome_organizador} {l.numero_organizador}</p>
+  //   </div>
+  //   <div>
+  //     <h4>Sub-Organizador:</h4>
+  //     <p>{l.nome_suborganizador} {l.numero_organizador} {l.foto_url && (
+  //                 <img src={l.foto_url} alt={l.nome_suborganizador} style={{ width: '50px', height: '50px', marginLeft: '10px' }} />
+  //               )}</p>
+  //   </div>
 
-          {/* Renderizando sub-organizadores */}
-          {l.sub_organizadores && l.sub_organizadores.length > 0 && (
-            <div>
-              <h4>Sub-Organizadores:</h4>
-              <ul>
-                {l.sub_organizadores.map((sub) => (
-                  <li key={sub.sub_organizador_id}>
-                    {sub.nome_suborganizador} (Número: {sub.numero_suborganizador})
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+    
+  // </div>
+))}
 
-          {/* Renderizando imagens */}
-          {l.imagens && l.imagens.length > 0 && (
-            <div>
-              <h4>Imagens:</h4>
-              <ul>
-                {l.imagens.map((img) => (
-                  <li key={img.imagem_id}>
-                    <img src={img.url_imagem} alt={img.descricao} style={{ width: '100px' }} />
-                    <p>{img.descricao}</p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-      ))}
-
-      <Dropdown title={['Carrinhos']} />
+      {/* <Dropdown title={['Carrinhos']} /> */}
     </div>
   );
 }
