@@ -50,7 +50,7 @@ function Usuarios() {
         try {
             const response = await axios.put(`http://localhost:3003/usuarios/${editingUserId}`, {
                 nome,
-                email, // Envia o email
+                email,
                 tipo_usuario: tipoUsuario,
                 numero_nif: numeroNif,
                 numero_qrcode: numeroQrCode
