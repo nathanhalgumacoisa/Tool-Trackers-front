@@ -28,6 +28,8 @@ function Ferramentas() {
             const response = await axios.get(`http://localhost:3003/ferramentas`);
             if (response.data && response.data.ferramentas) {
                 setLocals(response.data.ferramentas);
+                console.log(response.data.ferramentas);
+                
             } else {
                 console.log("Nenhuma ferramenta encontrada na resposta.");
             }

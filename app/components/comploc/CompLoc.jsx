@@ -9,7 +9,7 @@ const CompLoc = ({
   numero_organizador, 
   nome_suborganizador, 
   numero_suborganizador, 
-  title = 'Localização' // Valor padrão para title
+   // Valor padrão para title
 }) => {
   // Criação dos itens do dropdown
   const items = [
@@ -49,7 +49,7 @@ const CompLoc = ({
         >
           <a onClick={(e) => e.preventDefault()}>
             <Space className={styles.title}>
-              {title}
+              {nome_organizador}
               <DownOutlined />
             </Space>
           </a>
