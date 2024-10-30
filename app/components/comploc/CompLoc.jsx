@@ -9,14 +9,8 @@ const CompLoc = ({
   numero_organizador, 
   nome_suborganizador, 
   numero_suborganizador, 
-<<<<<<< HEAD
-   // Valor padrão para title
-=======
-  title = 'Localização', 
-  onEditLocal, 
-  onEditOrganizador, 
-  onEditSubOrganizador 
->>>>>>> 3dfdb27c476cb99f15092debdbe52727f4de5071
+
+ 
 }) => {
   // Criação dos itens do dropdown
   const items = [
@@ -43,24 +37,7 @@ const CompLoc = ({
       label: `Número do sub-organizador: ${numero_suborganizador}`,
       key: '4',
     },
-    {
-      type: 'divider',
-    },
-    {
-      label: 'Editar Localização',
-      key: '5',
-      onClick: onEditLocal,
-    },
-    {
-      label: 'Editar Organizador',
-      key: '6',
-      onClick: onEditOrganizador,
-    },
-    {
-      label: 'Editar Sub-Organizador',
-      key: '7',
-      onClick: onEditSubOrganizador,
-    },
+  
   ];
 
   return (
@@ -74,7 +51,9 @@ const CompLoc = ({
         >
           <a onClick={(e) => e.preventDefault()}>
             <Space className={styles.title}>
-              {nome_organizador}
+              { 
+                 `${nome_organizador}`
+              }
               <DownOutlined />
             </Space>
           </a>
