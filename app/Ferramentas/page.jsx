@@ -6,7 +6,7 @@ import axios from 'axios';
 import Header from '../components/header/header.jsx';
 import { useState, useEffect } from 'react';
 import CardFerr from '../components/cardFerramenta/CardFerr';
-
+import FiltroFerr from '../components/filtroFerr/FiltroFerr';
 
 
 function FerramentasforUser () {
@@ -40,6 +40,7 @@ async function getFerramentas() {
     return (
       <div className={styles.container}>
        <Header/>
+       <FiltroFerr/>
        <div className={styles.App}>
                 <h1 className={styles.h1}>Ferramentas Cadastradas</h1>
                 {locals.length > 0 ? (
