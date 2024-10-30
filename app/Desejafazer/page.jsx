@@ -6,8 +6,10 @@ import Header from '../components/header/Header.jsx';
 
 const Desejafazer = () => {
     return (
-        <div>
-            <Header />
+        <div  >
+            <div className={styles.div1}>
+            <Header className={styles.header} />
+            </div>
             <div className={styles.imageContainer}>
                 <img src="./fundosenai.png" alt="Fundo Senai" className={styles.imagem1} />
                 <h1 className={styles.cards1}>O que deseja fazer?</h1>
@@ -15,7 +17,7 @@ const Desejafazer = () => {
 
             <div className={styles.cardsContainer}>
                 <App
-                    title={<span style={{ fontSize: '18px' }}>Emprèstimo</span>}
+                    title={<span style={{ fontSize: '18px' }}>Empréstimos</span>}
                     link="/opcoesEmprestimos"
                     image="/ferramentas2.png" // Substitua pelo caminho correto da imagem
                 />
