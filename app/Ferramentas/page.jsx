@@ -5,7 +5,7 @@ import React from 'react';
 import axios from 'axios';
 import Header from '../components/header/header.jsx';
 import { useState, useEffect } from 'react';
-
+import CardFerr from '../components/cardFerramenta/CardFerr';
 
 
 
