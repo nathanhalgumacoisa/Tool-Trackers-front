@@ -8,18 +8,18 @@ import { Switch } from 'antd';
 function Usuarios() {
     const [locals, setLocals] = useState([]);
     const [nome, setNome] = useState('');
+    const [email, setEmail] = useState(''); // Novo estado para o email
     const [tipoUsuario, setTipoUsuario] = useState('');
     const [numeroNif, setNumeroNif] = useState('');
     const [numeroQrCode, setNumeroQrCode] = useState('');
     const [editingUserId, setEditingUserId] = useState(null);
 
     useEffect(() => {
-        // Carrega usuários do localStorage
         const savedLocals = localStorage.getItem('usuarios');
         if (savedLocals) {
             setLocals(JSON.parse(savedLocals));
         } else {
-            getUsuarios(); // Busca usuários do servidor se não houver no localStorage
+            getUsuarios();
         }
     }, []);
 
@@ -28,7 +28,7 @@ function Usuarios() {
             const response = await axios.get(`http://localhost:3003/usuarios`);
             if (response.data && response.data.usuarios) {
                 setLocals(response.data.usuarios);
-                localStorage.setItem('usuarios', JSON.stringify(response.data.usuarios)); // Atualiza localStorage
+                localStorage.setItem('usuarios', JSON.stringify(response.data.usuarios));
             } else {
                 console.log("Nenhum usuário encontrado na resposta.");
             }
@@ -42,25 +42,38 @@ function Usuarios() {
             user.user_id === userId ? { ...user, ativo: !isActive } : user
         );
         setLocals(updatedUsers);
-        localStorage.setItem('usuarios', JSON.stringify(updatedUsers)); // Atualiza o localStorage
+        localStorage.setItem('usuarios', JSON.stringify(updatedUsers));
     };
 
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            await axios.put(`http://localhost:3003/usuarios/${editingUserId}`, {
+            const response = await axios.put(`http://localhost:3003/usuarios/${editingUserId}`, {
                 nome,
+                email, // Envia o email
                 tipo_usuario: tipoUsuario,
                 numero_nif: numeroNif,
                 numero_qrcode: numeroQrCode
             });
 
-            // Atualiza a lista de usuários após a edição
-            await getUsuarios(); // Chama a função para atualizar a lista de usuários
+            const updatedUser = {
+                user_id: editingUserId,
+                nome,
+                email,
+                tipo_usuario: tipoUsuario,
+                numero_nif: numeroNif,
+                numero_qrcode: numeroQrCode
+            };
 
-            // Reseta os campos do formulário
+            setLocals((prevLocals) =>
+                prevLocals.map((user) =>
+                    user.user_id === editingUserId ? updatedUser : user
+                )
+            );
+
             setEditingUserId(null);
             setNome('');
+            setEmail(''); // Reseta o email
             setTipoUsuario('');
             setNumeroNif('');
             setNumeroQrCode('');
@@ -70,7 +83,9 @@ function Usuarios() {
     }
 
     function editUser(user) {
+        console.log("Editando usuário:", user);
         setNome(user.nome);
+        setEmail(user.email); // Adiciona o email
         setTipoUsuario(user.tipo_usuario);
         setNumeroNif(user.numero_nif);
         setNumeroQrCode(user.numero_qrcode);
@@ -89,6 +104,7 @@ function Usuarios() {
                             key={l.user_id}
                         >
                             <h3 className={styles.h3}>Nome: {l.nome}</h3>
+                            <h4 className={styles.h4}>Email: {l.email}</h4> {/* Exibe o email */}
                             <h4 className={styles.h4}>Tipo: {l.tipo_usuario}</h4>
                             <h4 className={styles.h4}>Número do NIF: {l.numero_nif}</h4>
                             <h4 className={styles.h4}>Número do QRCODE: {l.numero_qrcode}</h4>
@@ -117,6 +133,13 @@ function Usuarios() {
                                         placeholder="Nome"
                                         value={nome}
                                         onChange={(e) => setNome(e.target.value)}
+                                        required
+                                    />
+                                    <input className={styles.inputs}
+                                        type="email" // Tipo de input para email
+                                        placeholder="Email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                         required
                                     />
                                     <input className={styles.inputs}
