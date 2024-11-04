@@ -1,0 +1,22 @@
+
+.menu {
+    background-color: #252B2B;  
+    top: 0; 
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+   
+}
+
+.container {
+    display:flex;
+    margin-left: 2rem;
+    
+}
+
+.container p {
+    color: white; 
+    margin-left: 1rem;
+    cursor: pointer;
+}
+
