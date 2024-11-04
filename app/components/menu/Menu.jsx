@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./menu.module.css"
+import Link from 'next/link'
 
 const Menu = () => {
     return (
