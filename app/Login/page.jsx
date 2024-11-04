@@ -24,8 +24,12 @@ export default function Login() {
   };
 
   return (
+    
     <div className={styles.form}>
       <Header></Header>
+      <div>
+      <img src="./fundo-login.png" alt="" className={styles.img_login}/>
+      </div>
       <h1 className={styles.H1text}>Login</h1>
       <div className={styles.formDiv01}>
         <label className={styles.textlabel}>E-mail:</label>
@@ -52,7 +56,7 @@ export default function Login() {
 
       <p className={styles.cadastro}>
         Não tem uma conta?{" "}
-        <Link href="/Cadastro">
+        <Link className={styles.link1} href="/Cadastro">
           <span className={styles.link}>Registre-se aqui</span>
         </Link>
       </p>
