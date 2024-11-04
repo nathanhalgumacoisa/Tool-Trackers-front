@@ -4,7 +4,7 @@
     background-color: rgb(157, 41, 41);
     color: rgb(0, 0, 0);
     border: 2px ; /* Borda vermelha */
-    border-radius: 50px; /* Arredondamento */
+    border-radius: 1rem; /* Arredondamento */
     outline: none; /* Remove a borda de foco padrão */
     transition: border-color 0.3s; 
     max-width: 20%;
@@ -72,14 +72,14 @@
 
   .button{
     text-align: center;
-    margin-top: 2rem;
+    margin-top: 3rem;
     width: 6vw;
-    height: 3vw;
+    height: 2vw;
     align-items: center;
     margin-left: 57rem;
     background-color: rgb(185, 185, 185);
     color: rgb(0, 0, 0);
-    border-radius: 2rem;
+    border-radius: 1rem;
     border-color: rgb(129, 28, 0);
   }
 
