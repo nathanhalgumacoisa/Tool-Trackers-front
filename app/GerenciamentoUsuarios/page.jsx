@@ -6,29 +6,40 @@ import styles from './gerenciamentousuarios.module.css';
 import { Switch } from 'antd';
 
 function Usuarios() {
-    const [locals, setLocals] = useState([]); // Estado para armazenar usuários
+    const [locals, setLocals] = useState([]);
     const [nome, setNome] = useState('');
+    const [email, setEmail] = useState('');
     const [tipoUsuario, setTipoUsuario] = useState('');
     const [numeroNif, setNumeroNif] = useState('');
     const [numeroQrCode, setNumeroQrCode] = useState('');
-    const [editingUserId, setEditingUserId] = useState(null); // Estado para o usuário em edição
+    const [editingUserId, setEditingUserId] = useState(null);
 
     useEffect(() => {
         const savedLocals = localStorage.getItem('usuarios');
         if (savedLocals) {
+<<<<<<< HEAD
              setLocals(JSON.parse(savedLocals)); 
          } else {
         getUsuarios(); 
          }
+=======
+            setLocals(JSON.parse(savedLocals));
+        } else {
+            getUsuarios();
+        }
+>>>>>>> 2c52257207659d17e0dcfbe26ecb7431ef76d866
     }, []);
 
-    // Função para obter usuários
     async function getUsuarios() {
         try {
             const response = await axios.get(`http://localhost:3003/usuarios`);
             console.log("Usuários recebidos:", response.data);
             if (response.data && response.data.usuarios) {
                 setLocals(response.data.usuarios);
+<<<<<<< HEAD
+=======
+                localStorage.setItem('usuarios', JSON.stringify(response.data.usuarios));
+>>>>>>> 2c52257207659d17e0dcfbe26ecb7431ef76d866
             } else {
                 console.log("Nenhum usuário encontrado na resposta.");
             }
@@ -37,6 +48,7 @@ function Usuarios() {
         }
     }
 
+<<<<<<< HEAD
     // Após adicionar um novo usuário, chame getUsuarios
     const addUsuario = async (novoUsuario) => {
         await axios.post(`http://localhost:3003/usuarios`, novoUsuario);
@@ -44,44 +56,63 @@ function Usuarios() {
     };
 
     // Função para atualizar a ativação do usuário
+=======
+>>>>>>> 2c52257207659d17e0dcfbe26ecb7431ef76d866
     const toggleUserActivation = async (userId, isActive) => {
         try {
-            await axios.put(`http://localhost:3003/usuarios/${userId}`, { ativo: !isActive });
+            console.log(`Alterando status do usuário ${userId} para ${!isActive}`);
+            const user = locals.find(u => u.user_id === userId);
+
+            const response = await axios.put(`http://localhost:3003/usuarios/${userId}`, {
+                ativo: !isActive,
+                nome: user.nome,
+                email: user.email,
+                tipo_usuario: user.tipo_usuario,
+                numero_nif: user.numero_nif,
+                numero_qrcode: user.numero_qrcode
+            });
+
+            console.log("Resposta do servidor:", response.data);
+    
             const updatedUsers = locals.map((user) =>
                 user.user_id === userId ? { ...user, ativo: !isActive } : user
             );
             setLocals(updatedUsers);
-            localStorage.setItem('usuarios', JSON.stringify(updatedUsers)); // Atualiza o localStorage
+            localStorage.setItem('usuarios', JSON.stringify(updatedUsers));
         } catch (error) {
-            console.log("Erro ao atualizar status do usuário:", error);
+            console.error("Erro ao atualizar status do usuário:", error);
         }
     };
 
-    // Função para atualizar um usuário
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            await axios.put(`http://localhost:3003/usuarios/${editingUserId}`, {
+            const response = await axios.put(`http://localhost:3003/usuarios/${editingUserId}`, {
                 nome,
+                email,
                 tipo_usuario: tipoUsuario,
                 numero_nif: numeroNif,
                 numero_qrcode: numeroQrCode
             });
 
+            const updatedUser = {
+                user_id: editingUserId,
+                nome,
+                email,
+                tipo_usuario: tipoUsuario,
+                numero_nif: numeroNif,
+                numero_qrcode: numeroQrCode
+            };
 
-            // Atualiza o estado local após a edição
-            const updatedUsers = locals.map(user =>
-                user.user_id === editingUserId
-                    ? { ...user, nome, tipo_usuario: tipoUsuario, numero_nif: numeroNif, numero_qrcode: numeroQrCode }
-                    : user
+            setLocals((prevLocals) =>
+                prevLocals.map((user) =>
+                    user.user_id === editingUserId ? updatedUser : user
+                )
             );
 
-            setLocals(updatedUsers);
-            localStorage.setItem('usuarios', JSON.stringify(updatedUsers)); // Atualiza o localStorage
-
-            // Resetar campos e editar estado
-            setEditingUserId(null); // Reseta o id de edição
+            setEditingUserId(null);
             setNome('');
+            setEmail('');
             setTipoUsuario('');
             setNumeroNif('');
             setNumeroQrCode('');
@@ -90,13 +121,14 @@ function Usuarios() {
         }
     }
 
-    // Função para iniciar a edição de um usuário
     function editUser(user) {
+        console.log("Editando usuário:", user);
         setNome(user.nome);
+        setEmail(user.email);
         setTipoUsuario(user.tipo_usuario);
         setNumeroNif(user.numero_nif);
         setNumeroQrCode(user.numero_qrcode);
-        setEditingUserId(user.user_id); // Define o usuário que está sendo editado
+        setEditingUserId(user.user_id);
     }
 
     return (
@@ -111,6 +143,7 @@ function Usuarios() {
                             key={l.user_id}
                         >
                             <h3 className={styles.h3}>Nome: {l.nome}</h3>
+                            <h4 className={styles.h4}>Email: {l.email}</h4>
                             <h4 className={styles.h4}>Tipo: {l.tipo_usuario}</h4>
                             <h4 className={styles.h4}>Número do NIF: {l.numero_nif}</h4>
                             <h4 className={styles.h4}>Número do QRCODE: {l.numero_qrcode}</h4>
@@ -132,7 +165,6 @@ function Usuarios() {
                                 <p className={styles.mensagemInativo}>Usuário está inativo.</p>
                             )}
 
-
                             {editingUserId === l.user_id && (
                                 <form className={styles.formeditar} onSubmit={handleSubmit}>
                                     <input className={styles.inputs}
@@ -140,6 +172,13 @@ function Usuarios() {
                                         placeholder="Nome"
                                         value={nome}
                                         onChange={(e) => setNome(e.target.value)}
+                                        required
+                                    />
+                                    <input className={styles.inputs}
+                                        type="email"
+                                        placeholder="Email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                         required
                                     />
                                     <input className={styles.inputs}

@@ -9,7 +9,8 @@ const CompLoc = ({
   numero_organizador, 
   nome_suborganizador, 
   numero_suborganizador, 
-  title = 'Localização' // Valor padrão para title
+
+ 
 }) => {
   // Criação dos itens do dropdown
   const items = [
@@ -36,11 +37,12 @@ const CompLoc = ({
       label: `Número do sub-organizador: ${numero_suborganizador}`,
       key: '4',
     },
+  
   ];
 
   return (
-    <div className={styles.App} >
-      <div className={styles.Container} >
+    <div className={styles.App}>
+      <div className={styles.Container}>
         <Dropdown
           menu={{
             items,
@@ -49,7 +51,9 @@ const CompLoc = ({
         >
           <a onClick={(e) => e.preventDefault()}>
             <Space className={styles.title}>
-              {title}
+              { 
+                 `${nome_organizador}`
+              }
               <DownOutlined />
             </Space>
           </a>

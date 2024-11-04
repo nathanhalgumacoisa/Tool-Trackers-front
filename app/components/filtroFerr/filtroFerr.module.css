@@ -1,0 +1,24 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+    margin-bottom: 6rem;
+}
+
+.input {
+    width: 60vw;
+    color: rgb(0, 0, 0);
+    border: 2px ; /* Borda vermelha */
+    border-radius: 50px; /* Arredondamento */
+    outline: none; /* Remove a borda de foco padrão */
+    transition: border-color 0.3s; 
+    max-width: 50%;
+    align-items: center;
+    margin: -1rem auto;
+    padding: 1rem;
+    align-items: center;
+    margin-left: 16rem;
+    margin-top: 0.5rem;
+        }

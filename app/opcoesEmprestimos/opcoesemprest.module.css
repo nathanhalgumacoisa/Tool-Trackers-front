@@ -1,0 +1,81 @@
+.div1{
+    
+        width: 100%;                 /* Ajusta a largura da imagem */
+        height: auto;   
+        z-index: -1;             /* Mantém a proporção da imagem */
+}
+.header{
+    position: fixed;
+    margin-top: -2rem;
+    width: 100%;
+    height: 100%;
+}
+.cards1 {
+    position: absolute;   
+    margin-bottom: 10rem;
+    left: 50%;      
+    margin-top: 4rem;      
+    font-size: 40px; 
+    transform: translateX(-50%); /* Ajusta a posição para centralizar */
+    color: rgb(0, 0, 0);               
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); 
+    z-index: 1;                  /* Garante que o texto fique acima da imagem */
+    margin-bottom: 5rem;
+}
+
+.cardsContainer {
+    display: flex;                /* Ativa o flexbox */
+    justify-content: center;      /* Centraliza horizontalmente */
+    align-items: center;          /* Centraliza verticalmente, se necessário */
+    height: 49rem;
+    margin-top: 2rem;  
+    position: relative;
+    z-index: 1; 
+    
+}
+.div1 {
+    position: fixed;
+    margin-top: -2rem;
+    width: 100%;
+    height: 100%; 
+}
+
+.content {
+   text-align: center;
+   margin-top: 5%;
+}
+
+.buttonContainer {
+    margin-top: 8%;
+}
+
+.title {
+    text-align: center; 
+}
+
+.button{
+   height: 60px;
+   width: 130px;
+   background-color: #6E0000;
+   border-radius: 10PX;
+   color: aliceblue;
+}
+
+.button2 {
+    margin-left: 5%;
+    height: 60px;
+    width: 130px;
+    background-color: #6E0000;
+    border-radius: 10PX;
+    color: aliceblue;
+}
+
+.imagem1 {
+    width: 100%;
+    height: 100%; 
+    position: fixed;
+  }
+
+  .imageContainer {
+    position: relative;           /* Define o contêiner como relativo */
+}
