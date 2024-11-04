@@ -17,18 +17,29 @@ function Usuarios() {
     useEffect(() => {
         const savedLocals = localStorage.getItem('usuarios');
         if (savedLocals) {
+<<<<<<< HEAD
+             setLocals(JSON.parse(savedLocals)); 
+         } else {
+        getUsuarios(); 
+         }
+=======
             setLocals(JSON.parse(savedLocals));
         } else {
             getUsuarios();
         }
+>>>>>>> 2c52257207659d17e0dcfbe26ecb7431ef76d866
     }, []);
 
     async function getUsuarios() {
         try {
             const response = await axios.get(`http://localhost:3003/usuarios`);
+            console.log("Usuários recebidos:", response.data);
             if (response.data && response.data.usuarios) {
                 setLocals(response.data.usuarios);
+<<<<<<< HEAD
+=======
                 localStorage.setItem('usuarios', JSON.stringify(response.data.usuarios));
+>>>>>>> 2c52257207659d17e0dcfbe26ecb7431ef76d866
             } else {
                 console.log("Nenhum usuário encontrado na resposta.");
             }
@@ -37,6 +48,16 @@ function Usuarios() {
         }
     }
 
+<<<<<<< HEAD
+    // Após adicionar um novo usuário, chame getUsuarios
+    const addUsuario = async (novoUsuario) => {
+        await axios.post(`http://localhost:3003/usuarios`, novoUsuario);
+        getUsuarios(); // Atualiza a lista após adicionar
+    };
+
+    // Função para atualizar a ativação do usuário
+=======
+>>>>>>> 2c52257207659d17e0dcfbe26ecb7431ef76d866
     const toggleUserActivation = async (userId, isActive) => {
         try {
             console.log(`Alterando status do usuário ${userId} para ${!isActive}`);
