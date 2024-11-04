@@ -9,21 +9,15 @@ const FiltroFerr = () => {
     try {
       const response = await axios.get('http://localhost:3003/ferramentas', {
         params: {
-          nome: searchText,
-          conjunto: searchText,
-          numero: searchText,
-          patrimonio: searchText,
-          modelo: searchText,
-          disponivel: searchText,
-          conferido: searchText,
-          emprestado: searchText,
-          manutencao: searchText,
-          localizacao_id: searchText,
+          disponivel: searchText, // Pesquisa apenas no campo 'disponivel'
         }
       });
+
       if (response.data && response.data.ferramentas) {
-        setSearchResults(response.data.ferramentas);
+        const filteredResults = response.data.ferramentas.filter(ferr => ferr.disponivel === searchText);
+        setSearchResults(filteredResults);
       } else {
+        setSearchResults([]);
         console.log("Nenhuma ferramenta encontrada na resposta.");
       }
     } catch (error) {
@@ -34,8 +28,10 @@ const FiltroFerr = () => {
   useEffect(() => {
     if (searchText) {
       handleSearch();
+    } else {
+      setSearchResults([]);
     }
-  }, [searchText]); // Executar a busca sempre que "searchText" for alterado
+  }, [searchText]);
 
   return (
     <div>
@@ -47,8 +43,8 @@ const FiltroFerr = () => {
       />
       <button onClick={handleSearch}>Buscar</button>
       <ul>
-        {searchResults.map(ferramenta => (
-          <li key={ferramenta.id}>{ferramenta.nome}</li>
+        {searchResults.map(ferr => (
+          <li key={ferr.ferramenta_id}>{ferr.nome}</li>
         ))}
       </ul>
     </div>
