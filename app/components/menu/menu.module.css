@@ -2,36 +2,25 @@
 .menu {
     background-color: #252B2B;  
     top: 0; 
-    width: 100%; 
+    width: 20%; 
     display: flex; 
-    justify-content: center; 
+    margin-left: 0;
+    display:flex;
+    justify-content: start;
    
 }
 
-.container {
+.container p {
     display:flex;
-    margin-left: 2rem;
+    margin-left: 10rem;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    
     
 }
 
-.container p {
+.container  {
     color: white; 
-    margin-left: 1rem;
-    cursor: pointer;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-.container p {
-    color: white; 
-    margin-left: 1rem;
-    cursor: pointer;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-.container p {
-    color: white; 
-    margin-left: 1rem;
+    
     cursor: pointer;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
