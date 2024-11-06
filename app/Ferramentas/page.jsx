@@ -39,10 +39,10 @@ async function getFerramentas() {
 
     return (
       <div className={styles.container}>
-       <Header/>
-       <FiltroFerr/>
+       <Header/>       
        <div className={styles.App}>
                 <h1 className={styles.h1}>Ferramentas Cadastradas</h1>
+                <FiltroFerr/>
                 {locals.length > 0 ? (
                     locals.map((ferr) => (
                         <div className={styles.ferramentas} key={ferr.ferramenta_id}>
