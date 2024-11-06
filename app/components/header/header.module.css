@@ -5,11 +5,13 @@
     justify-content: center;
     align-items: center;
     flex-direction: row;
+    padding: 2rem;
     
 }
 
 .img{
     width: 10vw;
     height: 20vh;
-    margin-left: 2rem;
+    margin-right: 68%;
+    position: fixed;
 }
