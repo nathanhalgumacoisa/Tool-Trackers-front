@@ -5,6 +5,7 @@ import axios from 'axios';
 import styles from './cadastroferr.module.css'; // Certifique-se de que o caminho do CSS esteja correto
 import Header from '../components/header/Header';
 
+
 const CadastroFerr = () => {
     const [nome, setNome] = useState('');
     const [imagem_url, setImagemUrl] = useState('');
