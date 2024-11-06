@@ -1,15 +1,17 @@
 .container{
     background-color:#252B2B;
-    height: 50%;
+    height: 10%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
+    padding: 2rem;
     
 }
 
 .img{
     width: 10vw;
     height: 20vh;
-    margin-left: 2rem;
+    margin-right: 68%;
+    position: fixed;
 }
