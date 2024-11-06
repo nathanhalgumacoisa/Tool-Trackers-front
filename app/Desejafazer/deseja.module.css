@@ -55,7 +55,7 @@
 
 .imagem1 {
     width: 100%;                 /* Ajusta a largura da imagem */
-    height: auto;   
+    height: 100%;   
     z-index: -1;             /* Mantém a proporção da imagem */
 }
 
