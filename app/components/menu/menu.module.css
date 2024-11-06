@@ -10,6 +10,7 @@
 
 .container {
     display:flex;
+    margin-right: 10rem;
     margin-left: 10rem;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     align-items: center;
@@ -18,6 +19,7 @@
 
 .container p {
     color: white; 
+    margin-right: 10rem;
     margin-left: 10rem;
     cursor: pointer;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -25,6 +27,7 @@
 
 .container p {
     color: white; 
+    margin-right: 10rem;
     margin-left: 10rem;
     cursor: pointer;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -32,6 +35,7 @@
 
 .container p {
     color: white; 
+    margin-right: 10rem;
     margin-left: 10rem;
     cursor: pointer;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
