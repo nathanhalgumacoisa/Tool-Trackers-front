@@ -14,6 +14,7 @@ const Menu = () => {
             <div className={styles.container}>
               <p>Conferência</p>
             </div>
+            <div className={styles.container}>
               <p>Empréstimo</p>
             </div>   
         </div>
