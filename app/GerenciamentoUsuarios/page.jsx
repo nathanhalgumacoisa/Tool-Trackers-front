@@ -17,29 +17,18 @@ function Usuarios() {
     useEffect(() => {
         const savedLocals = localStorage.getItem('usuarios');
         if (savedLocals) {
-<<<<<<< HEAD
-             setLocals(JSON.parse(savedLocals)); 
-         } else {
-        getUsuarios(); 
-         }
-=======
             setLocals(JSON.parse(savedLocals));
         } else {
             getUsuarios();
         }
->>>>>>> 2c52257207659d17e0dcfbe26ecb7431ef76d866
     }, []);
 
     async function getUsuarios() {
         try {
             const response = await axios.get(`http://localhost:3003/usuarios`);
-            console.log("Usuários recebidos:", response.data);
             if (response.data && response.data.usuarios) {
                 setLocals(response.data.usuarios);
-<<<<<<< HEAD
-=======
                 localStorage.setItem('usuarios', JSON.stringify(response.data.usuarios));
->>>>>>> 2c52257207659d17e0dcfbe26ecb7431ef76d866
             } else {
                 console.log("Nenhum usuário encontrado na resposta.");
             }
@@ -48,21 +37,9 @@ function Usuarios() {
         }
     }
 
-<<<<<<< HEAD
-    // Após adicionar um novo usuário, chame getUsuarios
-    const addUsuario = async (novoUsuario) => {
-        await axios.post(`http://localhost:3003/usuarios`, novoUsuario);
-        getUsuarios(); // Atualiza a lista após adicionar
-    };
-
-    // Função para atualizar a ativação do usuário
-=======
->>>>>>> 2c52257207659d17e0dcfbe26ecb7431ef76d866
     const toggleUserActivation = async (userId, isActive) => {
         try {
-            console.log(`Alterando status do usuário ${userId} para ${!isActive}`);
             const user = locals.find(u => u.user_id === userId);
-
             const response = await axios.put(`http://localhost:3003/usuarios/${userId}`, {
                 ativo: !isActive,
                 nome: user.nome,
@@ -72,8 +49,6 @@ function Usuarios() {
                 numero_qrcode: user.numero_qrcode
             });
 
-            console.log("Resposta do servidor:", response.data);
-    
             const updatedUsers = locals.map((user) =>
                 user.user_id === userId ? { ...user, ativo: !isActive } : user
             );
@@ -87,7 +62,7 @@ function Usuarios() {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            const response = await axios.put(`http://localhost:3003/usuarios/${editingUserId}`, {
+            await axios.put(`http://localhost:3003/usuarios/${editingUserId}`, {
                 nome,
                 email,
                 tipo_usuario: tipoUsuario,
@@ -110,25 +85,28 @@ function Usuarios() {
                 )
             );
 
-            setEditingUserId(null);
-            setNome('');
-            setEmail('');
-            setTipoUsuario('');
-            setNumeroNif('');
-            setNumeroQrCode('');
+            resetForm();
         } catch (error) {
             console.log("Erro ao atualizar usuário:", error);
         }
     }
 
     function editUser(user) {
-        console.log("Editando usuário:", user);
         setNome(user.nome);
         setEmail(user.email);
         setTipoUsuario(user.tipo_usuario);
         setNumeroNif(user.numero_nif);
         setNumeroQrCode(user.numero_qrcode);
         setEditingUserId(user.user_id);
+    }
+
+    function resetForm() {
+        setEditingUserId(null);
+        setNome('');
+        setEmail('');
+        setTipoUsuario('');
+        setNumeroNif('');
+        setNumeroQrCode('');
     }
 
     return (
@@ -203,7 +181,7 @@ function Usuarios() {
                                         required
                                     />
                                     <button className={styles.buttonseditar} type="submit">Atualizar</button>
-                                    <button className={styles.buttonseditar} type="button" onClick={() => setEditingUserId(null)}>Cancelar</button>
+                                    <button className={styles.buttonseditar} type="button" onClick={resetForm}>Cancelar</button>
                                 </form>
                             )}
                         </div>
