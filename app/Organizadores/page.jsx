@@ -47,7 +47,7 @@ function App() {
       <div className={styles.table}>
           {locals.map(local => (
             <div key={local.id}>
-              <p onClick={() => handleOrganizadorClick(local.id)} style={{ cursor: 'pointer' }}>
+              {/* <p onClick={() => handleOrganizadorClick(local.id)} style={{ cursor: 'pointer' }}>
                 {local.nome_organizador}
               </p>
               <p onClick={() => handleNumOrganizadorClick(local.id)} style={{ cursor: 'pointer' }}>
@@ -59,10 +59,13 @@ function App() {
               <p>
               {expandedImgId === local.id ?  <img src={local.foto_url}  style={{ width: '50px', height: '50px' }} /> : null}
                
-              </p>
+              </p> */}
+              <NestedDropdown  nome_organizador={local.nome_organizador} numero_organizador={local.numero_organizador} 
+              nome_suborganizador={local.nome_suborganizador} numero_suborganizador={local.numero_suborganizador}  
+              foto_url={local.foto_url}/>
             </div>
           ))}
-        <NestedDropdown/>
+       
       </div>
     </div>
 
