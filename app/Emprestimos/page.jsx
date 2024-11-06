@@ -18,7 +18,7 @@ const Emprestimos = () => {
 
         <div className={styles.divinputs}>
         <div>
-        <h2 className={styles.h2}>Nome</h2>
+        <h2 className={styles.h2}>Nome:</h2>
         </div>
         <div>
         <input

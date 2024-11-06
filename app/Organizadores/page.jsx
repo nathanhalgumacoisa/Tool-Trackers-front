@@ -8,6 +8,8 @@ import Header from '../components/header/Header.jsx';
 
 function App() {
   const [locals, setLocals] = useState([]);
+  const [expandedId, setExpandedId] = useState(null); // Estado para controlar qual organizador foi clicado
+  const [expandedSubId, setExpandedSubId] = useState(null); // Estado para controlar qual organizador foi clicado
   const searchParams = useSearchParams();
   const ambiente = searchParams.get('ambiente');
 
@@ -27,15 +29,20 @@ function App() {
     getOrganizador();
   }, [ambiente]);
 
+  const handleOrganizadorClick = (id) => {
+    setExpandedId(expandedId === id ? null : id); // Alterna o estado ao clicar
+  };
+  const handleNumOrganizadorClick = (id) => {
+    setExpandedSubId(expandedSubId === id ? null : id); // Alterna o estado ao clicar
+  };
+
   return (
     <div className={styles.App}>
       <Header />
 
-     
       <table className={styles.table}>
         <thead>
-          <tr  className={styles.tr}>
-            
+          <tr className={styles.tr}>
             <th>Nome do Organizador</th>
             <th>Número do Organizador</th>
             <th>Nome do Suborganizador</th>
@@ -46,10 +53,15 @@ function App() {
         <tbody>
           {locals.map(local => (
             <tr key={local.id}>
-              <td>{local.id}</td>
-              <td>{local.nome_organizador}</td>
-              <td>{local.numero_organizador}</td>
-              <td>{local.nome_suborganizador}</td>
+              <td onClick={() => handleOrganizadorClick(local.id)} style={{ cursor: 'pointer' }}>
+                {local.nome_organizador}
+              </td>
+              <td onClick={() => handleNumOrganizadorClick(local.id)} style={{ cursor: 'pointer' }}>
+                {expandedId === local.id ? local.numero_organizador : null}
+              </td>
+              <td>
+              {expandedSubId === local.id ? local.nome_suborganizador : null}
+              </td>
               <td>{local.numero_suborganizador}</td>
               <td>
                 <img src={local.foto_url} alt={local.nome_suborganizador} style={{ width: '50px', height: '50px' }} />
