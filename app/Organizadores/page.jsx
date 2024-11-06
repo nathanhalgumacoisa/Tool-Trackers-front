@@ -2,9 +2,9 @@
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import styles from './organizadores.module.css';
 
 import Header from '../components/header/Header.jsx';
-import OrganizadorComponent from '../components/dropOrganizadores/DropOrganizadores.jsx';
 
 function App() {
   const [locals, setLocals] = useState([]);
@@ -27,20 +27,37 @@ function App() {
     getOrganizador();
   }, [ambiente]);
 
-  // Filtrando organizadores por tipo
-  const organizadores = {
-    carrinhos: locals.filter(l => l.nome_organizador === 'carrinhos'),
-    armarios: locals.filter(l => l.nome_organizador === 'armarios'),
-    tornos: locals.filter(l => l.nome_organizador === 'tornos'),
-    paineis: locals.filter(l => l.nome_organizador === 'paineis'),
-  };
-
   return (
-    <div className="App">
+    <div className={styles.App}>
       <Header />
-      
-      {/* Componente de Organizadores com dados filtrados */}
-      <OrganizadorComponent organizadores={organizadores} />
+
+     
+      <table className={styles.table}>
+        <thead>
+          <tr  className={styles.tr}>
+            
+            <th>Nome do Organizador</th>
+            <th>Número do Organizador</th>
+            <th>Nome do Suborganizador</th>
+            <th>Número do Suborganizador</th>
+            <th>Foto</th>
+          </tr>
+        </thead>
+        <tbody>
+          {locals.map(local => (
+            <tr key={local.id}>
+              <td>{local.id}</td>
+              <td>{local.nome_organizador}</td>
+              <td>{local.numero_organizador}</td>
+              <td>{local.nome_suborganizador}</td>
+              <td>{local.numero_suborganizador}</td>
+              <td>
+                <img src={local.foto_url} alt={local.nome_suborganizador} style={{ width: '50px', height: '50px' }} />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
