@@ -17,7 +17,7 @@ export default function Login() {
     try {
       await signInWithEmailAndPassword(auth, email_login, senha);
       alert("Login realizado com sucesso!");
-      router.push("/Perfil");
+      router.push("/GerenciamentoUsuarios");
     } catch (error) {
       alert("Erro ao logar: " + error.message);
     }
