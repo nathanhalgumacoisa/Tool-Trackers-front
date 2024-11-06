@@ -1,4 +1,3 @@
-
 "use client";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -27,6 +26,7 @@ function FerramentasforUser() {
     }
 
     const handleUpdateStatus = (id, newStatus) => {
+        // Atualiza a lista de ferramentas com o novo status
         setLocals(prevLocals => 
             prevLocals.map(ferr => 
                 ferr.ferramenta_id === id ? { ...ferr, disponivel: newStatus } : ferr
@@ -52,7 +52,7 @@ function FerramentasforUser() {
                                 modelo={ferr.modelo}
                                 descricao={ferr.descricao}
                                 disponivel={ferr.disponivel} // Passa o status de disponibilidade
-                                onUpdateStatus={handleUpdateStatus} // Passa a função de atualização
+                                onUpdateStatus={handleUpdateStatus} // Passa a função para atualizar o status
                             />
                         </div>
                     ))

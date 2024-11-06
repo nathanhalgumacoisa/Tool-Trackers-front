@@ -6,7 +6,7 @@ import axios from 'axios';
 const { Meta } = Card;
 
 const CardFerr = ({ 
-    id, // Adiciona o ID da ferramenta
+    id,
     nome, 
     imagem_url, 
     conjunto, 
@@ -14,8 +14,8 @@ const CardFerr = ({
     patrimonio, 
     modelo, 
     descricao, 
-    disponivel, // Estado de disponibilidade recebido como prop
-    onUpdateStatus // Função para atualizar o status recebida como prop
+    disponivel, // Status de disponibilidade
+    onUpdateStatus // Função para atualizar o status
 }) => {
     const handleHarmonyClick = async () => {
         const newStatus = !disponivel; // Inverte o status de disponibilidade
@@ -23,7 +23,7 @@ const CardFerr = ({
         try {
             await axios.put(`http://localhost:3003/ferramentas/${id}/disponivel`, { disponivel: newStatus });
             message.success(`Status de disponibilidade atualizado para ${newStatus ? 'disponível' : 'não disponível'}.`);
-            onUpdateStatus(id, newStatus); // Chama a função para atualizar o estado no componente pai
+            onUpdateStatus(id, newStatus); // Atualiza o estado no componente pai
         } catch (error) {
             console.error("Erro ao atualizar o status de disponibilidade:", error);
             message.error('Erro ao atualizar o status.');
@@ -39,7 +39,7 @@ const CardFerr = ({
             cover={
                 <img
                     alt="example"
-                    src={imagem_url} // Usar a imagem da ferramenta
+                    src={imagem_url}
                 />
             }
             actions={[
@@ -49,15 +49,15 @@ const CardFerr = ({
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        width: '11px', // Aumenta o tamanho para melhorar a usabilidade
+                        width: '11px',
                         height: '15px',
                         borderRadius: '50%',
-                        backgroundColor: disponivel ? 'green' : 'red', // Muda a cor de fundo da bolinha
+                        backgroundColor: disponivel ? 'green' : 'red', // Cor da bolinha baseada no status
                         cursor: 'pointer'
                     }}
                 >
                     <HarmonyOSOutlined 
-                        style={{ color: 'white' }} // Cor do ícone
+                        style={{ color: 'white' }} 
                     />
                 </div>,
                 <CheckCircleOutlined key="check" />,
@@ -66,8 +66,8 @@ const CardFerr = ({
             ]}
         >
             <Meta
-                title={nome} // Usar o nome da ferramenta como título
-                description={`Conjunto: ${conjunto}, Tamanho: ${numero}, Patrimônio: ${patrimonio}, Modelo: ${modelo}, Descrição: ${descricao}`} // Exibir outras informações na descrição
+                title={nome}
+                description={`Conjunto: ${conjunto}, Tamanho: ${numero}, Patrimônio: ${patrimonio}, Modelo: ${modelo}, Descrição: ${descricao}`}
             />
         </Card>
     );
