@@ -9,7 +9,7 @@ const Menu = () => {
               <Link href="/CadastroFerr"><p>Cadastro de Ferramentas</p></Link>
             </div>
             <div className={styles.container}>
-              <Link href="/CadastroUsuario"><p>Cadastro Usuário</p></Link>
+              <Link href="/Cadastro"><p>Cadastro Usuário</p></Link>
             </div> 
             <div className={styles.container}>
               <Link href="/Conferencia"><p>Conferência</p></Link>
