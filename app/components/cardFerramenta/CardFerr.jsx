@@ -62,7 +62,10 @@ const CardFerr = ({
                 </div>,
                 <CheckCircleOutlined key="check" />,
                 <RetweetOutlined key="retweet"/>,
-                <ToolOutlined key="tool" />
+                <ToolOutlined 
+                    key="tool" 
+                    style={{ color: disponivel ? 'black' : 'yellow' }} // Cor do ícone baseada no status
+                />
             ]}
         >
             <Meta
