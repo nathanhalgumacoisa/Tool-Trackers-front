@@ -5,6 +5,8 @@ import Header from '../components/header/Header.jsx';
 import styles from './gerenciamentousuarios.module.css';
 import { Switch } from 'antd';
 
+// const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+
 function Usuarios() {
     const [locals, setLocals] = useState([]);
     const [nome, setNome] = useState('');
@@ -108,6 +110,9 @@ function Usuarios() {
         setNumeroNif('');
         setNumeroQrCode('');
     }
+
+
+
 
     return (
         <div>
