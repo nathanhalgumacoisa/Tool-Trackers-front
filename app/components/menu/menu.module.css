@@ -14,13 +14,12 @@
     display:flex;
     margin-left: 10rem;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    
+    color: white;
     
 }
 
 .container  {
-    color: white; 
-    
+    color: white;
     cursor: pointer;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
