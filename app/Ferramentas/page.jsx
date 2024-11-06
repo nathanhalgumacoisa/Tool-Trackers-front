@@ -1,51 +1,49 @@
-"use client"
-// import Card from '../components/ferramentas-cards/ferramenta.jsx'
-import styles from './ferreletro.module.css';
-import React from 'react';
+"use client";
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import styles from './ferreletro.module.css';
 import Header from '../components/header/header.jsx';
-import { useState, useEffect } from 'react';
 import CardFerr from '../components/cardFerramenta/CardFerr';
 
+function FerramentasforUser() {
+    const [locals, setLocals] = useState([]);
 
+    useEffect(() => {
+        getFerramentas();
+    }, []);
 
-function FerramentasforUser () {
-  const [locals, setLocals] = useState([]);
-  const [nome, setNome] = useState('');
-  const [imagem_url, setImagemUrl] = useState('');
-  const [conjunto, setConjunto] = useState('');
-  const [numero, setNumero] = useState('');
-  const [patrimonio, setPatrimonio] = useState('');
-  const [modelo, setModelo] = useState('');
-  const [descricao, setDescricao] = useState('');
+    async function getFerramentas() {
+        try {
+            const response = await axios.get(`http://localhost:3003/ferramentas`);
+            if (response.data && response.data.ferramentas) {
+                setLocals(response.data.ferramentas);
+            } else {
+                console.log("Nenhuma ferramenta encontrada na resposta.");
+            }
+        } catch (error) {
+            console.log("Erro ao buscar ferramentas:", error);
+        }
+    }
 
-  useEffect(() => {
-    getFerramentas();
-}, []);
-
-async function getFerramentas() {
-  try {
-      const response = await axios.get(`http://localhost:3003/ferramentas`);
-      if (response.data && response.data.ferramentas) {
-          setLocals(response.data.ferramentas);
-      } else {
-          console.log("Nenhuma ferramenta encontrada na resposta.");
-      }
-  } catch (error) {
-      console.log("Erro ao buscar ferramentas:", error);
-  }
-}
-
+    const handleUpdateStatus = (id, newStatus) => {
+        // Atualiza a lista de ferramentas com o novo status
+        setLocals(prevLocals => 
+            prevLocals.map(ferr => 
+                ferr.ferramenta_id === id ? { ...ferr, disponivel: newStatus } : ferr
+            )
+        );
+    };
 
     return (
-      <div className={styles.container}>
-       <Header/>
-       <div className={styles.App}>
+        <div className={styles.container}>
+            <Header />
+            <div className={styles.App}>
                 <h1 className={styles.h1}>Ferramentas Cadastradas</h1>
                 {locals.length > 0 ? (
                     locals.map((ferr) => (
                         <div className={styles.ferramentas} key={ferr.ferramenta_id}>
                             <CardFerr
+                                id={ferr.ferramenta_id} // Passa o ID da ferramenta
                                 nome={ferr.nome}
                                 imagem_url={ferr.imagem_url}
                                 conjunto={ferr.conjunto}
@@ -53,20 +51,17 @@ async function getFerramentas() {
                                 patrimonio={ferr.patrimonio}
                                 modelo={ferr.modelo}
                                 descricao={ferr.descricao}
+                                disponivel={ferr.disponivel} // Passa o status de disponibilidade
+                                onUpdateStatus={handleUpdateStatus} // Passa a função para atualizar o status
                             />
-        
                         </div>
                     ))
                 ) : (
                     <p>Nenhuma ferramenta cadastrada.</p>
                 )}
             </div>
-    
-      </div>
+        </div>
     );
-  };
+}
 
-
-
-
-  export default FerramentasforUser;
+export default FerramentasforUser;

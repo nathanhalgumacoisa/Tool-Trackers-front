@@ -39,7 +39,7 @@
     height: 60px;
     width: 130px;
     background-color: #6E0000;
-    border-radius: 10PX;
+    border-radius: 10px;
     color: aliceblue;
 }
 
@@ -55,7 +55,7 @@
 
 .imagem1 {
     width: 100%;                 /* Ajusta a largura da imagem */
-    height: auto;   
+    height: 100%;   
     z-index: -1;             /* Mantém a proporção da imagem */
 }
 

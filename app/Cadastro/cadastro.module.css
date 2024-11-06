@@ -18,21 +18,24 @@
     border: 2px ; /* Borda vermelha */
     border-radius: 50px; /* Arredondamento */
     outline: none; /* Remove a borda de foco padrão */
-    transition: border-color 0.3s; 
-    max-width: 50%;
+ 
+    max-width: 21%;
     align-items: center;
     margin: -1rem auto;
     padding: 1rem;
     align-items: center;
-    margin-left: 16rem;
+    margin-left: 48rem;
     margin-top: 0.5rem;
+    justify-content: center;
         }
 
 .title{
-    font-size: 15px;
-    max-width: 40.35vw;
-    margin: 1.25px auto;
-    padding: 1.25rem;
+    font-size: 19px;
+    align-items: center;
+    text-align: center;
+    margin-top: 1rem;
+    margin-left: -19rem;
+    color: rgb(255, 255, 255);
 }
 
 .input::placeholder {
@@ -43,7 +46,6 @@
     width: 60vw;
     background-color: rgb(156, 0, 0);
     color: rgb(255, 255, 255);
-    border: 2px solid transparent; /* Ajuste a borda se necessário */
     border-radius: 50px;
     outline: none;
     transition: border-color 0.3s;
@@ -60,17 +62,23 @@
 }
 
 .btn_cadastro {
-    background-color: rgb(156, 0, 0);
-    color: rgb(255, 255, 255);
+    background-color: rgb(185, 185, 185);
+    color: rgb(0, 0, 0);
     border: 2px ; /* Borda vermelha */
-    border-radius: 50px; /* Arredondamento */
+    border-radius: 1rem; /* Arredondamento */
     outline: none; /* Remove a borda de foco padrão */
     transition: border-color 0.3s; 
     max-width: 50%;
     align-items: center;
-    margin-top: 2rem;
+    margin-top: -4rem;
     margin-bottom: 2rem;
     padding: 1rem;
+    margin-left: 2rem;
+    height: 1rem;
+    text-align: center;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
 }
 
 .btn_cadastro:hover {
@@ -84,4 +92,32 @@
 
 .required {
     border: 2px solid red; /* Por exemplo, uma borda vermelha */
+  }
+
+  .img_login{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: -1; 
+    margin-top: -2rem;
+  }
+
+  .text1{
+    color: rgb(0, 0, 0);
+    font-size: 3rem;
+    margin-bottom: 5px;
+    margin-top: 3rem;
+    margin-left: 1rem;
+    align-items: center;
+    text-align: center;
+
+  }
+
+  .conainer_input{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 7rem;
+    margin-bottom: 6rem;
   }

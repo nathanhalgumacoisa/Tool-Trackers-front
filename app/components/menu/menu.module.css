@@ -1,0 +1,27 @@
+
+.menu {
+    background-color: #252B2B;  
+    top: 0; 
+    width: 20%; 
+    display: flex; 
+    margin-left: 0;
+    display:flex;
+    justify-content: start;
+   
+}
+
+.container p {
+    display:flex;
+    margin-left: 10rem;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    
+    
+}
+
+.container  {
+    color: white; 
+    
+    cursor: pointer;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
