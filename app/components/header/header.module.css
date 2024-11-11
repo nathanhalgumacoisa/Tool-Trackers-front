@@ -1,13 +1,15 @@
-.container{
-    background-color:#252B2B;
-    height: 10vh;
+.container {
+    background-color: #252B2B;
+    height: 3%; /* Reduced height */
+    width: 100%; /* Ensures it fits the viewport width */
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start; /* Align items to the start */
+    align-items: center; /* Center items vertically */
+    padding: 0.0.0.0.0.0.1rem; /* Adjusted padding if needed */
 }
 
-.img{
-    width: 10vw;
-    height: 20vh;
-    margin-left: 2rem;
+.img {
+    width: 10vw; /* Width remains the same */
+    height: 20vh; /* Height remains the same */
+    margin-right: 0; /* No margin to keep it in the corner */
 }

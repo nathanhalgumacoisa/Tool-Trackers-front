@@ -9,7 +9,7 @@ const Desejafazer = () => {
     return (
         <div  >
             <div className={styles.div1}>
-            <Header className={styles.header} />
+            <Header />
             </div>
             <div className={styles.imageContainer}>
                 <img src="./fundosenai.png" alt="Fundo Senai" className={styles.imagem1} />

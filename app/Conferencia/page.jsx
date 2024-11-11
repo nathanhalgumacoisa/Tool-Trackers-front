@@ -10,48 +10,69 @@ const { Option } = Select;
 function Conferencias() {
     const [conferencias, setConferencias] = useState([]);
     const [ferramentas, setFerramentas] = useState([]);
-    const [localizacoes, setLocalizacoes] = useState([]);
+    const [carrinhos, setCarrinhos] = useState([]); // Estado para carrinhos
+    const [gavetas, setGavetas] = useState([]); // Estado para gavetas
     const [selectedCarrinho, setSelectedCarrinho] = useState(null);
     const [selectedGaveta, setSelectedGaveta] = useState(null);
     const [checkedFerramentas, setCheckedFerramentas] = useState(new Set());
     const [form] = Form.useForm();
+    const ambiente = ''; // Defina ambiente de acordo com sua lógica
 
     useEffect(() => {
         fetchFerramentas();
-        fetchLocalizacoes();
+        fetchCarrinhos(); // Busca os carrinhos ao montar o componente
+        getOrganizador();
     }, []);
 
     const fetchFerramentas = async () => {
         try {
             const response = await axios.get('http://localhost:3003/ferramentas');
-            setFerramentas(response.data.ferramentas); // Certifique-se de que o formato da resposta é correto
+            setFerramentas(response.data.ferramentas);
         } catch (error) {
             console.error("Erro ao buscar ferramentas:", error);
             message.error('Erro ao carregar ferramentas.');
         }
     };
 
-    const fetchLocalizacoes = async () => {
+    const fetchCarrinhos = async () => {
         try {
-            const response = await axios.get('http://localhost:3003/localizacoes');
-            setLocalizacoes(response.data.localizacoes);
+            const response = await axios.get('http://localhost:3003/carrinhos'); // Ajuste para o endpoint correto
+            setCarrinhos(response.data.carrinhos); // Verifique se a resposta contém `carrinhos`
         } catch (error) {
-            console.error("Erro ao buscar localizações:", error);
-            message.error('Erro ao carregar localizações.');
+            console.error("Erro ao buscar carrinhos:", error.response ? error.response.data : error.message);
+            message.error('Erro ao carregar carrinhos.');
+        }
+    };
+
+    const fetchGavetas = async (carrinhoId) => {
+        try {
+            const response = await axios.get(`http://localhost:3003/sub_organizadores/${carrinhoId}`); // Ajuste para o endpoint correto
+            setGavetas(response.data.gavetas); // Verifique se a resposta contém `gavetas`
+        } catch (error) {
+            console.error("Erro ao buscar gavetas:", error.response ? error.response.data : error.message);
+            message.error('Erro ao carregar gavetas.');
+        }
+    };
+
+    const getOrganizador = async () => {
+        if (ambiente) {
+            try {
+                const response = await axios.get(`http://localhost:3003/localizacoes/lista/${ambiente}`);
+                setLocalizacoes(response.data.localizacoes);
+            } catch (error) {
+                console.error("Erro ao buscar localizações:", error);
+            }
         }
     };
 
     const handleCarrinhoChange = (carrinho) => {
         setSelectedCarrinho(carrinho);
+        fetchGavetas(carrinho); // Busca gavetas quando um carrinho é selecionado
     };
 
     const handleCheckboxChange = (ferramentaId) => {
         const newCheckedFerramentas = new Set(checkedFerramentas);
-        if (newCheckedFerramentas.has(ferramentaId)) {
-            newCheckedFerramentas.delete(ferramentaId);
-        } else {
-            newCheckedFerramentas.add(ferramentaId);
-        }
+        newCheckedFerramentas.has(ferramentaId) ? newCheckedFerramentas.delete(ferramentaId) : newCheckedFerramentas.add(ferramentaId);
         setCheckedFerramentas(newCheckedFerramentas);
     };
 
@@ -62,7 +83,7 @@ function Conferencias() {
                 data_conferencia: values.data_conferencia,
             });
             message.success('Conferência criada com sucesso!');
-            fetchConferencias();
+            fetchConferencias(); // Defina essa função para atualizar a lista de conferências
             form.resetFields();
             setSelectedCarrinho(null);
             setSelectedGaveta(null);
@@ -84,25 +105,27 @@ function Conferencias() {
                     </Form.Item>
                     <Form.Item label="Carrinho" rules={[{ required: true }]}>
                         <Select onChange={handleCarrinhoChange} placeholder="Selecione um carrinho">
-                            <Option value="1">Carrinho 1</Option>
-                            <Option value="2">Carrinho 2</Option>
-                            <Option value="3">Carrinho 3</Option>
-                            <Option value="4">Carrinho 4</Option>
+                            {carrinhos.length > 0 ? (
+                                carrinhos.map(carrinho => (
+                                    <Option key={carrinho.id} value={carrinho.id}>
+                                        {carrinho.nome} {/* Ajuste conforme as propriedades do seu carrinho */}
+                                    </Option>
+                                ))
+                            ) : (
+                                <Option disabled>Nenhum carrinho disponível</Option>
+                            )}
                         </Select>
                     </Form.Item>
                     <Form.Item label="Gaveta" rules={[{ required: true }]}>
                         <Select onChange={setSelectedGaveta} placeholder="Selecione uma gaveta">
-                            {selectedCarrinho === "1" && (
-                                <>
-                                    <Option value="gaveta1">Gaveta 1</Option>
-                                    <Option value="gaveta2">Gaveta 2</Option>
-                                </>
-                            )}
-                            {selectedCarrinho === "2" && (
-                                <>
-                                    <Option value="gaveta3">Gaveta 3</Option>
-                                    <Option value="gaveta4">Gaveta 4</Option>
-                                </>
+                            {gavetas.length > 0 ? (
+                                gavetas.map(gaveta => (
+                                    <Option key={gaveta.id} value={gaveta.id}>
+                                        {gaveta.nome} {/* Ajuste conforme as propriedades da sua gaveta */}
+                                    </Option>
+                                ))
+                            ) : (
+                                <Option disabled>Nenhuma gaveta disponível</Option>
                             )}
                         </Select>
                     </Form.Item>
@@ -127,11 +150,7 @@ function Conferencias() {
                         >
                             <List.Item.Meta
                                 title={`Ferramenta ID: ${ferramenta.ferramenta_id}`}
-                                description={`Nome: ${ferramenta.nome}, 
-                                Descrição: ${ferramenta.descricao},
-                                Imagem: ${ferramenta.imagem_url},
-                                Conjunto: ${ferramenta.conjunto},
-                                Número`}
+                                description={`Nome: ${ferramenta.nome}, Descrição: ${ferramenta.descricao}, Imagem: ${ferramenta.imagem_url}, Conjunto: ${ferramenta.conjunto}, Número: ${ferramenta.numero}, Patrimônio: ${ferramenta.patrimonio}, Modelo: ${ferramenta.modelo}`}
                             />
                         </List.Item>
                     )}

@@ -1,6 +1,8 @@
+
 'use client';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import styles from './ferreletro.module.css';
 import Header from '../components/header/header.jsx';
 import CardFerr from '../components/cardFerramenta/CardFerr';
 import FiltroFerr from '../components/filtroFerr/FiltroFerr';

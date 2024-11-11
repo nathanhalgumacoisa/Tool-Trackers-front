@@ -6,7 +6,7 @@ import { Card, Typography } from 'antd';
 import styles from './perfil.module.css';
 import Header from '../components/header/Header';
 
-const { Title, Paragraph } = Typography;
+const { Title,  } = Typography;
 
 const Perfil = () => {
   const [user, setUser] = useState(null);
@@ -19,7 +19,7 @@ const Perfil = () => {
 
         const userData = {
           name: data.name,
-          email: data.email,
+          email: 'data.email',
           ambienteResponsavel: 'Ambiente de Desenvolvimento', // vai pegar do back
         };
 
@@ -38,13 +38,10 @@ const Perfil = () => {
 
       <div className={styles.classe}>
         {user && (
-          <Card style={{ width: 300, textAlign: 'center' }}>
-            {/* <div style={{ width: 100, height: 100, margin: '0 auto' }}>
-              <User size={100} color="#555" /> 
-            </div> user icone*/}
-            <Title level={4}>{user.name}</Title>
-            <Paragraph>{user.email}</Paragraph>
-            <Paragraph>{user.ambienteResponsavel}</Paragraph>
+          <Card>
+            
+            <Title level={4}>{user.email}</Title  >
+            
           </Card>
         )}
       </div>

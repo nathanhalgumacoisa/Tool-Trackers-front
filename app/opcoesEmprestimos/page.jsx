@@ -16,12 +16,12 @@ const OpcoesEmprestimos = () => {
             <h1 className={styles.cards1}>O que deseja fazer ?</h1>
             <div className={styles.cardsContainer}> {/* Contêiner flexível para os cards */}
                 <div>
-                <App title="Oficina Mecânica de Usinagem" link="/Organizadores?ambiente=ofm" /> {/* Primeiro card */}
-                <App title="Oficina Eletro Eletrônica" link="/Organizadores?ambiente=oee" /> {/* Segundo card */}
+                <App title="Oficina Mecânica de Usinagem" link="/Organizadores?ambiente=ofm"  image="/torno.png" /> {/* Primeiro card */}
+                <App title="Oficina Eletro Eletrônica" link="/Organizadores?ambiente=oee"  image="/Eletro.png"/> {/* Segundo card */}
                 </div>
                 <div>
-                <App title="Espaço Maker" link="/Organizadores?ambiente=em" /> {/* Primeiro card */}
-                <App title="Manutenção" link="/Organizadores?ambiente=manut" /> {/* Primeiro card */}
+                <App title="Espaço Maker" link="/Organizadores?ambiente=em"  image="/reparo.png"/> {/* Primeiro card */}
+                <App title="Manutenção" link="/Organizadores?ambiente=manut" image="/manutencao.png" /> {/* Primeiro card */}
                 </div>
             </div>
         </div>

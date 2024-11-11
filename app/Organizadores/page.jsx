@@ -2,13 +2,15 @@
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-
-import Dropdown from '../components/dropdown/Dropdown.jsx';
+import styles from './organizadores.module.css';
 import Header from '../components/header/Header.jsx';
-import CompLoc from '../components/comploc/CompLoc.jsx';
+import NestedDropdown from '../components/dropOrganizadores/DropOrganizadores';
 
 function App() {
   const [locals, setLocals] = useState([]);
+  const [expandedId, setExpandedId] = useState(null); // Estado para controlar qual organizador foi clicado
+  const [expandedSubId, setExpandedSubId] = useState(null); // Estado para controlar qual organizador foi clicado
+  const [expandedImgId, setExpandedImgId] = useState(null); // Estado para controlar qual organizador foi clicado
   const searchParams = useSearchParams();
   const ambiente = searchParams.get('ambiente');
 
@@ -28,40 +30,46 @@ function App() {
     getOrganizador();
   }, [ambiente]);
 
+  const handleOrganizadorClick = (id) => {
+    setExpandedId(expandedId === id ? null : id); // Alterna o estado ao clicar
+  };
+  const handleNumOrganizadorClick = (id) => {
+    setExpandedSubId(expandedSubId === id ? null : id); // Alterna o estado ao clicar
+  };
+  const handleImgOrganizadorClick = (id) => {
+    setExpandedImgId(expandedImgId === id ? null : id); // Alterna o estado ao clicar
+  };
+
   return (
-    <div className="App">
+    <div className={styles.App}>
       <Header />
-      {locals.map((l) => (
-        <CompLoc
-        key={l.localizacoes_id}
-        ambiente={l.ambiente}
-        nome_organizador={l.nome_organizador}
-        numero_organizador={l.numero_organizador}
-        nome_suborganizador={l.nome_suborganizador}
-        numero_suborganizador={l.numero_suborganizador}
-        foto_url={l.foto_url}
-    />
-  // <div key={l.localizacao_id}>
-  //   <h3>{l.ambiente}</h3>
-    
-  //   {/* Renderizando organizador */}
-  //   <div>
-  //     <h4>Organizador:</h4>
-  //     <p>{l.nome_organizador} {l.numero_organizador}</p>
-  //   </div>
-  //   <div>
-  //     <h4>Sub-Organizador:</h4>
-  //     <p>{l.nome_suborganizador} {l.numero_organizador} {l.foto_url && (
-  //                 <img src={l.foto_url} alt={l.nome_suborganizador} style={{ width: '50px', height: '50px', marginLeft: '10px' }} />
-  //               )}</p>
-  //   </div>
 
-    
-  // </div>
-))}
-
-      {/* <Dropdown title={['Carrinhos']} /> */}
+      <div className={styles.table}>
+          {locals.map(local => (
+            <div key={local.id}>
+              {/* <p onClick={() => handleOrganizadorClick(local.id)} style={{ cursor: 'pointer' }}>
+                {local.nome_organizador}
+              </p>
+              <p onClick={() => handleNumOrganizadorClick(local.id)} style={{ cursor: 'pointer' }}>
+  {expandedId === local.id ? local.numero_organizador : null}
+</p>
+<p onClick={() => handleImgOrganizadorClick(local.id)} style={{ cursor: 'pointer' }}>
+  {expandedSubId === local.id ? `${local.nome_suborganizador} ${local.numero_suborganizador}` : null}
+</p>
+              <p>
+              {expandedImgId === local.id ?  <img src={local.foto_url}  style={{ width: '50px', height: '50px' }} /> : null}
+               
+              </p> */}
+              <NestedDropdown  nome_organizador={local.nome_organizador} numero_organizador={local.numero_organizador} 
+              nome_suborganizador={local.nome_suborganizador} numero_suborganizador={local.numero_suborganizador}  
+              foto_url={local.foto_url}/>
+            </div>
+          ))}
+       
+      </div>
     </div>
+
+    
   );
 }
 
