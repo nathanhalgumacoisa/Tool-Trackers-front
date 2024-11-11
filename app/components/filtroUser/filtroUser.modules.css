@@ -1,0 +1,16 @@
+/* styles.css */
+input[type="text"], input[type="email"] {
+    background-color: red; /* Fundo vermelho */
+    color: white;          /* Texto branco */
+    border: 2px solid white; /* Borda branca */
+    padding: 10px;        /* Espaçamento interno */
+    border-radius: 5px;   /* Bordas arredondadas */
+    width: 100%;          /* Largura total */
+    box-sizing: border-box; /* Inclui padding e border na largura total */
+    margin-bottom: 10px;  /* Espaçamento inferior */
+}
+
+input[type="text"]::placeholder, input[type="email"]::placeholder {
+    color: white; /* Cor do placeholder branco */
+    opacity: 0.7; /* Leve transparência no placeholder */
+}

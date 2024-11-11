@@ -1,46 +1,46 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+import styles from './filtroFerr.module.css';
 
-const SearchBar = () => {
+const FiltroFerr = ({ onSearchResults }) => {
   const [searchText, setSearchText] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get('/api/ferramentas', {
+      const response = await axios.get('http://localhost:3003/ferramentas', {
         params: {
-          nome: searchText,
-          conjunto: searchText,
-          numero: searchText,
-          patrimonio: searchText,
-          modelo: searchText,
-          disponivel: searchText,
-          conferido: searchText,
-          emprestado: searchText,
-          manutencao: searchText,
-          localizacao_id: searchText,
+          searchText: searchText
         }
       });
-      setSearchResults(response.data.ferramentas);
+
+      if (response.data && response.data.ferramentas) {
+        const filteredResults = response.data.ferramentas.filter(ferr => 
+          Object.values(ferr).some(value =>
+            typeof value === 'string' && value.toLowerCase().includes(searchText.toLowerCase())
+          )
+        );
+        onSearchResults(filteredResults);
+      } else {
+        onSearchResults([]);
+        console.log("Nenhuma ferramenta encontrada na resposta.");
+      }
     } catch (error) {
       console.error('Erro ao buscar ferramentas:', error);
     }
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Pesquisar"
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
-      />
-      <button onClick={handleSearch}>Buscar</button>
-      <ul>
-        {searchResults.map(ferramenta => (
-          <li key={ferramenta.id}>{ferramenta.nome}</li>
-        ))}
-      </ul>
+    <div className={styles.container}>
+      <div className={styles.nav_container}>
+        <input
+          type="text"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          placeholder="Pesquisar ferramentas..."
+          className={styles.nav_search}
+        />
+        <button onClick={handleSearch} className={styles.btn_search}>Pesquisar</button>
+      </div>
     </div>
   );
 };
