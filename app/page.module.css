@@ -5,3 +5,31 @@
     width: 100%;
     height: 20%; 
   }
+
+.text {
+    display: none;
+}
+
+  @media (max-width: 480px) {
+    .container {
+        padding: 10px; /* Adicione um preenchimento para melhor legibilidade */
+        background-color: #e1e1e1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .imagem1 {
+       display: none;
+    }
+
+    .text {
+        display: flex;
+        flex-direction: column;
+        font-size: 1.5rem; /* Aumente o tamanho do texto para dispositivos móveis */
+        margin-top: 1rem; /* Adicione espaço acima do texto */
+        text-align: center; /* Centralizar o texto */
+    }
+
+}
