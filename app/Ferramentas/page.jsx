@@ -25,13 +25,19 @@ function FerramentasforUser() {
         }
     }
 
-    const handleUpdateStatus = (id, newStatus) => {
-        // Atualiza a lista de ferramentas com o novo status
-        setLocals(prevLocals => 
-            prevLocals.map(ferr => 
-                ferr.ferramenta_id === id ? { ...ferr, disponivel: newStatus } : ferr
-            )
-        );
+    const handleUpdateStatus = async (id, newStatus) => {
+        try {
+            const response = await axios.put(`http://localhost:3003/ferramentas/disponivel/${id}`, { disponivel: newStatus });
+            console.log("Resposta do servidor:", response.data);
+            
+            setLocals(prevLocals => 
+                prevLocals.map(ferr => 
+                    ferr.ferramenta_id === id ? { ...ferr, disponivel: newStatus } : ferr
+                )
+            );
+        } catch (error) {
+            console.error("Erro ao atualizar o status de disponibilidade:", error.response?.data || error.message);
+        }
     };
 
     return (
