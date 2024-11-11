@@ -7,10 +7,11 @@ import Header from '../components/header/Header.jsx';
 
 function App() {
   const [locals, setLocals] = useState([]);
-  const [expandedId, setExpandedId] = useState(null);
-  const [expandedSubId, setExpandedSubId] = useState(null);
-  const [expandedImgId, setExpandedImgId] = useState(null);
-  const [expandedCarrinhos, setExpandedCarrinhos] = useState(false); // Estado para controlar a exibição de "Carrinhos"
+  const [expanded, setExpanded] = useState({});
+  const [expandedCarrinhos, setExpandedCarrinhos] = useState(false);
+  const [expandedArmarios, setExpandedArmarios] = useState(false);
+  const [expandedTornos, setExpandedTornos] = useState(false);
+  const [expandedPaineis, setExpandedPaineis] = useState(false);
   const [ferramentas, setFerramentas] = useState([]);
   const searchParams = useSearchParams();
   const ambiente = searchParams.get('ambiente');
@@ -28,9 +29,7 @@ function App() {
     }
     getOrganizador();
   }, [ambiente]);
-  const handleCarrinhosClick = () => {
-    setExpandedCarrinhos(!expandedCarrinhos); // Alterna o estado ao clicar em "Carrinhos"
-  };
+
   const getFerramentas = async () => {
     try {
       const response = await axios.get(`http://localhost:3003/ferramentas`);
@@ -44,17 +43,19 @@ function App() {
     }
   };
 
-  const handleOrganizadorClick = (id) => {
-    setExpandedId(expandedId === id ? null : id);
-  };
-
   const handleNumOrganizadorClick = (id) => {
-    setExpandedSubId(expandedSubId === id ? null : id);
+    setExpanded((prev) => ({
+      ...prev,
+      [id]: { ...prev[id], sub: !prev[id]?.sub, img: false }
+    }));
   };
 
-  const handleImgOrganizadorClick = (id, fotoUrl) => {
-    setExpandedImgId(expandedImgId === id ? null : id);
-    if (expandedImgId !== id) {
+  const handleImgOrganizadorClick = (id) => {
+    setExpanded((prev) => ({
+      ...prev,
+      [id]: { ...prev[id], img: !prev[id]?.img }
+    }));
+    if (!expanded[id]?.img) {
       getFerramentas(id);
     } else {
       setFerramentas([]);
@@ -64,90 +65,93 @@ function App() {
   return (
     <div className={styles.container} key="app-container">
       <Header />
-
-
       <div className={styles.localsContainer}>
+        <div className={styles.h2Container}>
+          <h2 className={styles.h2} onClick={() => setExpandedCarrinhos(!expandedCarrinhos)}>Carrinhos</h2>
+          {expandedCarrinhos && locals
+            .filter(local => local.nome_organizador === 'carrinhos')
+            .map((local, index) => (
+              <div key={`carrinho-${index}-${local.organizador_id}`} className={styles.mapItem}>
+                <p onClick={() => handleNumOrganizadorClick(local.id)} className={styles.mapText}>
+                  {local.numero_organizador}
+                </p>
+                {expanded[local.id]?.sub && (
+                  <p onClick={() => handleImgOrganizadorClick(local.id)} className={styles.mapText}>
+                    {local.nome_suborganizador} {local.numero_suborganizador}
+                  </p>
+                )}
+                {expanded[local.id]?.img && (
+                  <img src={local.foto_url} className={styles.mapImage} />
+                )}
+              </div>
+            ))}
+        </div>
 
         <div className={styles.h2Container}>
-        <h2 className={styles.h2} onClick={handleCarrinhosClick} style={{ cursor: 'pointer' }}>
-            Carrinhos
-          </h2>
-          <h2 className={styles.h2}>Armários</h2>
-          <h2 className={styles.h2}>Tornos</h2>
-          <h2 className={styles.h2}>Paineis</h2>
+          <h2 className={styles.h2} onClick={() => setExpandedArmarios(!expandedArmarios)}>Armários</h2>
+          {expandedArmarios && locals
+            .filter(local => local.nome_organizador === 'armarios')
+            .map((local, index) => (
+              <div key={`armario-${index}-${local.organizador_id}`} className={styles.mapItem}>
+                <p onClick={() => handleNumOrganizadorClick(local.id)} className={styles.mapText}>
+                  {local.numero_organizador}
+                </p>
+                {expanded[local.id]?.sub && (
+                  <p onClick={() => handleImgOrganizadorClick(local.id)} className={styles.mapText}>
+                    {local.nome_suborganizador} {local.numero_suborganizador}
+                  </p>
+                )}
+                {expanded[local.id]?.img && (
+                  <img src={local.foto_url} className={styles.mapImage} />
+                )}
+              </div>
+            ))}
         </div>
-        
-        {expandedCarrinhos && locals
-          .filter(local => local.nome_organizador === 'carrinhos') // Filtra apenas os organizadores "carrinhos"
-        .map((local, index) => (
-          <div key={`org-${index}-${local.organizador_id}`}>
-{/* <p onClick={() => handleOrganizadorClick(local.id)} style={{ cursor: 'pointer' }}>
-                {local.nome_organizador}
-              </p> */}
-              <p onClick={() => handleNumOrganizadorClick(local.id)} style={{ cursor: 'pointer' }}>
-              {local.numero_organizador}
-</p>
-<p onClick={() => handleImgOrganizadorClick(local.id)} style={{ cursor: 'pointer' }}>
-  {expandedSubId === local.id ? `${local.nome_suborganizador} ${local.numero_suborganizador}` : null}
-</p>
-              <p>
-              {expandedImgId === local.id ?  <img src={local.foto_url}  style={{ width: '50px', height: '50px' }} /> : null}
-               
-              </p>
-            
-          </div>
-        ))}
+
+        <div className={styles.h2Container}>
+          <h2 className={styles.h2} onClick={() => setExpandedTornos(!expandedTornos)}>Tornos</h2>
+          {expandedTornos && locals
+            .filter(local => local.nome_organizador === 'tornos')
+            .map((local, index) => (
+              <div key={`torno-${index}-${local.organizador_id}`} className={styles.mapItem}>
+                <p onClick={() => handleNumOrganizadorClick(local.id)} className={styles.mapText}>
+                  {local.numero_organizador}
+                </p>
+                {expanded[local.id]?.sub && (
+                  <p onClick={() => handleImgOrganizadorClick(local.id)} className={styles.mapText}>
+                    {local.nome_suborganizador} {local.numero_suborganizador}
+                  </p>
+                )}
+                {expanded[local.id]?.img && (
+                  <img src={local.foto_url} className={styles.mapImage} />
+                )}
+              </div>
+            ))}
+        </div>
+
+        <div className={styles.h2Container}>
+          <h2 className={styles.h2} onClick={() => setExpandedPaineis(!expandedPaineis)}>Paineis</h2>
+          {expandedPaineis && locals
+            .filter(local => local.nome_organizador === 'paineis')
+            .map((local, index) => (
+              <div key={`painel-${index}-${local.organizador_id}`} className={styles.mapItem}>
+                <p onClick={() => handleNumOrganizadorClick(local.id)} className={styles.mapText}>
+                  {local.numero_organizador}
+                </p>
+                {expanded[local.id]?.sub && (
+                  <p onClick={() => handleImgOrganizadorClick(local.id)} className={styles.mapText}>
+                    {local.nome_suborganizador} {local.numero_suborganizador}
+                  </p>
+                )}
+                {expanded[local.id]?.img && (
+                  <img src={local.foto_url} className={styles.mapImage} />
+                )}
+              </div>
+            ))}
+        </div>
       </div>
     </div>
   );
 }
 
 export default App;
-{/* <p onClick={() => handleOrganizadorClick(local.id)} style={{ cursor: 'pointer' }}>
-                {local.nome_organizador}
-              </p>
-              <p onClick={() => handleNumOrganizadorClick(local.id)} style={{ cursor: 'pointer' }}>
-  {expandedId === local.id ? local.numero_organizador : null}
-</p>
-<p onClick={() => handleImgOrganizadorClick(local.id)} style={{ cursor: 'pointer' }}>
-  {expandedSubId === local.id ? `${local.nome_suborganizador} ${local.numero_suborganizador}` : null}
-</p>
-              <p>
-              {expandedImgId === local.id ?  <img src={local.foto_url}  style={{ width: '50px', height: '50px' }} /> : null}
-               
-              </p> */}
-
-            //   <p
-            //   key={`org-${index}-${local.organizador_id}`}
-            //   onClick={() => handleOrganizadorClick(local.organizador_id)}
-            //   style={{ cursor: 'pointer' }}
-            // >
-            //   {local.nome_organizador}
-            // </p>
-
-            // <p
-            //   key={`num-${index}-${local.organizador_id}`}
-            //   onClick={() => handleNumOrganizadorClick(local.organizador_id)}
-            //   style={{ cursor: 'pointer' }}
-            // >
-            //   {expandedId === local.organizador_id ? local.numero_organizador : null}
-            // </p>
-
-            // <p
-            //   key={`sub-${index}-${local.sub_organizador_id}`}
-            //   onClick={() => handleImgOrganizadorClick(local.sub_organizador_id)}
-            //   style={{ cursor: 'pointer' }}
-            // >
-            //   {expandedSubId === local.sub_organizador_id ? `${local.nome_suborganizador} ${local.numero_suborganizador}` : null}
-            // </p>
-
-            // <p key={`img-${index}-${local.sub_organizador_id}`}>
-            //   {expandedImgId === local.sub_organizador_id ? (
-            //     <img
-            //       key={`img-actual-${index}-${local.sub_organizador_id}`}
-            //       src={local.foto_url}
-            //       style={{ width: '50px', height: '50px' }}
-            //       alt={`Organizador ${local.nome_organizador}`}
-            //     />
-            //   ) : null}
-            // </p>
