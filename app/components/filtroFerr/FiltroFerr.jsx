@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import styles from './filtroFerr.module.css'; // Importe os estilos necessários
+import styles from './filtroFerr.module.css';
 
 const FiltroFerr = ({ onSearchResults }) => {
   const [searchText, setSearchText] = useState('');
@@ -9,12 +9,16 @@ const FiltroFerr = ({ onSearchResults }) => {
     try {
       const response = await axios.get('http://localhost:3003/ferramentas', {
         params: {
-          disponivel: searchText,
+          searchText: searchText
         }
       });
 
       if (response.data && response.data.ferramentas) {
-        const filteredResults = response.data.ferramentas.filter(ferr => ferr.nome.toLowerCase().includes(searchText.toLowerCase()));
+        const filteredResults = response.data.ferramentas.filter(ferr => 
+          Object.values(ferr).some(value =>
+            typeof value === 'string' && value.toLowerCase().includes(searchText.toLowerCase())
+          )
+        );
         onSearchResults(filteredResults);
       } else {
         onSearchResults([]);
@@ -35,7 +39,7 @@ const FiltroFerr = ({ onSearchResults }) => {
           placeholder="Pesquisar ferramentas..."
           className={styles.nav_search}
         />
-        <button onClick={handleSearch} className={styles.searchButton}>Pesquisar</button>
+        <button onClick={handleSearch} className={styles.btn_search}>Pesquisar</button>
       </div>
     </div>
   );
