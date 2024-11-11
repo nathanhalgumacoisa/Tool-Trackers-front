@@ -97,3 +97,17 @@
     outline: none; /* Remove a borda de foco padrão */
     transition: border-color 0.3s; 
 }
+
+@media (max-width: 480px) {
+    .input, .select, .btn_cadastro {
+        width: 90vw;
+    }
+
+    .title {
+        font-size: 1.2rem;
+    }
+
+    .text1 {
+        font-size: 1.5rem;
+    }
+}

@@ -23,3 +23,17 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+    @media (max-width: 480px) {
+        .menu {
+            flex-direction: row; /* Altera a direção para coluna */
+            align-items: flex-start; /* Alinha os itens à esquerda */
+            padding: 5px;
+        }
+    
+        .container p {
+            margin-left: 0; 
+            margin-right: 1rem;
+            text-align: left; /* Alinha o texto à esquerda */
+            font-size: small;
+        }
+    }
