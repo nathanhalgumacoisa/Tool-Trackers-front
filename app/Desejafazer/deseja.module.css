@@ -4,13 +4,9 @@
     align-items: center;          /* Center vertically, if necessary */
     height: 100vh;
     margin-top: 2rem;
-    flex-direction: column;       /* Stack items vertically on smaller screens */
-}
+    flex-direction: column; 
+    position: fixed; 
 
-.div1 {
-    margin-top: -1rem;
-    width: 100%;
-    height: auto;                /* Allow height to adjust based on content */
 }
 
 .content {
@@ -20,15 +16,17 @@
 
 .buttonContainer {
     margin-top: 8%;
-    display: flex;               /* Use flexbox for button alignment */
-    flex-direction: column;      /* Stack buttons vertically on smaller screens */
-    align-items: center;         /* Center buttons */
+    display: flex;              
+    flex-direction: column;      
+    align-items: center;         
 }
 
 .title {
     text-align: center; 
     position: fixed;
-    width: 100%;                 /* Ensure title takes full width */
+    width: 100%;  
+    font-size: small; 
+    margin-bottom: 8.0rem;        
 }
 
 .button, .button2 {
@@ -37,13 +35,13 @@
     background-color: #6E0000;
     border-radius: 10px;
     color: aliceblue;
-    margin: 0.5rem;             /* Add some margin between buttons */
+    margin: 0.5rem;             
 }
 
 .imageContainer {
-    position: relative;           /* Define the container as relative */
-    width: 100%;                 /* Full width for responsiveness */
-    height: auto;                /* Allow height to adjust based on content */
+    position: relative;          
+    width: 100%;                 
+    height: 100%;                /* Allow height to adjust based on content */
 }
 
 .imagem1 {
