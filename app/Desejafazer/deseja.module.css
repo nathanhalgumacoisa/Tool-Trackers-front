@@ -4,11 +4,11 @@
     align-items: center;          /* Centraliza verticalmente, se necessário */
     height: 100vh;
     margin-top: 2rem;
-    
+ 
 }
 .div1 {
-    position: fixed;
-    margin-top: -2rem;
+  
+    margin-top: -1rem;
     width: 100%;
     height: 100%; 
 }
@@ -16,6 +16,9 @@
 .content {
    text-align: center;
    margin-top: 5%;
+
+    
+ 
 }
 
 .buttonContainer {
@@ -24,6 +27,8 @@
 
 .title {
     text-align: center; 
+    position: fixed;
+    
 }
 
 .button{
@@ -46,7 +51,7 @@
 .imagem1 {
     width: 100%;
     height: 100%; 
-    position: fixed;
+    
   }
 
   .imageContainer {
