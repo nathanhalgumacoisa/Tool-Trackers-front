@@ -7,74 +7,77 @@ import Link from "next/link";
 import styles from "./cadastro.module.css";
 import Header from "../components/header/Header";
 
-export default function Register() {
-  const [email_login, setEmail] = useState("");
-  const [senha, setPassword] = useState("");
-  const router = useRouter();
 
-  const register = async () => {
-    try {
-      await createUserWithEmailAndPassword(auth, email_login, senha);
-      alert("Registrado com sucesso!");
-      router.push("/Login");
-    } catch (error) {
-      alert("Erro ao registrar: " + error.message);
-    }
-  };
 
+  export default function Register() {
+    const [email_login, setEmail] = useState("");
+    const [senha, setPassword] = useState("");
+    const router = useRouter();
   
-  return (
-    <div>
-      <Header />
+    const register = async () => {
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email_login, senha);
+        alert("Registrado com sucesso!");
+  
+        // Salvar dados no Firestore
+        const user = userCredential.user; // Obtém o usuário registrado
+        await setDoc(doc(db, "usuarios", user.uid), {
+          email: email_login,
+          tipo_usuario: null, // Adicione outros campos que você precisar
+        });
+  
+        router.push("/Login");
+      } catch (error) {
+        alert("Erro ao registrar: " + error.message);
+        console.log("Erro ao registrar: " + error.message);
+      }
+    };
+  
+    return (
       <div>
-      <img src="./fundo-login.png" alt="" className={styles.img_login}/>
+        <Header />
+        <div>
+          <img src="./fundo-login.png" alt="" className={styles.img_login} />
+        </div>
+        <div className={styles.container}>
+          <h1 className={styles.text1}>Cadastro</h1>
+          <div className={styles.conainer_input}>
+            <div className={styles.input_container}>
+              <label className={styles.label}>
+                <h2 className={styles.title}>E-mail:</h2>
+                <input
+                  type="email"
+                  className={styles.input}
+                  value={email_login}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </label>
+            </div>
+            <div className={styles.input_container}>
+              <label className={styles.label}>
+                <h2 className={styles.title}>Senha:</h2>
+                <input
+                  type="password"
+                  className={styles.input}
+                  value={senha}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </label>
+            </div>
+          </div>
+          <button className={styles.btn_cadastro} onClick={register}>
+            <h1 className={styles.title1}>Registrar</h1>
+          </button>
+          <p>
+            Já tem uma conta?{" "}
+            <Link href="/Login">
+              <span className={styles.link}>Entre aqui</span>
+            </Link>
+          </p>
+        </div>
       </div>
-      <div className={styles.container}>
-
-        <h1 className={styles.text1}>Cadastro</h1>
-
-        <div className={styles.conainer_input}>
-        <div className={styles.input_container}>
-          <label className={styles.label}>
-            <h2 className={styles.title}>E-mail:</h2>
-        
-            <input
-            type="email"
-            className={styles.input}
-            value={email_login}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          </label>
-        </div>
-
-        <div className={styles.input_container}>
-          <label className={styles.label}>
-            <h2 className={styles.title}>Senha:</h2>
-        
-            <input
-            type="password"
-            className={styles.input}
-            value={senha}
-            onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
-        </div>
-        </div>
-
-        <button className={styles.btn_cadastro} onClick={register}>
-        <h1 className={styles.title1}>Registrar</h1>  
-        </button>
-
-        <p>
-          Já tem uma conta?{" "}
-          <Link href="/Login">
-            <span className={styles.link}>Entre aqui</span>
-          </Link>
-        </p>
-      </div>
-    </div>
-  );
-}
+    );
+  }
 
 
 
