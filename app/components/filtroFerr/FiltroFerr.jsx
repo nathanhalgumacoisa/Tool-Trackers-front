@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import styles from './filtroFerr.module.css'; // Importe os estilos necessários
 
 const FiltroFerr = ({ onSearchResults }) => {
   const [searchText, setSearchText] = useState('');
@@ -25,14 +26,17 @@ const FiltroFerr = ({ onSearchResults }) => {
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
-        placeholder="Pesquisar ferramentas..."
-      />
-      <button onClick={handleSearch}>Pesquisar</button>
+    <div className={styles.container}>
+      <div className={styles.nav_container}>
+        <input
+          type="text"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          placeholder="Pesquisar ferramentas..."
+          className={styles.nav_search}
+        />
+        <button onClick={handleSearch} className={styles.searchButton}>Pesquisar</button>
+      </div>
     </div>
   );
 };
