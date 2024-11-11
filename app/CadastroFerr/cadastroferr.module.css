@@ -1,113 +1,76 @@
 .body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4; /* Cor de fundo para contraste */
+    background-color: #f4f4f4; /* Background color for contrast */
 }
 
-.container{
+.container {
     align-items: center;
     justify-content: center;
     display: flex;
     flex-direction: column;
+    padding: 1rem; /* Add padding for better spacing */
 }
-
-
 
 .h1 {
     text-align: center;
     color: #333;
 }
 
-.title{
-    font-size: 15px;
-    max-width: 40.35vw;
-    margin: 1.25px auto;
-    padding: 1.25rem;
-    margin-left: 17rem;
-    margin-top: 1rem;  
-    align-items: center;
+.title {
+    font-size: 1.2rem; /* Adjust font size for better readability */
+    max-width: 90%; /* Allow it to take more width on smaller screens */
+    margin: 1.25rem auto; /* Use rem for consistent spacing */
+    padding: 1rem; /* Add padding */
 }
 
-.input {
-    width: 60vw;
-    background-color: rgb(156, 0, 0);
-    color: rgb(0, 0, 0);
-    border: 2px ; /* Borda vermelha */
-    border-radius: 50px; /* Arredondamento */
-    outline: none; /* Remove a borda de foco padrão */
-    transition: border-color 0.3s; 
-    max-width: 50%;
-    align-items: center;
-    margin: -1rem auto;
-    padding: 1rem;
-    align-items: center;
-    margin-left: 23rem;
-    margin-top: 0.1rem;
-    font-family: Arial, sans-serif;
-}
-.select {
-    width: 60vw;
+.input, .select, .submitButton {
+    width: 90%; /* Full width on mobile */
+    max-width: 400px; /* Limit maximum width */
     background-color: rgb(156, 0, 0);
     color: rgb(255, 255, 255);
-    border: 2px solid transparent; /* Ajuste a borda se necessário */
-    border-radius: 50px;
-    outline: none;
+    border: 2px solid transparent; /* Adjust border if needed */
+    border-radius: 50px; /* Rounded corners */
+    outline: none; /* Remove default focus outline */
     transition: border-color 0.3s;
-    max-width: 50%;
-    margin: -1rem auto;
-    padding: 1rem;
-    margin-left: 23rem;
-    margin-top: 0.5rem;
+    margin: 1rem auto; /* Center and space inputs */
+    padding: 1rem; /* Add padding */
 }
 
-.select option {
-    background-color: rgb(156, 0, 0);
-    color: rgb(255, 255, 255);
-}
 .input::placeholder {
-    color: rgb(255, 255, 255); /* Altere para a cor desejada */
-}
-
-.submitButton{
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
+    color: rgb(255, 255, 255); /* Placeholder color */
 }
 
 .submitButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: rgb(156, 0, 0);
     color: rgb(255, 255, 255);
-    border: 2px ; /* Borda vermelha */
-    border-radius: 50px; /* Arredondamento */
-    outline: none; /* Remove a borda de foco padrão */
-    transition: border-color 0.3s; 
-    max-width: 50%;
-    width: 15vw;
-    align-items: center;
-    margin-left: 3rem;
-    margin-top: 2rem;
-    padding: 1rem;
+    border: 2px solid transparent; /* Adjust border if needed */
+    border-radius: 50px; /* Rounded corners */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    margin-top: 1.5rem; /* Space above button */
+    padding: 1rem; /* Add padding */
 }
 
 .submitButton:hover {
     background-color: rgb(255, 255, 255);
     color: rgb(156, 0, 0);
-    border: 2px ; /* Borda vermelha */
-    border-radius: 50px; /* Arredondamento */
-    outline: none; /* Remove a borda de foco padrão */
-    transition: border-color 0.3s; 
+    border: 2px solid rgb(156, 0, 0); /* Add border on hover */
 }
 
+/* Responsive adjustments */
 @media (max-width: 480px) {
-    .input, .select, .btn_cadastro {
-        width: 90vw;
+    .title {
+        font-size: 1.5rem; /* Increase font size on mobile */
     }
 
-    .title {
-        font-size: 1.2rem;
+    .input, .select, .submitButton {
+        width: 90vw; /* Full width on mobile */
+        margin-left: 0; /* Remove left margin */
     }
 
     .text1 {
-        font-size: 1.5rem;
+        font-size: 1.5rem; /* Adjust text size for mobile */
     }
 }
