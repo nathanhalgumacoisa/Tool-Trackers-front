@@ -12,10 +12,10 @@ const Menu = () => {
               <Link href="/Cadastro"><p>Cadastro Usuário</p></Link>
             </div> 
             <div className={styles.container}>
-              <Link href="/Conferencia"><p>Conferência</p></Link>
+              <Link href="/Desejafazer"><p>Deseja Fazer</p></Link>
             </div>
             <div className={styles.container}>
-                <Link href="/Emprestimos"><p>Empréstimo</p></Link>
+                <Link href="/Ferramentas"><p>Ferramentas</p></Link>
             </div>   
         </div>
     );
