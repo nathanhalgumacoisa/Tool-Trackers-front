@@ -16,8 +16,8 @@
 
 @media (max-width: 480px) {
     .img {
-        width: 20vw; 
+        width: 17vw; 
         height: 10vh; 
-        margin-right: 0;
+        margin-right: 0%;
     }
 }
