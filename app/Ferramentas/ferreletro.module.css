@@ -1,39 +1,59 @@
-.contant{
+.contant {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
 }
-.card{
+
+.card {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    margin-left: 5%;
-    margin-right: 5%;
+    height: auto; /* Ajustado para se adaptar ao conteúdo */
+    margin: 5%; /* Unificado para margem */
 }
 
-.h1{
-    font-size: 3rem;
-    margin-top: 5%;
-    text-align: center;
+.h1 {
+    font-size: 3rem; /* Tamanho do cabeçalho */
+    margin-top: 5%; /* Margem no topo */
+    text-align: center; /* Centraliza o texto */
 }
 
 .p1 {
-    margin-top: 5%;
-    text-align: center;
-    font-size: 2rem;
+    margin-top: 5%; /* Margem no topo */
+    text-align: center; /* Centraliza o texto */
+    font-size: 2rem; /* Tamanho do texto */
 }
 
-.cards{
+.cards {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    margin-top: -16%;
-    margin-left: 5%;
-    margin-right: 5%;
+    height: auto; /* Ajustado para se adaptar ao conteúdo */
+    margin-top: -16%; /* Ajustar se necessário */
+    margin: 5%; /* Unificado para margem */
+}
+
+
+@media (max-width: 480px) { /* Ajuste para smartphones */
+    .h1 {
+        font-size: 1.3rem;
+        margin-top: 15%;
+         /* Tamanho ainda menor para cabeçalho */
+    }
+
+    .p1 {
+        font-size: 0.2rem; 
+        margin-top: 15%;
+        /* Tamanho ainda menor para parágrafo */
+    }
+
+    .card, .cards {
+        margin: rem; 
+        margin-top: 15%;
+        /* Reduzir margem em telas pequenas */
+    }
 }

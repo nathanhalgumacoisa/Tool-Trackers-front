@@ -13,22 +13,22 @@
 .input {
     align-items: center;
     width: 90%; /* Full width on smaller screens */
-    max-width: 300px; /* Limit max width */
+    max-width: 400px; /* Limit max width */
     height: 2rem; /* Height of input */
     margin-top: 0.5rem; /* Space above input */
     border-radius: 10rem; /* Rounded corners */
     padding: 0.5rem; /* Padding inside input */
     color: rgb(255, 255, 255); /* Text color */
     border: 2px solid brown; /* Border color */
-    background-color: rgb(156, 0, 0); /* Background color */
+    background-color: rgb(156, 0, 0); 
 }
 
 .divinputs {
-    margin-left: auto; /* Center inputs */
-    margin-right: auto; /* Center inputs */
-    display: flex; /* Use flexbox */
-    flex-direction: column; /* Stack inputs vertically */
-    align-items: center; /* Center align items */
+    margin-left: auto; 
+    margin-right: auto; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
 }
 
 .button {
@@ -43,6 +43,8 @@
     align-items: center; /* Center align button text */
     display: flex; /* Use flexbox for button */
     justify-content: center; /* Center text within button */
+    margin-top: 10%;
+    margin-left: 33rem;
 }
 
 .bu01 {
@@ -54,7 +56,7 @@
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@media (max-width: 300px) {
     .h01 {
         font-size: 2rem; /* Reduce font size for smaller screens */
         margin-top: 3rem; /* Adjust margin */
