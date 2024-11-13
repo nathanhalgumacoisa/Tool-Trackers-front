@@ -7,75 +7,70 @@ import FiltroFerr from '../components/filtroFerr/FiltroFerr';
 import styles from './ferreletro.module.css';
 
 function FerramentasforUser() {
-  const [locals, setLocals] = useState([]);
-  const [filteredLocals, setFilteredLocals] = useState([]);
+    const [locals, setLocals] = useState([]);
+    const [filteredLocals, setFilteredLocals] = useState([]);
 
-  useEffect(() => {
-    getFerramentas();
-  }, []);
+    useEffect(() => {
+        getFerramentas();
+    }, []);
 
-  async function getFerramentas() {
-    try {
-      const response = await axios.get(`http://localhost:3003/ferramentas`);
-      if (response.data && response.data.ferramentas) {
-        setLocals(response.data.ferramentas);
-        setFilteredLocals(response.data.ferramentas); // Initialize filteredLocals with all ferramentas
-      } else {
-        console.log("Nenhuma ferramenta encontrada na resposta.");
-      }
-    } catch (error) {
-      console.log("Erro ao buscar ferramentas:", error);
-    }
-  }
-
-    const handleUpdateStatus = async (id, newStatus) => {
+    async function getFerramentas() {
         try {
-            const response = await axios.put(`http://localhost:3003/ferramentas/disponivel/${id}`, { disponivel: newStatus });
-            console.log("Resposta do servidor:", response.data);
-            
-            setLocals(prevLocals => 
-                prevLocals.map(ferr => 
-                    ferr.ferramenta_id === id ? { ...ferr, disponivel: newStatus } : ferr
-                )
-            );
+            const response = await axios.get(`http://localhost:3003/ferramentas`);
+            if (response.data && response.data.ferramentas) {
+                setLocals(response.data.ferramentas);
+                setFilteredLocals(response.data.ferramentas); // Inicializa filteredLocals com todas as ferramentas
+            } else {
+                console.log("Nenhuma ferramenta encontrada na resposta.");
+            }
         } catch (error) {
-            console.error("Erro ao atualizar o status de disponibilidade:", error.response?.data || error.message);
+            console.log("Erro ao buscar ferramentas:", error);
         }
+    }
+
+    const handleUpdateStatus = (id, newStatus) => {
+        // Atualiza o estado local com o novo status
+        setLocals(prevLocals =>
+            prevLocals.map(ferr =>
+                ferr.ferramenta_id === id ? { ...ferr, disponivel: newStatus } : ferr
+            )
+        );
     };
 
-  const handleSearchResults = (results) => {
-    setFilteredLocals(results);
-  };
+    const handleSearchResults = (results) => {
+        setFilteredLocals(results);
+    };
 
-  return (
-    <div className={styles.container}>
+    return (
+      <div className={styles.container}>
       <Header />
       <div className={styles.App}>
-        <h1 className={styles.h1}>Ferramentas Cadastradas</h1>
-        <FiltroFerr onSearchResults={handleSearchResults} />
-        {filteredLocals.length > 0 ? (
-          filteredLocals.map((ferr) => (
-            <div className={styles.ferramentas} key={ferr.ferramenta_id}>
-              <CardFerr
-                id={ferr.ferramenta_id} 
-                nome={ferr.nome}
-                imagem_url={ferr.imagem_url}
-                conjunto={ferr.conjunto}
-                numero={ferr.numero}
-                patrimonio={ferr.patrimonio}
-                modelo={ferr.modelo}
-                descricao={ferr.descricao}
-                disponivel={ferr.disponivel}
-                onUpdateStatus={handleUpdateStatus}
-              />
-            </div>
-          ))
-        ) : (
-          <p>Nenhuma ferramenta cadastrada.</p>
-        )}
+          <h1 className={styles.h1}>Ferramentas Cadastradas</h1>
+          <FiltroFerr onSearchResults={handleSearchResults} />
+          {filteredLocals.length > 0 ? (
+              <div className={styles.ferramentasGrid}>
+                  {filteredLocals.map((ferr) => (
+                      <CardFerr
+                          key={ferr.ferramenta_id}
+                          id={ferr.ferramenta_id} 
+                          nome={ferr.nome}
+                          imagem_url={ferr.imagem_url}
+                          conjunto={ferr.conjunto}
+                          numero={ferr.numero}
+                          patrimonio={ferr.patrimonio}
+                          modelo={ferr.modelo}
+                          descricao={ferr.descricao}
+                          disponivel={ferr.disponivel}
+                          onUpdateStatus={handleUpdateStatus}
+                      />
+                  ))}
+              </div>
+          ) : (
+              <p>Nenhuma ferramenta cadastrada.</p>
+          )}
       </div>
-    </div>
-  );
+  </div>
+    );
 }
 
 export default FerramentasforUser;
