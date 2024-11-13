@@ -15,9 +15,14 @@
 }
 
 @media (max-width: 480px) {
+    .container {
+        max-width: 99%;
+        width: 99%;
+    }
+
     .img {
-        width: 17vw; 
+        width: 15vw; 
         height: 10vh; 
-        margin-right: 0%;
+        margin-right: 0rem;
     }
 }
