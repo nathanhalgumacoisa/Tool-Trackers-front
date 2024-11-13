@@ -57,6 +57,7 @@ function FerramentasforUser() {
           filteredLocals.map((ferr) => (
             <div className={styles.ferramentas} key={ferr.ferramenta_id}>
               <CardFerr
+                id={ferr.ferramenta_id} 
                 nome={ferr.nome}
                 imagem_url={ferr.imagem_url}
                 conjunto={ferr.conjunto}
@@ -64,6 +65,8 @@ function FerramentasforUser() {
                 patrimonio={ferr.patrimonio}
                 modelo={ferr.modelo}
                 descricao={ferr.descricao}
+                disponivel={ferr.disponivel}
+                onUpdateStatus={handleUpdateStatus}
               />
             </div>
           ))
