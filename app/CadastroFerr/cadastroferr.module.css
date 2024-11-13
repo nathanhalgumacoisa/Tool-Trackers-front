@@ -8,21 +8,31 @@
     justify-content: center;
     display: flex;
     flex-direction: column;
+    background-color: #dcdcdc;
+    border-radius: 7rem;
+    box-shadow: 8 10px 10px rgba(0, 0, 0, 0.1);
+    width: 56%;
+    height: 70%;
+    text-align: center;
+    align-items: center;
+    margin-left: 15rem;
 }
 
-
+.navbottom {
+    
+}
 
 .h1 {
     text-align: center;
     color: #333;
+    margin-top: 5rem;
 }
 
 .title{
     font-size: 15px;
     max-width: 40.35vw;
-    margin: 1.25px auto;
     padding: 1.25rem;
-    margin-left: 17rem;
+    margin-left: 2rem;
     margin-top: 1rem;  
     align-items: center;
 }
@@ -40,8 +50,8 @@
     margin: -1rem auto;
     padding: 1rem;
     align-items: center;
-    margin-left: 23rem;
-    margin-top: 0.1rem;
+    margin-left: 2rem;
+    margin-top: -1rem;
     font-family: Arial, sans-serif;
 }
 .select {
