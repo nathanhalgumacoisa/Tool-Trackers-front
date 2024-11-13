@@ -96,7 +96,7 @@ const CadastroFerr = () => {
         <div className={styles.conjunto}>
             <Header />
             <form onSubmit={handleSubmit}>
-                <h1>Cadastro de Ferramentas</h1>
+                <h1 className={styles.h11}>Cadastro de Ferramentas</h1>
                 <div className={styles.container}>
                     {stepInputs[currentStep].map((input, index) => (
                         <div key={index}>
