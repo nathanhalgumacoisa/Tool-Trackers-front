@@ -51,7 +51,6 @@ function Register() {
       try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
         const response = await axios.post('http://localhost:3003/usuarios', {
-          tipo_usuario,
           nome,
           email,
       });
@@ -79,10 +78,6 @@ function Register() {
 
           {/* <form onSubmit={handleSubmit}> */}
 
-
-
-
-
           <div className={styles.input_container}>
               <label className={styles.label}>
                 <h2 className={styles.title}>Nome:</h2>
@@ -94,16 +89,6 @@ function Register() {
                 />
               </label>
             </div> 
-
-
-
-
-
-
-
-
-
-
             <div className={styles.input_container}>
               <label className={styles.label}>
                 <h2 className={styles.title}>E-mail:</h2>
@@ -127,25 +112,6 @@ function Register() {
               </label>
             </div>
 
-
-
-
-
-
-
-
-
-            <div className={styles.input_container}>
-              <label className={styles.label}>
-                <h2 className={styles.title}>Tipo de Usuário:</h2>
-                <select id="tipo_usuario" >
-                <option value="">Selecione...</option>
-                <option value="aluno">Aluno</option>
-                <option value="instrutor">Instrutor</option>
-            </select>
-                
-              </label>
-            </div>
 
           {/* </form> */}
 
