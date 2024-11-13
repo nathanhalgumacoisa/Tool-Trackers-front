@@ -18,7 +18,7 @@ export default function Login() {
     try {
       await signInWithEmailAndPassword(auth, nome, email_login, senha);
       alert("Login realizado com sucesso!");
-      router.push("/GerenciamentoUsuarios");
+      router.push("/Desejafazer");
     } catch (error) {
       alert("Erro ao realizar login: nome, e-mail ou senha incorretos " + error.message);
     }
