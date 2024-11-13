@@ -42,33 +42,34 @@ function FerramentasforUser() {
     };
 
     return (
-        <div className={styles.container}>
-            <Header />
-            <div className={styles.App}>
-                <h1 className={styles.h1}>Ferramentas Cadastradas</h1>
-                <FiltroFerr onSearchResults={handleSearchResults} />
-                {filteredLocals.length > 0 ? (
-                    filteredLocals.map((ferr) => (
-                        <div className={styles.ferramentas} key={ferr.ferramenta_id}>
-                            <CardFerr
-                                id={ferr.ferramenta_id} 
-                                nome={ferr.nome}
-                                imagem_url={ferr.imagem_url}
-                                conjunto={ferr.conjunto}
-                                numero={ferr.numero}
-                                patrimonio={ferr.patrimonio}
-                                modelo={ferr.modelo}
-                                descricao={ferr.descricao}
-                                disponivel={ferr.disponivel}
-                                onUpdateStatus={handleUpdateStatus}
-                            />
-                        </div>
-                    ))
-                ) : (
-                    <p>Nenhuma ferramenta cadastrada.</p>
-                )}
-            </div>
-        </div>
+      <div className={styles.container}>
+      <Header />
+      <div className={styles.App}>
+          <h1 className={styles.h1}>Ferramentas Cadastradas</h1>
+          <FiltroFerr onSearchResults={handleSearchResults} />
+          {filteredLocals.length > 0 ? (
+              <div className={styles.ferramentasGrid}>
+                  {filteredLocals.map((ferr) => (
+                      <CardFerr
+                          key={ferr.ferramenta_id}
+                          id={ferr.ferramenta_id} 
+                          nome={ferr.nome}
+                          imagem_url={ferr.imagem_url}
+                          conjunto={ferr.conjunto}
+                          numero={ferr.numero}
+                          patrimonio={ferr.patrimonio}
+                          modelo={ferr.modelo}
+                          descricao={ferr.descricao}
+                          disponivel={ferr.disponivel}
+                          onUpdateStatus={handleUpdateStatus}
+                      />
+                  ))}
+              </div>
+          ) : (
+              <p>Nenhuma ferramenta cadastrada.</p>
+          )}
+      </div>
+  </div>
     );
 }
 
