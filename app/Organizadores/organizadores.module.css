@@ -35,7 +35,7 @@
 }
 
 .mapItem {
-    display: flex;
+    
     flex-direction: column;
     align-items: flex-start;
     border: 2px solid gray;
@@ -46,7 +46,18 @@
     max-width: 400px;
     transition: box-shadow 0.3s;
 }
+.selectContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 10px;
+}
 
+.selectedCarrinho {
+    margin-top: 5px;
+    font-size: 1rem;
+    color: #333;
+}
 .mapItem:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
