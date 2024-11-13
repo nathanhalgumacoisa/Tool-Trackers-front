@@ -67,6 +67,7 @@ function App() {
       <Header />
       <div className={styles.localsContainer}>
         <div className={styles.h2Container}>
+          <select></select>
           <h2 className={styles.h2} onClick={() => setExpandedCarrinhos(!expandedCarrinhos)}>Carrinhos</h2>
           {expandedCarrinhos && locals
             .filter(local => local.nome_organizador === 'carrinhos')

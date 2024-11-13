@@ -31,8 +31,9 @@ const CadastroFerr = () => {
 
     useEffect(() => {
         fetchOrganizadores();
+        fetchSubOrganizadores();
     }, []);
-
+    
     const fetchOrganizadores = async () => {
         try {
             const response = await axios.get('http://localhost:3003/organizador');
@@ -45,7 +46,7 @@ const CadastroFerr = () => {
 
     const fetchSubOrganizadores = async () => {
         try {
-            const response = await axios.get('http://localhost:3003/sub_organizadores');
+            const response = await axios.get('http://localhost:3003/sub_organizador');
             console.log('Dados dos sub-organizadores:', response.data); // Para depuração
             setSubOrganizadores(Array.isArray(response.data) ? response.data : []);
         } catch (error) {
@@ -53,35 +54,51 @@ const CadastroFerr = () => {
         }
     };
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const ferramentaData = { nome, imagem_url, conjunto, numero, patrimonio, modelo, descricao };
-
+    
         try {
-            await axios.post('http://localhost:3003/ferramentas', ferramentaData);
+            // Primeiro, cria a localização
+            const data = {
+                ambiente,
+                organizador_id: ambiente === "oficina mecanica de usinagem" ? 1 :
+                                ambiente === "oficina eletro eletronica" ? 2 :
+                                ambiente === "especo maker" ? 3 : 4,
+                slug: ambiente === "oficina mecanica de usinagem" ? "ofm" :
+                      ambiente === "oficina eletro eletronica" ? "oee" :
+                      ambiente === "especo maker" ? "em" : "manut",
+            };
+    
+            // Criação da localização
+            const response = await axios.post('http://localhost:3003/localizacoes', data);
+            const createdLocalizacaoId = response.data.localizacao_id; // Verifique se o ID está sendo retornado
+    
+            // Agora cria a ferramenta
+            await axios.post('http://localhost:3003/ferramentas', {
+                nome, 
+                imagem_url, 
+                conjunto, 
+                numero, 
+                patrimonio, 
+                modelo, 
+                descricao, 
+                localizacao_id: createdLocalizacaoId // Utilize o ID da localização
+            });
+    
+            // Criação do organizador e sub-organizador
             await axios.post('http://localhost:3003/organizador', {
-                 nome_organizador,
-                 numero_organizador
-
+                nome_organizador,
+                numero_organizador
             });
             await axios.post('http://localhost:3003/sub_organizador', {
                 nome_suborganizador,
                 numero_suborganizador,
             });
-            await axios.post('http://localhost:3003/localizacoes', {
-                ambiente,
-                organizador_id: ambiente == "oficina mecanica de usinagem" ? 1 : ambiente == "oficina eletro eletronica" 
-                ? 2 : ambiente == "especo maker" ? 3 : 4 ,
-                slug: ambiente == "oficina mecanica de usinagem" ? "ofm" : ambiente == "oficina eletro eletronica" 
-                ? "oee" : ambiente == "especo maker" ? "em" : "manut" 
-            });
-
+    
             setSuccessMessage('Cadastrado com sucesso!');
             clearInputs();
         } catch (error) {
-            console.error(error);
+            console.error('Erro ao cadastrar:', error.response ? error.response.data : error.message);
         }
     };
 
