@@ -25,6 +25,7 @@ const CardFerr = ({
 
         try {
             await axios.put(`http://localhost:3003/ferramentas/disponivel/${id}`, { disponivel: newStatus });
+            console.log('Novo status:', newStatus);
             message.success(`Status de disponibilidade atualizado para ${newStatus ? 'disponível' : 'indisponível'}.`);
             setIsBorrowed(newStatus); // Atualiza o estado local
             onUpdateStatus(id, newStatus); // Atualiza o estado no componente pai
