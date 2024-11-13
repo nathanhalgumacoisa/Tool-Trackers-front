@@ -18,7 +18,7 @@ export default function Login() {
     try {
       await signInWithEmailAndPassword(auth, nome, email_login, senha);
       alert("Login realizado com sucesso!");
-      router.push("/GerenciamentoUsuarios");
+      router.push("/Desejafazer");
     } catch (error) {
       alert("Erro ao realizar login: nome, e-mail ou senha incorretos " + error.message);
     }
@@ -39,7 +39,7 @@ export default function Login() {
 
 
 
-      <div className={styles.formDiv02}>
+      <div className={styles.formDiv01}>
         <label className={styles.textlabel}>Nome:</label>
         <input
           type="text"
@@ -49,18 +49,7 @@ export default function Login() {
         />
       </div>
 
-
-
-
-
-
-
-
-
-
-
-
-      <div className={styles.formDiv01}>
+      <div className={styles.formDiv02}>
         <label className={styles.textlabel}>E-mail:</label>
         <input
           type="email"
@@ -69,6 +58,7 @@ export default function Login() {
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
+
       <div className={styles.formDiv02}>
         <label className={styles.textlabel}>Senha:</label>
         <input
@@ -78,6 +68,9 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
+
+
+      
       <div className={styles.texts}>
       <button className={styles.button} onClick={logIn}>
         Login

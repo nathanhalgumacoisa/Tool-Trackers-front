@@ -1,0 +1,49 @@
+/* cardferr.module.css */
+.card {
+    width: 20%;
+    border-radius: 10px;
+    box-shadow: 8 10px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    overflow: hidden;
+    margin-top: 1rem;
+    background-color: rgb(220, 220, 220);
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+.cardImage {
+    height: 200px;
+    object-fit: cover;
+}
+
+.cardActions {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+
+.cardAction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 11px;
+    height: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+}
+
+.available {
+    background-color: green;
+}
+
+.unavailable {
+    background-color: red;
+}
+
+.maintenance {
+    color: rgb(228, 228, 0);
+}

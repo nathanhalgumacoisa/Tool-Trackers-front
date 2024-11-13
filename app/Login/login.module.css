@@ -7,13 +7,14 @@
     border-radius: 1rem; /* Arredondamento */
     outline: none; /* Remove a borda de foco padrão */
     transition: border-color 0.3s; 
-    max-width: 20%;
+    max-width: 15%;
+    height: 1rem;
     align-items: center;
     margin: -1rem auto;
     padding: 1rem;
     align-items: center;
     margin-left: 19,7rem;
-    margin-top: 1rem;
+    margin-top: 0rem;
 
         }
         .textlabel{
@@ -87,7 +88,7 @@
     color: black;
     font-size: 3rem;
     text-align: center;
-    margin-top: 6rem;
+    margin-top: 2rem;
     margin-left: 1rem;
     margin-bottom: -3rem;
     z-index: 1;

@@ -2,9 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import styles from './cadastroferr.module.css'; // Certifique-se de que o caminho do CSS esteja correto
+import styles from './cadastroferr.module.css';
 import Header from '../components/header/Header';
-
 
 const CadastroFerr = () => {
     const [nome, setNome] = useState('');
@@ -15,29 +14,51 @@ const CadastroFerr = () => {
     const [modelo, setModelo] = useState('');
     const [descricao, setDescricao] = useState('');
     const [ambiente, setAmbiente] = useState('');
-    const [organizador_id, setOrganizadorId] = useState('');
-    const [slug, setSlug] = useState('');
-
-    // Novos estados
     const [nome_organizador, setNomeOrganizador] = useState('');
     const [numero_organizador, setNumeroOrganizador] = useState('');
     const [nome_suborganizador, setNomeSubOrganizador] = useState('');
     const [numero_suborganizador, setNumeroSubOrganizador] = useState('');
     const [foto_url, setFotoUrl] = useState('');
-
-    const [organizadores, setOrganizadores] = useState([]);
-    const [sub_organizadores, setSubOrganizadores] = useState([]);
     const [successMessage, setSuccessMessage] = useState('');
+    const [currentStep, setCurrentStep] = useState(0);
+
+    const stepInputs = [
+        [
+            { label: "Nome", value: nome, setter: setNome, type: "text", required: true },
+            { label: "Imagem URL", value: imagem_url, setter: setImagemUrl, type: "text", required: true },
+            { label: "Conjunto", value: conjunto, setter: setConjunto, type: "text", required: true },
+            { label: "Número", value: numero, setter: setNumero, type: "text", required: true },
+        ],
+        [
+            { label: "Patrimônio", value: patrimonio, setter: setPatrimonio, type: "text", required: true },
+            { label: "Modelo", value: modelo, setter: setModelo, type: "text", required: true },
+            { label: "Descrição", value: descricao, setter: setDescricao, type: "textarea", required: true },
+            {
+                label: "Selecione o Ambiente",
+                value: ambiente,
+                setter: setAmbiente,
+                type: "select",
+                options: ["oficina mecanica de usinagem", "oficina eletro eletrônica", "espaço maker", "manutencao"],
+                required: true
+            },
+        ],
+        [
+            { label: "Selecione o Organizador", value: nome_organizador, setter: setNomeOrganizador, type: "select", options: ["carrinhos", "armarios", "tornos", "paineis"], required: true },
+            { label: "Número do Organizador", value: numero_organizador, setter: setNumeroOrganizador, type: "text", required: true },
+            { label: "Selecione o Sub-organizador", value: nome_suborganizador, setter: setNomeSubOrganizador, type: "select", options: ["gavetas", "prateleiras", "outros"], required: true },
+            { label: "Número do Sub-organizador", value: numero_suborganizador, setter: setNumeroSubOrganizador, type: "text", required: true },
+            { label: "Foto de referência do sub-organizador", value: foto_url, setter: setFotoUrl, type: "text", required: true },
+        ]
+    ];
 
     useEffect(() => {
         fetchOrganizadores();
         fetchSubOrganizadores();
     }, []);
-    
+
     const fetchOrganizadores = async () => {
         try {
             const response = await axios.get('http://localhost:3003/organizador');
-            console.log('Dados dos organizadores:', response.data); // Para depuração
             setOrganizadores(Array.isArray(response.data) ? response.data : []);
         } catch (error) {
             console.error(error);
@@ -46,7 +67,7 @@ const CadastroFerr = () => {
 
     const fetchSubOrganizadores = async () => {
         try {
-            const response = await axios.get('http://localhost:3003/sub_organizador');
+            const response = await axios.get('http://localhost:3003/sub_organizadores');
             console.log('Dados dos sub-organizadores:', response.data); // Para depuração
             setSubOrganizadores(Array.isArray(response.data) ? response.data : []);
         } catch (error) {
@@ -56,255 +77,80 @@ const CadastroFerr = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
-        try {
-            // Primeiro, cria a localização
-            const data = {
-                ambiente,
-                organizador_id: ambiente === "oficina mecanica de usinagem" ? 1 :
-                                ambiente === "oficina eletro eletronica" ? 2 :
-                                ambiente === "especo maker" ? 3 : 4,
-                slug: ambiente === "oficina mecanica de usinagem" ? "ofm" :
-                      ambiente === "oficina eletro eletronica" ? "oee" :
-                      ambiente === "especo maker" ? "em" : "manut",
-            };
-    
-            // Criação da localização
-            const response = await axios.post('http://localhost:3003/localizacoes', data);
-            const createdLocalizacaoId = response.data.localizacao_id; // Verifique se o ID está sendo retornado
-    
-            // Agora cria a ferramenta
-            await axios.post('http://localhost:3003/ferramentas', {
-                nome, 
-                imagem_url, 
-                conjunto, 
-                numero, 
-                patrimonio, 
-                modelo, 
-                descricao, 
-                localizacao_id: createdLocalizacaoId // Utilize o ID da localização
-            });
-    
-            // Criação do organizador e sub-organizador
-            await axios.post('http://localhost:3003/organizador', {
-                nome_organizador,
-                numero_organizador
-            });
-            await axios.post('http://localhost:3003/sub_organizador', {
-                nome_suborganizador,
-                numero_suborganizador,
-            });
-    
-            setSuccessMessage('Cadastrado com sucesso!');
-            clearInputs();
-        } catch (error) {
-            console.error('Erro ao cadastrar:', error.response ? error.response.data : error.message);
+        // Lógica de envio dos dados...
+    };
+
+    const handleNext = () => {
+        if (currentStep < stepInputs.length - 1) {
+            setCurrentStep(currentStep + 1);
         }
     };
 
-    const clearInputs = () => {
-        setNome('');
-        setImagemUrl('');
-        setConjunto('');
-        setNumero('');
-        setPatrimonio('');
-        setModelo('');
-        setDescricao('');
-        // setOrganizadorId('');
-        // setSubOrganizadorId('');
-        setAmbiente('');
-        setNomeOrganizador('');
-        setNumeroOrganizador('');
-        setNomeSubOrganizador('');
-        setNumeroSubOrganizador('');
-        setFotoUrl('');
+    const handlePrevious = () => {
+        if (currentStep > 0) {
+            setCurrentStep(currentStep - 1);
+        }
     };
 
     return (
         <div className={styles.conjunto}>
             <Header />
             <form onSubmit={handleSubmit}>
+                <h1 className={styles.h11}>Cadastro de Ferramentas</h1>
                 <div className={styles.container}>
-                    <h1>Cadastro de Ferramentas</h1>
-
-                    {/* Campos do formulário */}
-                    <div>
-                        <label>
-                            <h2 className={styles.title}>Nome:</h2>
-                            <input type="text" className={styles.input} value={nome} onChange={(e) => setNome(e.target.value)} placeholder="Digite aqui..." required />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            <h2 className={styles.title}>Imagem URL:</h2>
-                            <input
-                                type="text"
-                                className={styles.input}
-                                value={imagem_url}
-                                onChange={(e) => setImagemUrl(e.target.value)}
-                                placeholder="Digite aqui..."
-                                required
-                            />
-                        </label>
-                    </div>
-
-                    <div>
-                        <label>
-                            <h2 className={styles.title}>Conjunto:</h2>
-                            <input
-                                type="text"
-                                className={styles.input}
-                                value={conjunto}
-                                onChange={(e) => setConjunto(e.target.value)}
-                                placeholder="Digite aqui..."
-                                required
-                            />
-                        </label>
-                    </div>
-
-                    <div>
-                        <label>
-                            <h2 className={styles.title}>Número:</h2>
-                            <input
-                                type="text"
-                                className={styles.input}
-                                value={numero}
-                                onChange={(e) => setNumero(e.target.value)}
-                                placeholder="Digite aqui..."
-                                required
-                            />
-                        </label>
-                    </div>
-
-                    <div>
-                        <label>
-                            <h2 className={styles.title}>Patrimônio:</h2>
-                            <input
-                                type="text"
-                                className={styles.input}
-                                value={patrimonio}
-                                onChange={(e) => setPatrimonio(e.target.value)}
-                                placeholder="Digite aqui..."
-                                required
-                            />
-                        </label>
-                    </div>
-
-                    <div>
-                        <label>
-                            <h2 className={styles.title}>Modelo:</h2>
-                            <input
-                                type="text"
-                                className={styles.input}
-                                value={modelo}
-                                onChange={(e) => setModelo(e.target.value)}
-                                placeholder="Digite aqui..."
-                                required
-                            />
-                        </label>
-                    </div>
-
-                    <div>
-                        <label>
-                            <h2 className={styles.title}>Descrição:</h2>
-                            <textarea
-                                className={styles.input}
-                                value={descricao}
-                                onChange={(e) => setDescricao(e.target.value)}
-                                placeholder="Digite aqui..."
-                                required
-                            ></textarea>
-                        </label>
-                    </div>
-
-                    <div className={styles.input_container}>
-                        <label>
-                            <h2 className={styles.title}>Selecione o ambiente</h2>
-                            <select
-                                className={styles.select}
-                                value={ambiente}
-                                onChange={(e) => setAmbiente(e.target.value)}
-                                required
-                            >
-                                <option value="" disabled>Selecione um tipo</option>
-                                <option value="oficina mecanica de usinagem">Oficina de mecânica de Usinagem</option>
-                                <option value="oficna eletro eletronica">Oficina Eletro eletrônica</option>
-                                <option value="especo maker">Espaço Maker</option>
-                                <option value="manutencao">Manutenção</option>
-                            </select>
-                        </label>
-                    </div>
-
-                    <div className={styles.input_container}>
-                        <label>
-                            <h2 className={styles.title}>Selecione o organizador</h2>
-                            <select
-                                className={styles.select}
-                                value={nome_organizador}
-                                onChange={(e) => setNomeOrganizador(e.target.value)}
-                                required
-                            >
-                                <option value="" disabled>Selecione um organizador</option>
-                                <option value="carrinhos">Carrinhos</option>
-                                <option value="armarios">Armários</option>
-                                <option value="tornos">Tornos</option>
-                                <option value="paineis">Painéis</option>
-                            </select>
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            <h2 className={styles.title}>Numero do Organizador:</h2>
-                            <input
-                                type="text"
-                                className={styles.input}
-                                value={numero_organizador}
-                                onChange={(e) => setNumeroOrganizador(e.target.value)}
-                                placeholder="Digite aqui..."
-                                required
-                            />
-                        </label>
-                    </div>
-                    <div className={styles.input_container}>
-                        <label>
-                            <h2 className={styles.title}>Selecione o sub-organizador</h2>
-                            <select
-                                className={styles.select}
-                                value={nome_suborganizador}
-                                onChange={(e) => setNomeSubOrganizador(e.target.value)}
-                                required
-                            >
-                                <option value="" disabled>Selecione um sub-organizador</option>
-                                <option value="gavetas">Gavetas</option>
-                                <option value="prateleiras">Prateleiras</option>
-                                <option value="outros">Outros</option>
-                            </select>
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            <h2 className={styles.title}>Numero do Sub-organizador:</h2>
-                            <input
-                                type="text"
-                                className={styles.input}
-                                value={numero_suborganizador}
-                                onChange={(e) => setNumeroSubOrganizador(e.target.value)}
-                                placeholder="Digite aqui..."
-                                required
-                            />
-                        </label>
-                    </div>
-
-                    <div>
-                        <label>
-                            <h2 className={styles.title}>Foto de referência do sub-organizador:</h2>
-                            <input type="text" className={styles.input} value={foto_url} onChange={(e) => setFotoUrl(e.target.value)} placeholder="Digite aqui..." required />
-                        </label>
-                    </div>
-
-                    <div>
-                        <button type="submit" className={styles.submitButton}>Enviar</button>
-                    </div>
+                    {stepInputs[currentStep].map((input, index) => (
+                        <div key={index}>
+                            <label className={styles.titulos}>
+                                <h2 className={styles.title}>{input.label}:</h2>
+                                {input.type === 'textarea' ? (
+                                    <textarea
+                                        className={styles.input}
+                                        value={input.value}
+                                        onChange={(e) => input.setter(e.target.value)}
+                                        placeholder="Digite aqui..."
+                                        required={input.required}
+                                    />
+                                ) : input.type === 'select' ? (
+                                    <select
+                                        className={styles.select}
+                                        value={input.value}
+                                        onChange={(e) => input.setter(e.target.value)}
+                                        required={input.required}
+                                    >
+                                        <option value="" disabled>Selecione</option>
+                                        {input.options.map((option, idx) => (
+                                            <option key={idx} value={option}>{option}</option>
+                                        ))}
+                                    </select>
+                                ) : (
+                                    <input
+                                        type={input.type}
+                                        className={styles.input}
+                                        value={input.value}
+                                        onChange={(e) => input.setter(e.target.value)}
+                                        placeholder="Digite aqui..."
+                                        required={input.required}
+                                    />
+                                )}
+                            </label>
+                        </div>
+                    ))}
+                </div>
+                <div className={styles.botoes}>
+                    {currentStep > 0 && (
+                        <button type="button" onClick={handlePrevious} className={styles.navButton2}>
+                            Anterior
+                        </button>
+                    )}
+                    {currentStep < stepInputs.length - 1 ? (
+                        <button type="button" onClick={handleNext} className={styles.navButton1}>
+                            Próximo
+                        </button>
+                    ) : (
+                        <button type="submit" className={styles.submitButton}>
+                            Enviar
+                        </button>
+                    )}
                 </div>
             </form>
 
