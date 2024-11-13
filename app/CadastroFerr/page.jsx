@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import styles from './cadastroferr.module.css'; 
+import styles from './cadastroferr.module.css';
 import Header from '../components/header/Header';
 
 const CadastroFerr = () => {
@@ -26,7 +26,7 @@ const CadastroFerr = () => {
         fetchOrganizadores();
         fetchSubOrganizadores();
     }, []);
-    
+
     const fetchOrganizadores = async () => {
         try {
             const response = await axios.get('http://localhost:3003/organizador');
@@ -49,35 +49,35 @@ const CadastroFerr = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         try {
             // Primeiro, cria a localização
             const data = {
                 ambiente,
                 organizador_id: ambiente === "oficina mecanica de usinagem" ? 1 :
-                                ambiente === "oficina eletro eletronica" ? 2 :
-                                ambiente === "especo maker" ? 3 : 4,
+                    ambiente === "oficina eletro eletronica" ? 2 :
+                        ambiente === "especo maker" ? 3 : 4,
                 slug: ambiente === "oficina mecanica de usinagem" ? "ofm" :
-                      ambiente === "oficina eletro eletronica" ? "oee" :
-                      ambiente === "especo maker" ? "em" : "manut",
+                    ambiente === "oficina eletro eletronica" ? "oee" :
+                        ambiente === "especo maker" ? "em" : "manut",
             };
-    
+
             // Criação da localização
             const response = await axios.post('http://localhost:3003/localizacoes', data);
             const createdLocalizacaoId = response.data.localizacao_id; // Verifique se o ID está sendo retornado
-    
+
             // Agora cria a ferramenta
             await axios.post('http://localhost:3003/ferramentas', {
-                nome, 
-                imagem_url, 
-                conjunto, 
-                numero, 
-                patrimonio, 
-                modelo, 
-                descricao, 
+                nome,
+                imagem_url,
+                conjunto,
+                numero,
+                patrimonio,
+                modelo,
+                descricao,
                 localizacao_id: createdLocalizacaoId // Utilize o ID da localização
             });
-    
+
             // Criação do organizador e sub-organizador
             await axios.post('http://localhost:3003/organizador', {
                 nome_organizador,
@@ -87,7 +87,7 @@ const CadastroFerr = () => {
                 nome_suborganizador,
                 numero_suborganizador,
             });
-    
+
             setSuccessMessage('Cadastrado com sucesso!');
             clearInputs();
         } catch (error) {
@@ -152,24 +152,24 @@ const CadastroFerr = () => {
                         </div>
                     ))}
 
-                    
+
                 </div>
                 <div className={styles.botoes}>
-                        {currentStep > 0 && (
-                            <button type="button" onClick={handlePrevious} className={styles.navButton2}>
-                                Anterior
-                            </button>
-                        )}
-                        {currentStep < stepInputs.length - 1 ? (
-                            <button type="button" onClick={handleNext} className={styles.navButton1}>
-                                Próximo
-                            </button>
-                        ) : (
-                            <button type="submit" className={styles.submitButton}>
-                                Enviar
-                            </button>
-                        )}
-                    </div>
+                    {currentStep > 0 && (
+                        <button type="button" onClick={handlePrevious} className={styles.navButton2}>
+                            Anterior
+                        </button>
+                    )}
+                    {currentStep < stepInputs.length - 1 ? (
+                        <button type="button" onClick={handleNext} className={styles.navButton1}>
+                            Próximo
+                        </button>
+                    ) : (
+                        <button type="submit" className={styles.submitButton}>
+                            Enviar
+                        </button>
+                    )}
+                </div>
             </form>
 
             {successMessage && <p>{successMessage}</p>}
