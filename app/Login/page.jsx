@@ -26,10 +26,16 @@ export default function Login() {
   return (
     
     <div className={styles.form}>
+      <div className={styles.header}>
       <Header></Header>
+      </div>
       <div>
       <img src="./fundo-login.png" alt="" className={styles.img_login}/>
       </div>
+
+
+      <div className={styles.login}>
+
       <h1 className={styles.H1text}>Login</h1>
       <div className={styles.formDiv01}>
         <label className={styles.textlabel}>E-mail:</label>
@@ -60,6 +66,7 @@ export default function Login() {
           <span className={styles.link}>Registre-se aqui</span>
         </Link>
       </p>
+      </div>
       </div>
     </div>
   );
