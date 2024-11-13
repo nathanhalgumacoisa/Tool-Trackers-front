@@ -1,9 +1,10 @@
 .body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4; /* Cor de fundo para contraste */
+    background-color: #f4f4f4;
+    /* Cor de fundo para contraste */
 }
 
-.container{
+.container {
     align-items: center;
     justify-content: center;
     display: flex;
@@ -18,8 +19,25 @@
     margin-left: 15rem;
 }
 
-.navbottom {
-    
+.navButton1 {
+    margin-right: 36rem;
+    margin-left: 1rem;
+    margin-top: 2rem;
+    width: 7%;
+    background-color: rgb(189, 189, 189);
+    border-radius: 7px;
+}
+
+.navButton2 {
+    margin-left: 32rem;
+    margin-top: 2rem;
+    width: 7%;
+    background-color: rgb(189, 189, 189);
+    border-radius: 7px;
+}
+
+.botoes {
+    display: flex;
 }
 
 .h1 {
@@ -28,12 +46,12 @@
     margin-top: 5rem;
 }
 
-.title{
+.title {
     font-size: 15px;
     max-width: 40.35vw;
     padding: 1.25rem;
     margin-left: 2rem;
-    margin-top: 1rem;  
+    margin-top: 1rem;
     align-items: center;
 }
 
@@ -41,10 +59,13 @@
     width: 60vw;
     background-color: rgb(156, 0, 0);
     color: rgb(0, 0, 0);
-    border: 2px ; /* Borda vermelha */
-    border-radius: 50px; /* Arredondamento */
-    outline: none; /* Remove a borda de foco padrão */
-    transition: border-color 0.3s; 
+    border: 2px;
+    /* Borda vermelha */
+    border-radius: 50px;
+    /* Arredondamento */
+    outline: none;
+    /* Remove a borda de foco padrão */
+    transition: border-color 0.3s;
     max-width: 50%;
     align-items: center;
     margin: -1rem auto;
@@ -54,11 +75,13 @@
     margin-top: -1rem;
     font-family: Arial, sans-serif;
 }
+
 .select {
     width: 60vw;
     background-color: rgb(156, 0, 0);
     color: rgb(255, 255, 255);
-    border: 2px solid transparent; /* Ajuste a borda se necessário */
+    border: 2px solid transparent;
+    /* Ajuste a borda se necessário */
     border-radius: 50px;
     outline: none;
     transition: border-color 0.3s;
@@ -73,11 +96,13 @@
     background-color: rgb(156, 0, 0);
     color: rgb(255, 255, 255);
 }
+
 .input::placeholder {
-    color: rgb(255, 255, 255); /* Altere para a cor desejada */
+    color: rgb(255, 255, 255);
+    /* Altere para a cor desejada */
 }
 
-.submitButton{
+.submitButton {
     align-items: center;
     justify-content: center;
     display: flex;
@@ -87,10 +112,13 @@
 .submitButton {
     background-color: rgb(156, 0, 0);
     color: rgb(255, 255, 255);
-    border: 2px ; /* Borda vermelha */
-    border-radius: 50px; /* Arredondamento */
-    outline: none; /* Remove a borda de foco padrão */
-    transition: border-color 0.3s; 
+    border: 2px;
+    /* Borda vermelha */
+    border-radius: 50px;
+    /* Arredondamento */
+    outline: none;
+    /* Remove a borda de foco padrão */
+    transition: border-color 0.3s;
     max-width: 50%;
     width: 15vw;
     align-items: center;
@@ -102,8 +130,11 @@
 .submitButton:hover {
     background-color: rgb(255, 255, 255);
     color: rgb(156, 0, 0);
-    border: 2px ; /* Borda vermelha */
-    border-radius: 50px; /* Arredondamento */
-    outline: none; /* Remove a borda de foco padrão */
-    transition: border-color 0.3s; 
+    border: 2px;
+    /* Borda vermelha */
+    border-radius: 50px;
+    /* Arredondamento */
+    outline: none;
+    /* Remove a borda de foco padrão */
+    transition: border-color 0.3s;
 }
