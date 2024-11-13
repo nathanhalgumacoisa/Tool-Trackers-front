@@ -22,6 +22,35 @@ const CadastroFerr = () => {
     const [successMessage, setSuccessMessage] = useState('');
     const [currentStep, setCurrentStep] = useState(0);
 
+    const stepInputs = [
+        [
+            { label: "Nome", value: nome, setter: setNome, type: "text", required: true },
+            { label: "Imagem URL", value: imagem_url, setter: setImagemUrl, type: "text", required: true },
+            { label: "Conjunto", value: conjunto, setter: setConjunto, type: "text", required: true },
+            { label: "Número", value: numero, setter: setNumero, type: "text", required: true },
+        ],
+        [
+            { label: "Patrimônio", value: patrimonio, setter: setPatrimonio, type: "text", required: true },
+            { label: "Modelo", value: modelo, setter: setModelo, type: "text", required: true },
+            { label: "Descrição", value: descricao, setter: setDescricao, type: "textarea", required: true },
+            {
+                label: "Selecione o Ambiente",
+                value: ambiente,
+                setter: setAmbiente,
+                type: "select",
+                options: ["oficina mecanica de usinagem", "oficina eletro eletrônica", "espaço maker", "manutencao"],
+                required: true
+            },
+        ],
+        [
+            { label: "Selecione o Organizador", value: nome_organizador, setter: setNomeOrganizador, type: "select", options: ["carrinhos", "armarios", "tornos", "paineis"], required: true },
+            { label: "Número do Organizador", value: numero_organizador, setter: setNumeroOrganizador, type: "text", required: true },
+            { label: "Selecione o Sub-organizador", value: nome_suborganizador, setter: setNomeSubOrganizador, type: "select", options: ["gavetas", "prateleiras", "outros"], required: true },
+            { label: "Número do Sub-organizador", value: numero_suborganizador, setter: setNumeroSubOrganizador, type: "text", required: true },
+            { label: "Foto de referência do sub-organizador", value: foto_url, setter: setFotoUrl, type: "text", required: true },
+        ]
+    ];
+
     useEffect(() => {
         fetchOrganizadores();
         fetchSubOrganizadores();
@@ -46,53 +75,9 @@ const CadastroFerr = () => {
         }
     };
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        try {
-            // Primeiro, cria a localização
-            const data = {
-                ambiente,
-                organizador_id: ambiente === "oficina mecanica de usinagem" ? 1 :
-                    ambiente === "oficina eletro eletronica" ? 2 :
-                        ambiente === "especo maker" ? 3 : 4,
-                slug: ambiente === "oficina mecanica de usinagem" ? "ofm" :
-                    ambiente === "oficina eletro eletronica" ? "oee" :
-                        ambiente === "especo maker" ? "em" : "manut",
-            };
-
-            // Criação da localização
-            const response = await axios.post('http://localhost:3003/localizacoes', data);
-            const createdLocalizacaoId = response.data.localizacao_id; // Verifique se o ID está sendo retornado
-
-            // Agora cria a ferramenta
-            await axios.post('http://localhost:3003/ferramentas', {
-                nome,
-                imagem_url,
-                conjunto,
-                numero,
-                patrimonio,
-                modelo,
-                descricao,
-                localizacao_id: createdLocalizacaoId // Utilize o ID da localização
-            });
-
-            // Criação do organizador e sub-organizador
-            await axios.post('http://localhost:3003/organizador', {
-                nome_organizador,
-                numero_organizador
-            });
-            await axios.post('http://localhost:3003/sub_organizador', {
-                nome_suborganizador,
-                numero_suborganizador,
-            });
-
-            setSuccessMessage('Cadastrado com sucesso!');
-            clearInputs();
-        } catch (error) {
-            console.error('Erro ao cadastrar:', error.response ? error.response.data : error.message);
-        }
+        // Lógica de envio dos dados...
     };
 
     const handleNext = () => {
@@ -113,7 +98,6 @@ const CadastroFerr = () => {
             <form onSubmit={handleSubmit}>
                 <h1>Cadastro de Ferramentas</h1>
                 <div className={styles.container}>
-                    {/* Renderizando os inputs da etapa atual */}
                     {stepInputs[currentStep].map((input, index) => (
                         <div key={index}>
                             <label className={styles.titulos}>
@@ -151,8 +135,6 @@ const CadastroFerr = () => {
                             </label>
                         </div>
                     ))}
-
-
                 </div>
                 <div className={styles.botoes}>
                     {currentStep > 0 && (
