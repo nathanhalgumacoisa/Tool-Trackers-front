@@ -5,8 +5,7 @@
     height: 100vh;
     margin-top: 2rem;
     flex-direction: column; 
-    position: fixed; 
-
+    position: fixed;
 }
 
 .content {
@@ -67,18 +66,23 @@
     }
 
 @media (max-width: 480px) {
-    .cards1 {
-        font-size: 24px;          
-        margin-top: 4rem;         
+    .imagem1 {
+        display: none;
     }
+
     .buttonContainer {
         flex-direction: column;    
     }
     .cards1 {
-        font-size: 30px;          
+        font-size: 25px;          
         margin-top: 5rem;
-        margin-left: 5rem;        
+        text-align: center;        
     }
+
+    .cards {
+        margin-left: 2rem;
+    }
+
     .content {
         margin-top: 5%;           
     }
