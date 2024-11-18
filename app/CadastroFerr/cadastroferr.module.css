@@ -10,12 +10,13 @@
     display: flex;
     flex-direction: column;
     padding: 1rem; /* Add padding for better spacing */
-}
-
-
     background-color: #f4f4f4;
-    /* Cor de fundo para contraste */
 }
+
+
+
+    /* Cor de fundo para contraste */
+
 
 .container {
     display: flex;
@@ -88,6 +89,7 @@
 .submitButton {
     display: flex;
 
+}
 .h11{
     margin-top: 1rem;
     text-align: center;
@@ -200,15 +202,16 @@
 
     .text1 {
         font-size: 1.5rem; /* Adjust text size for mobile */
+        border: 2px;
+        /* Borda vermelha */
+        border-radius: 50px;
+        /* Arredondamento */
+        outline: none;
+        /* Remove a borda de foco padrão */
+        transition: border-color 0.3s;
     }
 
-    border: 2px;
-    /* Borda vermelha */
-    border-radius: 50px;
-    /* Arredondamento */
-    outline: none;
-    /* Remove a borda de foco padrão */
-    transition: border-color 0.3s;
+
 }
 
 .label-input {
