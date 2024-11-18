@@ -55,7 +55,7 @@ function Register() {
           email,
       });
         alert("Registrado com sucesso!");
-        
+        router.push("/Login");
 
         setEmail('');
          setNome('');
