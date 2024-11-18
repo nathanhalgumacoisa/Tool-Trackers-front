@@ -15,17 +15,10 @@
     margin: 5%; /* Unificado para margem */
 }
 
-
 .h1 {
     font-size: 3rem; /* Tamanho do cabeçalho */
     margin-top: 5%; /* Margem no topo */
     text-align: center; /* Centraliza o texto */
-
-.h1{
-    font-size: 3rem;
-    margin-top: 2%;
-    text-align: center;
-
 }
 
 .p1 {
@@ -39,36 +32,33 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-
     height: auto; /* Ajustado para se adaptar ao conteúdo */
     margin-top: -16%; /* Ajustar se necessário */
     margin: 5%; /* Unificado para margem */
 }
 
-
+/* Ajustes responsivos */
 @media (max-width: 480px) { /* Ajuste para smartphones */
     .h1 {
-        font-size: 1.3rem;
-        margin-top: 15%;
-         /* Tamanho ainda menor para cabeçalho */
+        font-size: 1.3rem; /* Tamanho menor para cabeçalho */
+        margin-top: 15%; 
     }
 
     .p1 {
-        font-size: 0.2rem; 
-        margin-top: 15%;
-        /* Tamanho ainda menor para parágrafo */
+        font-size: 1rem; /* Tamanho ajustado para parágrafo */
+        margin-top: 15%; 
     }
 
     .card, .cards {
-        margin: rem; 
+        margin: 1rem; /* Reduzir margem em telas pequenas */
         margin-top: 15%;
-        /* Reduzir margem em telas pequenas */
     }
 
-    height: 100vh;
-    margin-top: -16%;
-    margin-left: 5%;
-    margin-right: 5%;
+    .contant {
+        height: auto; /* Ajuste para caber melhor em telas pequenas */
+        margin-left: 5%;
+        margin-right: 5%;
+    }
 }
 
 .ferramentasGrid {
@@ -81,5 +71,4 @@
 .ferramentasGrid > * {
     flex: 1 1 calc(25% - 16px); 
     max-width: calc(25% - 16px); 
-
 }
