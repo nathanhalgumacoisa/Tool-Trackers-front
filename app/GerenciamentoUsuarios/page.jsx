@@ -12,8 +12,6 @@ function Usuarios() {
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [tipoUsuario, setTipoUsuario] = useState('');
-    const [numeroNif, setNumeroNif] = useState('');
-    const [numeroQrCode, setNumeroQrCode] = useState('');
     const [editingUserId, setEditingUserId] = useState(null);
 
     useEffect(() => {
@@ -47,8 +45,6 @@ function Usuarios() {
                 nome: user.nome,
                 email: user.email,
                 tipo_usuario: user.tipo_usuario,
-                numero_nif: user.numero_nif,
-                numero_qrcode: user.numero_qrcode
             });
 
             const updatedUsers = locals.map((user) =>
@@ -67,9 +63,6 @@ function Usuarios() {
             await axios.put(`http://localhost:3003/usuarios/${editingUserId}`, {
                 nome,
                 email,
-                tipo_usuario: tipoUsuario,
-                numero_nif: numeroNif,
-                numero_qrcode: numeroQrCode
             });
 
             const updatedUser = {
@@ -77,8 +70,6 @@ function Usuarios() {
                 nome,
                 email,
                 tipo_usuario: tipoUsuario,
-                numero_nif: numeroNif,
-                numero_qrcode: numeroQrCode
             };
 
             setLocals((prevLocals) =>
@@ -97,8 +88,6 @@ function Usuarios() {
         setNome(user.nome);
         setEmail(user.email);
         setTipoUsuario(user.tipo_usuario);
-        setNumeroNif(user.numero_nif);
-        setNumeroQrCode(user.numero_qrcode);
         setEditingUserId(user.user_id);
     }
 
@@ -107,8 +96,6 @@ function Usuarios() {
         setNome('');
         setEmail('');
         setTipoUsuario('');
-        setNumeroNif('');
-        setNumeroQrCode('');
     }
 
 
@@ -128,8 +115,6 @@ function Usuarios() {
                             <h3 className={styles.h3}>Nome: {l.nome}</h3>
                             <h4 className={styles.h4}>Email: {l.email}</h4>
                             <h4 className={styles.h4}>Tipo: {l.tipo_usuario}</h4>
-                            <h4 className={styles.h4}>Número do NIF: {l.numero_nif}</h4>
-                            <h4 className={styles.h4}>Número do QRCODE: {l.numero_qrcode}</h4>
 
                             <Switch
                                 checked={l.ativo}
@@ -159,7 +144,7 @@ function Usuarios() {
                                     />
                                     <input className={styles.inputs}
                                         type="email"
-                                        placeholder="Email"
+                                        placeholder="email"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                         required
@@ -169,20 +154,6 @@ function Usuarios() {
                                         placeholder="Tipo de Usuário"
                                         value={tipoUsuario}
                                         onChange={(e) => setTipoUsuario(e.target.value)}
-                                        required
-                                    />
-                                    <input className={styles.inputs}
-                                        type="text"
-                                        placeholder="Número do NIF"
-                                        value={numeroNif}
-                                        onChange={(e) => setNumeroNif(e.target.value)}
-                                        required
-                                    />
-                                    <input className={styles.inputs}
-                                        type="text"
-                                        placeholder="Número do QRCODE"
-                                        value={numeroQrCode}
-                                        onChange={(e) => setNumeroQrCode(e.target.value)}
                                         required
                                     />
                                     <button className={styles.buttonseditar} type="submit">Atualizar</button>

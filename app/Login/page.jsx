@@ -9,17 +9,18 @@ import { useRouter }from "next/navigation";
 import Header from "../components/header/Header.jsx";
 
 export default function Login() {
+  const [nome, setNome] = useState("");
   const [email_login, setEmail] = useState("");
   const [senha, setPassword] = useState("");
   const router = useRouter();
 
   const logIn = async () => {
     try {
-      await signInWithEmailAndPassword(auth, email_login, senha);
+      await signInWithEmailAndPassword(auth, nome, email_login, senha);
       alert("Login realizado com sucesso!");
-      router.push("/GerenciamentoUsuarios");
+      router.push("/Desejafazer");
     } catch (error) {
-      alert("Erro ao logar: " + error.message);
+      alert("Erro ao realizar login: nome, e-mail ou senha incorretos " + error.message);
     }
   };
 
@@ -31,7 +32,24 @@ export default function Login() {
       <img src="./fundo-login.png" alt="" className={styles.img_login}/>
       </div>
       <h1 className={styles.H1text}>Login</h1>
+
+
+
+
+
+
+
       <div className={styles.formDiv01}>
+        <label className={styles.textlabel}>Nome:</label>
+        <input
+          type="text"
+          className={styles.input}
+          value={nome}
+          onChange={(e) => setNome(e.target.value)}
+        />
+      </div>
+
+      <div className={styles.formDiv02}>
         <label className={styles.textlabel}>E-mail:</label>
         <input
           type="email"
@@ -40,6 +58,7 @@ export default function Login() {
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
+
       <div className={styles.formDiv02}>
         <label className={styles.textlabel}>Senha:</label>
         <input
@@ -49,6 +68,9 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
+
+
+      
       <div className={styles.texts}>
       <button className={styles.button} onClick={logIn}>
         Login
