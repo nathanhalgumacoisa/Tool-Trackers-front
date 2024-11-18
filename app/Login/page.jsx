@@ -40,7 +40,7 @@ export default function Login() {
 
     
 
-      <div className={styles.formDiv02}>
+      <div className={styles.formDiv01}>
         <label className={styles.textlabel}>E-mail:</label>
         <input
           type="email"
