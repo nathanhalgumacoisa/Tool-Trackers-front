@@ -5,14 +5,14 @@ import axios from 'axios';
 import styles from './organizadores.module.css';
 import Header from '../components/header/Header.jsx';
 
-function App() {
+function Organizadores() {
   const [locals, setLocals] = useState([]);
   const [expanded, setExpanded] = useState({});
   const [expandedCarrinhos, setExpandedCarrinhos] = useState(false);
   const [expandedArmarios, setExpandedArmarios] = useState(false);
   const [expandedTornos, setExpandedTornos] = useState(false);
   const [expandedPaineis, setExpandedPaineis] = useState(false);
-  const [ferramentas, setFerramentas] = useState([]);
+  const [selectedCarrinho, setSelectedCarrinho] = useState(""); // Estado para o carrinho selecionado
   const searchParams = useSearchParams();
   const ambiente = searchParams.get('ambiente');
 
@@ -30,26 +30,18 @@ function App() {
     getOrganizador();
   }, [ambiente]);
 
-  const getFerramentas = async () => {
-    try {
-      const response = await axios.get(`http://localhost:3003/ferramentas`);
-      if (response.data && response.data.ferramentas) {
-        setFerramentas(response.data.ferramentas);
-      } else {
-        console.log("Nenhuma ferramenta encontrada na resposta.");
-      }
-    } catch (error) {
-      console.log("Erro ao buscar ferramentas:", error);
-    }
-  };
-
   const handleNumOrganizadorClick = (id) => {
     setExpanded((prev) => ({
       ...prev,
-      [id]: { ...prev[id], sub: !prev[id]?.sub, img: false }
+      [id]: { ...prev[id], sub: !prev[id]?.sub } // alterna a visibilidade do suborganizador
     }));
   };
 
+  const handleSelectChange = (event) => {
+    const selectedId = event.target.value;
+    setSelectedCarrinho(selectedId);
+    handleNumOrganizadorClick(selectedId); // Expande ou colapsa o carrinho selecionado
+  };
   const handleImgOrganizadorClick = (id) => {
     setExpanded((prev) => ({
       ...prev,
@@ -66,28 +58,52 @@ function App() {
     <div className={styles.container} key="app-container">
       <Header />
       <div className={styles.localsContainer}>
-        <div className={styles.h2Container}>
-          <select></select>
-          <h2 className={styles.h2} onClick={() => setExpandedCarrinhos(!expandedCarrinhos)}>Carrinhos</h2>
-          {expandedCarrinhos && locals
-            .filter(local => local.nome_organizador === 'carrinhos')
-            .map((local, index) => (
-              <div key={`carrinho-${index}-${local.organizador_id}`} className={styles.mapItem}>
-                <p onClick={() => handleNumOrganizadorClick(local.id)} className={styles.mapText}>
-                  {local.numero_organizador}
-                </p>
-                {expanded[local.id]?.sub && (
-                  <p onClick={() => handleImgOrganizadorClick(local.id)} className={styles.mapText}>
-                    {local.nome_suborganizador} {local.numero_suborganizador}
-                  </p>
-                )}
-                {expanded[local.id]?.img && (
-                  <img src={local.foto_url} className={styles.mapImage} />
-                )}
-              </div>
-            ))}
-        </div>
+        
+      <div className={styles.selectedCarrinho}>
+  <div className={styles.h2Container}>
+    <select 
+      className={styles.h2} 
+      onClick={() => setExpandedCarrinhos(!expandedCarrinhos)} 
+      onChange={handleSelectChange}
+      value={selectedCarrinho}
+    >
+      <option value="">Carrinhos</option>
+      {expandedCarrinhos && locals
+        .filter(local => local.nome_organizador === 'carrinhos')
+        .map((local, index) => (
+          <option 
+            key={`carrinho-${index}-${local.organizador_id}`} 
+            value={local.id}
+          >
+            {local.numero_organizador}
+          </option>
+        ))}
+    </select>
 
+    {/* Exibição do Carrinho Selecionado */}
+    {selectedCarrinho && (
+      <div className={styles.selectedCarrinho}>
+        <p onClick={() => handleNumOrganizadorClick(selectedCarrinho)}>
+          Carrinho selecionado: {selectedCarrinho}
+        </p>
+      </div>
+    )}
+
+    {/* Exibição do Suborganizador se `expanded` estiver ativo */}
+    {expanded[selectedCarrinho]?.sub && locals
+      .filter(local => local.id === selectedCarrinho)
+      .map((local) => (
+        <p 
+          key={`suborganizador-${local.id}`}
+          onClick={() => handleImgOrganizadorClick(local.id)} 
+          className={styles.mapText}
+        >
+          {local.nome_suborganizador} {local.numero_suborganizador}
+        </p>
+      ))}
+  </div>
+</div>
+        {/* Seção Armários */}
         <div className={styles.h2Container}>
           <h2 className={styles.h2} onClick={() => setExpandedArmarios(!expandedArmarios)}>Armários</h2>
           {expandedArmarios && locals
@@ -103,12 +119,13 @@ function App() {
                   </p>
                 )}
                 {expanded[local.id]?.img && (
-                  <img src={local.foto_url} className={styles.mapImage} />
+                  <img src={local.foto_url} className={styles.mapImage} alt="Imagem do organizador" />
                 )}
               </div>
             ))}
         </div>
 
+        {/* Seção Tornos */}
         <div className={styles.h2Container}>
           <h2 className={styles.h2} onClick={() => setExpandedTornos(!expandedTornos)}>Tornos</h2>
           {expandedTornos && locals
@@ -124,12 +141,13 @@ function App() {
                   </p>
                 )}
                 {expanded[local.id]?.img && (
-                  <img src={local.foto_url} className={styles.mapImage} />
+                  <img src={local.foto_url} className={styles.mapImage} alt="Imagem do organizador" />
                 )}
               </div>
             ))}
         </div>
 
+        {/* Seção Paineis */}
         <div className={styles.h2Container}>
           <h2 className={styles.h2} onClick={() => setExpandedPaineis(!expandedPaineis)}>Paineis</h2>
           {expandedPaineis && locals
@@ -145,7 +163,7 @@ function App() {
                   </p>
                 )}
                 {expanded[local.id]?.img && (
-                  <img src={local.foto_url} className={styles.mapImage} />
+                  <img src={local.foto_url} className={styles.mapImage} alt="Imagem do organizador" />
                 )}
               </div>
             ))}
@@ -155,4 +173,4 @@ function App() {
   );
 }
 
-export default App;
+export default Organizadores;
