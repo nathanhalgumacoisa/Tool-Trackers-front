@@ -1,121 +1,108 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { RetweetOutlined, HarmonyOSOutlined, ToolOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import { Card, message } from 'antd';
 import axios from 'axios';
+import styles from './cardferr.module.css'; // Importando o CSS modular
 
 const { Meta } = Card;
 
-const CardFerr = ({ 
+const CardFerr = ({
     id,
-    nome, 
-    imagem_url, 
-    conjunto, 
-    numero, 
-    patrimonio, 
-    modelo, 
-    descricao, 
-    disponivel, // Status de disponibilidade
-    onUpdateStatus // Função para atualizar o status
+    nome,
+    imagem_url,
+    conjunto,
+    numero,
+    patrimonio,
+    modelo,
+    descricao,
+    disponivel,
+    em_manutencao,
+    onUpdateStatus
 }) => {
-    const [isBorrowed, setIsBorrowed] = useState(disponivel); // Status de empréstimo
-    const [isUnderMaintenance, setIsUnderMaintenance] = useState(false); // Status de manutenção
-    
-    const handleHarmonyClick = async () => {
-        const newStatus = !isBorrowed; // Inverte o status de disponibilidade
+    const [isBorrowed, setIsBorrowed] = useState(disponivel === 'f');
+    const [isUnderMaintenance, setIsUnderMaintenance] = useState(em_manutencao === 't');
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        setIsBorrowed(disponivel === 't');
+        setIsUnderMaintenance(em_manutencao === 't');
+    }, [disponivel, em_manutencao]);
+
+    const handleToggleAvailability = async () => {
+        setLoading(true);
+        const newStatus = isBorrowed ? 'f' : 't';
 
         try {
             await axios.put(`http://localhost:3003/ferramentas/disponivel/${id}`, { disponivel: newStatus });
-            message.success(`Status de disponibilidade atualizado para ${newStatus ? 'disponível' : 'indisponível'}.`);
-            setIsBorrowed(newStatus); // Atualiza o estado local
-            onUpdateStatus(id, newStatus); // Atualiza o estado no componente pai
-            if (newStatus === false) setIsUnderMaintenance(false); // Reseta o status de manutenção
+            setIsBorrowed(newStatus === 't');
+            onUpdateStatus(id, newStatus);
+            message.success(`Status atualizado para ${newStatus === 't' ? 'disponível' : 'indisponível'}.`);
         } catch (error) {
-            console.error("Erro ao atualizar o status de disponibilidade:", error);
             message.error('Erro ao atualizar o status.');
+        } finally {
+            setLoading(false);
         }
     };
 
     const handleRetweetClick = async () => {
-        if (isUnderMaintenance) return; // Não permite mudar se já estiver em manutenção
+        if (isUnderMaintenance || loading) return;
 
-        const newStatus = false; // Define o status como indisponível
+        const newStatus = 'f';
 
         try {
             await axios.put(`http://localhost:3003/ferramentas/disponivel/${id}`, { disponivel: newStatus });
-            message.success('Status de disponibilidade atualizado para indisponível devido ao empréstimo.');
-            setIsBorrowed(newStatus); // Atualiza o estado local
-            onUpdateStatus(id, newStatus); // Atualiza o estado no componente pai
-            setIsUnderMaintenance(false); // Reseta o status de manutenção
+            setIsBorrowed(false);
+            onUpdateStatus(id, newStatus);
+            setIsUnderMaintenance(false);
+            message.success('Ferramenta emprestada com sucesso.');
         } catch (error) {
-            console.error("Erro ao atualizar o status de disponibilidade:", error);
             message.error('Erro ao atualizar o status.');
         }
     };
 
     const handleToolClick = async () => {
-        if (isBorrowed) return; // Não permite mudar se já estiver emprestado
+        if (isBorrowed || loading) return;
 
-        const newStatus = false; // Define o status como indisponível
+        const newStatus = 'f';
 
         try {
             await axios.put(`http://localhost:3003/ferramentas/disponivel/${id}`, { disponivel: newStatus });
-            message.success('Status de disponibilidade atualizado para indisponível devido à manutenção.');
-            setIsUnderMaintenance(true); // Atualiza o estado local
-            onUpdateStatus(id, newStatus); // Atualiza o estado no componente pai
-            setIsBorrowed(false); // Reseta o status de empréstimo
+            setIsUnderMaintenance(true);
+            setIsBorrowed(false);
+            onUpdateStatus(id, newStatus);
+            message.success('Ferramenta em manutenção.');
         } catch (error) {
-            console.error("Erro ao atualizar o status de disponibilidade:", error);
             message.error('Erro ao atualizar o status.');
         }
     };
 
     return (
-        <Card
-            style={{
-                width: 300,
-                transition: 'background-color 0.3s'
-            }}
-            cover={
-                <img
-                    alt="example"
-                    src={imagem_url}
-                />
-            }
-            actions={[
-                <div 
-                    onClick={handleHarmonyClick} 
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        width: '11px',
-                        height: '15px',
-                        borderRadius: '50%',
-                        backgroundColor: isBorrowed ? 'green' : 'red', // Cor da bolinha baseada no status
-                        cursor: 'pointer'
-                    }}
-                >
-                    <HarmonyOSOutlined 
-                        style={{ color: 'white' }} 
-                    />
-                </div>,
-                <CheckCircleOutlined key="check" />,
-                <RetweetOutlined 
-                    key="retweet"
-                    onClick={handleRetweetClick}
-                    style={{ color: isBorrowed ? 'black' : 'red' }} // Altera a cor baseado no status
-                />,
-                <ToolOutlined 
-                    key="tool" 
-                    onClick={handleToolClick}
-                    style={{ color: isUnderMaintenance ? 'yellow' : 'black' }} // Altera a cor baseado no status de manutenção
-                />
-            ]}
-        >
+        <Card className={styles.card} hoverable>
+            <img alt="example" src={imagem_url} className={styles.cardImage} />
             <Meta
                 title={nome}
                 description={`Conjunto: ${conjunto}, Tamanho: ${numero}, Patrimônio: ${patrimonio}, Modelo: ${modelo}, Descrição: ${descricao}`}
             />
+            <div className={styles.cardActions}>
+                <div
+                    onClick={handleToggleAvailability}
+                    className={`${styles.cardAction} ${isBorrowed ? styles.available : styles.unavailable}`}
+                >
+                    <HarmonyOSOutlined 
+                    style={{ color: 'black' }}/>
+                </div>
+                <CheckCircleOutlined key="check" />
+                <RetweetOutlined
+                    key="retweet"
+                    onClick={handleRetweetClick}
+                    style={{ color: isBorrowed ? 'black' : 'red' }}
+                />
+                <ToolOutlined
+                    key="tool"
+                    onClick={handleToolClick}
+                    className={isUnderMaintenance ? styles.maintenance : ''}
+                />
+            </div>
         </Card>
     );
 };

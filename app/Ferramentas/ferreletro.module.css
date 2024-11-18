@@ -15,10 +15,17 @@
     margin: 5%; /* Unificado para margem */
 }
 
+
 .h1 {
     font-size: 3rem; /* Tamanho do cabeçalho */
     margin-top: 5%; /* Margem no topo */
     text-align: center; /* Centraliza o texto */
+
+.h1{
+    font-size: 3rem;
+    margin-top: 2%;
+    text-align: center;
+
 }
 
 .p1 {
@@ -32,6 +39,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+
     height: auto; /* Ajustado para se adaptar ao conteúdo */
     margin-top: -16%; /* Ajustar se necessário */
     margin: 5%; /* Unificado para margem */
@@ -56,4 +64,22 @@
         margin-top: 15%;
         /* Reduzir margem em telas pequenas */
     }
+
+    height: 100vh;
+    margin-top: -16%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.ferramentasGrid {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 16px; 
+    justify-content: center; 
+}
+
+.ferramentasGrid > * {
+    flex: 1 1 calc(25% - 16px); 
+    max-width: calc(25% - 16px); 
+
 }

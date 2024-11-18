@@ -1,5 +1,6 @@
 .body {
     font-family: Arial, sans-serif;
+
     background-color: #f4f4f4; /* Background color for contrast */
 }
 
@@ -11,9 +12,53 @@
     padding: 1rem; /* Add padding for better spacing */
 }
 
+
+    background-color: #f4f4f4;
+    /* Cor de fundo para contraste */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #dcdcdc;
+    border-radius: 7rem;
+    box-shadow: 8px 10px 10px rgba(0, 0, 0, 0.1);
+    width: 56%;
+    height: 46%; /* Alterar para auto para melhor adaptação ao conteúdo */
+    text-align: center;
+    margin: 0 auto; /* Centraliza o container na página */
+    padding: 2rem; /* Adiciona um padding para espaçamento */
+}
+
+
+.navButton1 {
+    width: 8%;
+    margin: 2%;
+    justify-content: center;
+    background-color: rgb(189, 189, 189);
+    border-radius: 7px;
+}
+
+.navButton2 {
+    width: 8%;
+    margin: 2%;
+    background-color: rgb(189, 189, 189);
+    border-radius: 7px;
+}
+
+.botoes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
 .h1 {
     text-align: center;
     color: #333;
+    margin-top: -8rem;
 }
 
 .title {
@@ -42,6 +87,74 @@
 
 .submitButton {
     display: flex;
+
+.h11{
+    margin-top: 1rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.titulos {
+    margin-top: 2rem;
+}
+
+.title {
+    font-size: 15px;
+    max-width: 40.35vw;
+    padding: 1.25rem;
+    margin-left: 2rem;
+    margin-top: 1rem;
+    align-items: center;
+}
+
+.input {
+    width: 60vw;
+    background-color: rgb(156, 0, 0);
+    color: rgb(0, 0, 0);
+    border: 2px;
+    /* Borda vermelha */
+    border-radius: 50px;
+    /* Arredondamento */
+    outline: none;
+    /* Remove a borda de foco padrão */
+    transition: border-color 0.3s;
+    max-width: 50%;
+    margin: -1rem auto;
+    padding: 1rem;
+    align-items: center;
+    margin-left: 3rem;
+    margin-top: -1rem;
+    font-family: Arial, sans-serif;
+}
+
+.select {
+    width: 30vw;
+    background-color: rgb(156, 0, 0);
+    color: rgb(255, 255, 255);
+    border: 2px solid transparent;
+    /* Ajuste a borda se necessário */
+    border-radius: 50px;
+    outline: none;
+    transition: border-color 0.3s;
+    max-width: 50%;
+    margin: 1rem;
+    padding: 1rem;
+    margin-left: 23rem;
+    margin-top: 0.5rem;
+}
+
+.select option {
+    background-color: rgb(156, 0, 0);
+    color: rgb(255, 255, 255);
+}
+
+.input::placeholder {
+    color: rgb(255, 255, 255);
+    /* Altere para a cor desejada */
+}
+
+.submitButton {
+
     align-items: center;
     justify-content: center;
     background-color: rgb(156, 0, 0);
@@ -51,11 +164,26 @@
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
     margin-top: 1.5rem; /* Space above button */
     padding: 1rem; /* Add padding */
+    border: 2px;
+    /* Borda vermelha */
+    border-radius: 50px;
+    /* Arredondamento */
+    outline: none;
+    /* Remove a borda de foco padrão */
+    transition: border-color 0.3s;
+    max-width: 50%;
+    width: 15vw;
+    align-items: center;
+    margin-left: 3rem;
+    margin-top: 2rem;
+    padding: 1rem;
+
 }
 
 .submitButton:hover {
     background-color: rgb(255, 255, 255);
     color: rgb(156, 0, 0);
+
     border: 2px solid rgb(156, 0, 0); /* Add border on hover */
 }
 
@@ -73,4 +201,44 @@
     .text1 {
         font-size: 1.5rem; /* Adjust text size for mobile */
     }
+
+    border: 2px;
+    /* Borda vermelha */
+    border-radius: 50px;
+    /* Arredondamento */
+    outline: none;
+    /* Remove a borda de foco padrão */
+    transition: border-color 0.3s;
+}
+
+.label-input {
+    display: flex;
+    flex-direction: column; /* Coloca label acima do input */
+    width: 100%; /* Faz o input ocupar toda a largura disponível */
+    max-width: 400px; /* Limita a largura máxima */
+    margin: 1rem 0; /* Espaçamento entre os inputs */
+}
+
+.input {
+    width: 60rem; 
+    background-color: rgb(156, 0, 0);
+    color: rgb(255, 255, 255);
+    border: 2px solid transparent;
+    border-radius: 50px;
+    outline: none;
+    transition: border-color 0.3s;
+    padding: 1rem;
+}
+
+.select {
+    width: 57rem; 
+    margin-left: 4rem;
+    margin-bottom: -1rem;
+    margin-top: -1rem
+}
+
+.title {
+    font-size: 15px;
+    color: #333; /* Ajuste a cor conforme necessário */
+
 }
