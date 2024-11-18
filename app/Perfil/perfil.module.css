@@ -3,3 +3,19 @@
     justify-content: center;
     margin-top: 5rem;
 }
+
+.classe {
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem; /* Margem no topo */
+}
+
+
+@media (max-width: 480px) { 
+    .classe {
+        flex-direction: column; 
+        margin-top: 2rem; 
+    }
+    
+
+}

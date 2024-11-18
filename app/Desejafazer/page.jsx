@@ -1,7 +1,7 @@
 
 import React from 'react';
-import App from '../components/card/Card'; // Ajuste o caminho conforme necessário
-import styles from './deseja.module.css'; // Importando o CSS Module
+import App from '../components/card/Card'; 
+import styles from './deseja.module.css'; 
 import Header from '../components/header/Header.jsx';
 
 
@@ -16,6 +16,9 @@ const Desejafazer = () => {
                 <h1 className={styles.cards1}>O que deseja fazer?</h1>
             </div>
 
+
+
+        <div className={styles.cards}>
             <div className={styles.cardsContainer}>
                 <App
                     title={<span style={{ fontSize: '18px' }}>Empréstimos</span>}
@@ -28,6 +31,8 @@ const Desejafazer = () => {
                     image="/lista.png"
                 />
             </div>
+</div>
+
         </div>
     );
 };
