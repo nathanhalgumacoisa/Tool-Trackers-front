@@ -6,6 +6,7 @@ import CardFerr from '../components/cardFerramenta/CardFerr';
 import FiltroFerr from '../components/filtroFerr/FiltroFerr';
 import styles from './ferreletro.module.css';
 
+
 function FerramentasforUser() {
     const [locals, setLocals] = useState([]);
     const [filteredLocals, setFilteredLocals] = useState([]);
