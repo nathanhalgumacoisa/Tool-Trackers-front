@@ -21,6 +21,7 @@ const CadastroFerr = () => {
     const [foto_url, setFotoUrl] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [currentStep, setCurrentStep] = useState(0);
+    const [isModalVisible, setIsModalVisible] = useState(false);
 
     const stepInputs = [
         [
@@ -77,7 +78,37 @@ const CadastroFerr = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
         // Lógica de envio dos dados...
+        
+        // Limpar os estados dos inputs
+        setNome('');
+        setImagemUrl('');
+        setConjunto('');
+        setNumero('');
+        setPatrimonio('');
+        setModelo('');
+        setDescricao('');
+        setAmbiente('');
+        setNomeOrganizador('');
+        setNumeroOrganizador('');
+        setNomeSubOrganizador('');
+        setNumeroSubOrganizador('');
+        setFotoUrl('');
+        
+        // Retornar ao primeiro passo
+        setCurrentStep(0);
+        
+        // Exibir mensagem de sucesso
+        setIsModalVisible(true);
+        
+        // Focar no primeiro input após limpar
+        setTimeout(() => {
+            const firstInput = document.querySelector(`input[type="text"], textarea, select`);
+            if (firstInput) {
+                firstInput.focus();
+            }
+        }, 0);
     };
 
     const handleNext = () => {
@@ -155,7 +186,17 @@ const CadastroFerr = () => {
                 
             </form>
 
-            {successMessage && <p>{successMessage}</p>}
+            {isModalVisible && (
+                <div className={styles.modal}>
+                    <div className={styles.modalContent}>
+                        <h2>Ferramenta criada com sucesso</h2>
+                        <button onClick={() => setIsModalVisible(false)} className={styles.closeButton}>
+                            Fechar
+                        </button>
+                    </div>
+                </div>
+            )}
+
         </div>
     );
 };
