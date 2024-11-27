@@ -3,6 +3,7 @@ import { RetweetOutlined, HarmonyOSOutlined, ToolOutlined, CheckCircleOutlined }
 import { Card, message } from 'antd';
 import axios from 'axios';
 import styles from './cardferr.module.css'; // Importando o CSS modular
+import { Divider } from 'antd';
 
 const { Meta } = Card;
 
@@ -79,11 +80,16 @@ const CardFerr = ({
     return (
         <Card className={styles.card} hoverable>
             <img alt="example" src={imagem_url} className={styles.cardImage} />
-            <Meta
-                title={nome}
-                description={`Conjunto: ${conjunto}, Tamanho: ${numero}, Patrimônio: ${patrimonio}, Modelo: ${modelo}, Descrição: ${descricao}`}
-            />
+            <div className={styles.text}>
+                <p className={styles.p}>
+                {nome}
+                </p>
+                {`Conjunto: ${conjunto}, Tamanho: ${numero}, Patrimônio: ${patrimonio}, Modelo: ${modelo}, Descrição: ${descricao}`}
+            </div>
+            <Divider style={{  borderColor: '#f0ffff' }}/>
             <div className={styles.cardActions}>
+   
+            
                 <div
                     onClick={handleToggleAvailability}
                     className={`${styles.cardAction} ${isBorrowed ? styles.available : styles.unavailable}`}
