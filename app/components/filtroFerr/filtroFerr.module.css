@@ -16,15 +16,15 @@
 }
 
 .nav_search {
-    width: 30vw;
+    width: 40rem;
+    height: 2rem;
     background-color: rgb(156, 0, 0);
-    color: rgb(0, 0, 0);
-    border: 2px solid rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     border-radius: 50px;
     outline: none;
-    transition: border-color 0.3s;
     max-width: 50%;
     padding: 1rem;
+    border: 0px solid rgb(0, 0, 0);
     
 }
 
@@ -33,20 +33,16 @@
 }
 
 .btn_search {
-    background-color: rgb(156, 0, 0);
-    color: #fff;
-    border: 2px solid rgb(0, 0, 0);
-    border-radius: 50px;
-    outline: none;
-    transition: border-color 0.3s;
-    padding: 1rem;
-    margin-left: 1rem;
+    background: none; /* Remove o fundo */
+    border: none; /* Remove a borda */
+    padding: 0; /* Remove o padding */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
 }
 
-.btn_search:hover {
-    background-color: rgb(0, 0, 0);
-    color: rgb(156, 0, 0);
-    border: 2px solid rgb(156, 0, 0);
+.searchIcon {
+    width: 2rem; 
+    height: 2rem; 
+    margin-left: 1rem;
 }
 
 .results {
