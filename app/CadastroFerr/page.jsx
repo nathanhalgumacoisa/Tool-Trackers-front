@@ -38,7 +38,7 @@ const CadastroFerr = () => {
                 value: ambiente,
                 setter: setAmbiente,
                 type: "select",
-                options: ["oficina mecanica de usinagem", "oficina eletro eletrônica", "espaço maker", "manutencao"],
+                options: ["Oficina mecanica de usinagem", "Oficina eletro eletrônica", "Espaço maker", "Manutencao"],
                 required: true
             },
         ],
@@ -96,8 +96,8 @@ const CadastroFerr = () => {
         <div className={styles.conjunto}>
             <Header />
             <form onSubmit={handleSubmit}>
-                <h1 className={styles.h11}>Cadastro de Ferramentas</h1>
                 <div className={styles.container}>
+                <h1 className={styles.h11}>Cadastro de Ferramentas</h1>
                     {stepInputs[currentStep].map((input, index) => (
                         <div key={index}>
                             <label className={styles.titulos}>
@@ -117,7 +117,7 @@ const CadastroFerr = () => {
                                         onChange={(e) => input.setter(e.target.value)}
                                         required={input.required}
                                     >
-                                        <option value="" disabled>Selecione</option>
+                                        <option value="" disabled className={styles.opcoes}>Selecione</option>
                                         {input.options.map((option, idx) => (
                                             <option key={idx} value={option}>{option}</option>
                                         ))}
@@ -135,8 +135,7 @@ const CadastroFerr = () => {
                             </label>
                         </div>
                     ))}
-                </div>
-                <div className={styles.botoes}>
+                    <div className={styles.botoes}>
                     {currentStep > 0 && (
                         <button type="button" onClick={handlePrevious} className={styles.navButton2}>
                             Anterior
@@ -152,6 +151,8 @@ const CadastroFerr = () => {
                         </button>
                     )}
                 </div>
+                </div>
+                
             </form>
 
             {successMessage && <p>{successMessage}</p>}

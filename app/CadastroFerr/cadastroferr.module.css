@@ -1,6 +1,6 @@
 .body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4; /* Background color for contrast */
+    background-color: #850000; /* Background color for contrast */
 }
 
 .container {
@@ -8,23 +8,46 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #dcdcdc;
-    border-radius: 7rem;
+    background-color: #fdfdfd;
+    border-radius: 1rem;
     box-shadow: 8px 10px 10px rgba(0, 0, 0, 0.1);
-    width: 56%;
-    height: auto; /* Alterado para auto para melhor adaptação ao conteúdo */
+    width: 40%;
     text-align: center;
-    margin: 0 auto; /* Centraliza o container na página */
-    padding: 2rem; /* Adiciona um padding para espaçamento */
+    margin: 0 auto;
+    padding: 2rem; 
+    margin-top: 6rem;
+    margin-bottom: 4rem;
+}
+
+.conjunto{
+    background-color: #920000;
+    height: 100vh;
 }
 
 .navButton1,
 .navButton2 {
-    width: 8%;
-    margin: 2%;
+    width: 6rem;
+    margin: 3rem;
     justify-content: center;
-    background-color: rgb(189, 189, 189);
-    border-radius: 7px;
+    align-items: center;
+    background-color: rgb(168, 168, 168);
+    border-radius: 5px;
+    height: 2rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.textarea {
+    width: 90%;
+    max-width: 400px;
+    background-color: rgb(211, 211, 211); /* Cinza claro */
+    color: rgb(0, 0, 0);
+    border: 2px solid transparent;
+    border-radius: 50px;
+    outline: none;
+    transition: border-color 0.3s;
+    margin: 1rem auto;
+    padding: 1rem;
 }
 
 .botoes {
@@ -36,23 +59,23 @@
 .h1 {
     text-align: center;
     color: #333;
-    margin-top: -8rem;
 }
 
 .title {
     font-size: 1.2rem; /* Ajustar tamanho da fonte para melhor legibilidade */
     max-width: 90%; /* Permitir que ocupe mais largura em telas menores */
-    margin: 1.25rem auto; /* Usar rem para espaçamento consistente */
+    margin: 1px ; /* Usar rem para espaçamento consistente */
     padding: 1rem; /* Adicionar padding */
+    text-align: left;
+    margin-bottom: -1rem;
 }
 
 .input,
-.select,
 .submitButton {
     width: 90%; /* Full width on mobile */
-    max-width: 400px; /* Limitar largura máxima */
-    background-color: rgb(156, 0, 0);
-    color: rgb(255, 255, 255);
+    max-width: 400px; 
+    background-color: rgb(211, 211, 211); /* Cinza claro */
+    color: rgb(0, 0, 0);
     border: 2px solid transparent; /* Ajustar borda se necessário */
     border-radius: 50px; /* Canto arredondado */
     outline: none; /* Remover contorno padrão */
@@ -63,7 +86,23 @@
 
 .input::placeholder,
 .select option {
-    color: rgb(255, 255, 255); /* Cor do placeholder */
+    color: rgb(0, 0, 0); 
+    margin-top: 2rem;
+}
+
+.select {
+    width: 90%; 
+    margin: 1rem auto; 
+    width: 90%; /* Full width on mobile */
+    max-width: 400px; 
+    background-color: rgb(211, 211, 211); /* Cinza claro */
+    color: rgb(0, 0, 0);
+    border: 2px solid transparent; /* Ajustar borda se necessário */
+    border-radius: 50px; /* Canto arredondado */
+    outline: none; /* Remover contorno padrão */
+    transition: border-color 0.3s;
+    margin: 4rem ; /* Centralizar e espaçar inputs */
+    padding: 1rem;
 }
 
 .h11 {
@@ -73,7 +112,7 @@
 }
 
 .titulos {
-    margin-top: 2rem;
+    margin-top: 20px;
 }
 
 .submitButton {
@@ -81,7 +120,7 @@
     align-items: center;
     justify-content: center;
     background-color: rgb(156, 0, 0);
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     border: 2px solid transparent; /* Ajustar borda se necessário */
     border-radius: 50px; /* Canto arredondado */
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
@@ -95,6 +134,10 @@
     background-color: rgb(255, 255, 255);
     color: rgb(156, 0, 0);
     border: 2px solid rgb(156, 0, 0); /* Adicionar borda ao passar o mouse */
+}
+
+.opcoes {
+    background-color: #fdfdfd;
 }
 
 /* Ajustes responsivos */
@@ -125,10 +168,10 @@
 
 .input {
     width: 60rem; 
-    background-color: rgb(156, 0, 0);
-    color: rgb(255, 255, 255);
+    background-color: rgb(211, 211, 211);
+    color: rgb(0, 0, 0);
     border: 2px solid transparent; /* Ajustar borda */
-    border-radius: 50px; /* Canto arredondado */
+    border-radius: 10px; /* Canto arredondado */
     outline: none; /* Remover contorno padrão */
     transition: border-color 0.3s;
     padding: 1rem;
