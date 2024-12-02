@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 .cardsContainer {
     display: flex;                
     justify-content: center;      
@@ -7,6 +10,7 @@
     position: fixed;
 
 }
+
 
 .content {
     text-align: center;
@@ -26,6 +30,7 @@
     width: 100%;  
     font-size: small; 
     margin-bottom: 30%;
+    font-family: 'Poppins', sans-serif;
         
 }
 
@@ -59,10 +64,9 @@
     transform: translateX(-50%); 
     color: rgb(0, 0, 0);               
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); 
-    display: flex;
-    flex-direction: column;
-                    
-} 
+    font-family: 'Poppins', sans-serif;              
+    }
+
     .cards {
          z-index: -1; 
          display: flex;

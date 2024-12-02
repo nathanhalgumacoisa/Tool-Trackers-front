@@ -9,14 +9,13 @@ import { useRouter }from "next/navigation";
 import Header from "../components/header/Header.jsx";
 
 export default function Login() {
-  const [nome, setNome] = useState("");
   const [email_login, setEmail] = useState("");
   const [senha, setPassword] = useState("");
   const router = useRouter();
 
   const logIn = async () => {
     try {
-      await signInWithEmailAndPassword(auth, nome, email_login, senha);
+      await signInWithEmailAndPassword(auth, email_login, senha);
       alert("Login realizado com sucesso!");
       router.push("/Desejafazer");
     } catch (error) {
@@ -39,17 +38,9 @@ export default function Login() {
 
 
 
-      <div className={styles.formDiv01}>
-        <label className={styles.textlabel}>Nome:</label>
-        <input
-          type="text"
-          className={styles.input}
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-        />
-      </div>
+    
 
-      <div className={styles.formDiv02}>
+      <div className={styles.formDiv01}>
         <label className={styles.textlabel}>E-mail:</label>
         <input
           type="email"

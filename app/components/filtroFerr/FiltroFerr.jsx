@@ -39,7 +39,9 @@ const FiltroFerr = ({ onSearchResults }) => {
           placeholder="Pesquisar ferramentas..."
           className={styles.nav_search}
         />
-        <button onClick={handleSearch} className={styles.btn_search}>Pesquisar</button>
+        <button onClick={handleSearch} className={styles.btn_search}>
+          <img src="/lupa.png" alt="Pesquisar" className={styles.searchIcon} />
+        </button>
       </div>
     </div>
   );
