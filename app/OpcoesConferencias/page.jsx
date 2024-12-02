@@ -13,7 +13,7 @@ const OpcoesConferencias = () => {
             <img src="./fundosenai.png" alt="Fundo Senai" className={styles.imagem1} />
             </div>
 
-            <h1 className={styles.cards1}>Qual setor gostaria de fazer a conferencia?</h1>
+            <h1 className={styles.cards1}>Em qual setor gostaria de fazer a conferência?</h1>
             <div className={styles.cardsContainer}> {/* Contêiner flexível para os cards */}
                 <div>
                 <App title="Oficina Mecânica de Usinagem" link="/Organizadores?ambiente=ofm" image="/torno.png"/> {/* Primeiro card */}

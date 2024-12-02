@@ -33,6 +33,15 @@
     font-family: 'Poppins', sans-serif;
         
 }
+.h1 {
+    font-size: 1.5rem;
+    /* Tamanho do cabeçalho */
+    margin-top: 5%;
+    /* Margem no topo */
+    text-align: center;
+    /* Centraliza o texto */
+    font-family: 'Poppins', sans-serif;
+}
 
 .button, .button2 {
     height: 60px;

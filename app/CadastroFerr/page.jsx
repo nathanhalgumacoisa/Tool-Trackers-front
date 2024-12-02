@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './cadastroferr.module.css';
 import Header from '../components/header/Header';
+import {  FaRegCheckCircle } from "react-icons/fa"; // Importando ícones
 
 const CadastroFerr = () => {
     const [nome, setNome] = useState('');
@@ -190,6 +191,7 @@ const CadastroFerr = () => {
                 <div className={styles.modal}>
                     <div className={styles.modalContent}>
                         <h2>Ferramenta criada com sucesso</h2>
+                        <FaRegCheckCircle style={{ color: 'green', fontSize: '100px', margin: '20px' }} />
                         <button onClick={() => setIsModalVisible(false)} className={styles.closeButton}>
                             Fechar
                         </button>

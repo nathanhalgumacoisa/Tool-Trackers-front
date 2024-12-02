@@ -77,7 +77,7 @@
 }
 
 .mapImage {
-    width: 150px; /* Largura consistente para imagens */
+    width: 100%; /* Largura consistente para imagens */
     height: 150px; /* Altura consistente para imagens */
     margin-top: 5px;
 }

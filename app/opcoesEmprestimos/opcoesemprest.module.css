@@ -14,13 +14,13 @@
     position: absolute;   
     margin-bottom: 10rem;
     left: 50%;      
-    margin-top: 4rem;      
+    margin-top: 6rem;      
     font-size: 40px; 
     transform: translateX(-50%); /* Ajusta a posição para centralizar */
     color: rgb(0, 0, 0);               
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); 
     z-index: 1;                  /* Garante que o texto fique acima da imagem */
     margin-bottom: 5rem;
+    font-family: 'Poppins', sans-serif; 
 }
 
 .cardsContainer {

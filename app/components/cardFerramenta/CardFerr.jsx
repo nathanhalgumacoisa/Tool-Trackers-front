@@ -3,9 +3,9 @@ import { RetweetOutlined, HarmonyOSOutlined, ToolOutlined, CheckCircleOutlined }
 import { FaRegCircle, FaRegCheckCircle } from "react-icons/fa"; // Importando ícones
 import { Card, message } from 'antd';
 import axios from 'axios';
+import Link from 'next/link'; // Importando Link do Next.js
 import styles from './cardferr.module.css'; // Importando o CSS modular
 import { Divider } from 'antd';
-
 
 const { Meta } = Card;
 
@@ -86,7 +86,12 @@ const CardFerr = ({
 
     return (
         <Card className={styles.card} hoverable>
-            <img alt="example" src={imagem_url} className={styles.cardImage} />
+            {/* Link envolvido com a imagem */}
+            <Link href="/Emprestimos">
+                {/* Usando <a> como wrapper dentro do Link */}
+                    <img alt="example" src={imagem_url} className={styles.cardImage} />
+                
+            </Link>
             <div className={styles.text}>
                 <p className={styles.p}>{nome}</p>
                 {`Conjunto: ${conjunto}, Tamanho: ${numero}, Patrimônio: ${patrimonio}, Modelo: ${modelo}, Descrição: ${descricao}`}
@@ -97,21 +102,18 @@ const CardFerr = ({
                     onClick={handleToggleAvailability}
                     className={`${styles.cardAction} ${isBorrowed ? styles.available : styles.unavailable}`}
                 >
-                    
-                    
-                    <FaRegCircle style={{ color: 'black', fontSize: '100%'}} />
                 </div>
                 <div onClick={toggleActive} style={{ cursor: 'pointer' }}>
-    {isActive ? (
-        <FaRegCheckCircle style={{ color: 'green', fontSize: '20px' }} />
-    ) : (
-        <FaRegCircle style={{ color: 'black', fontSize: '20px' }} />
-    )}
-</div>
+                    {isActive ? (
+                        <FaRegCheckCircle style={{ color: 'green', fontSize: '20px' }} />
+                    ) : (
+                        <FaRegCircle style={{ color: 'black', fontSize: '20px' }} />
+                    )}
+                </div>
                 <RetweetOutlined
                     key="retweet"
                     onClick={handleRetweetClick}
-                    style={{ color: isBorrowed ? 'black' : 'red', fontSize: '20px' }}
+                    style={{ color: isBorrowed ? 'black' : 'black', fontSize: '20px' }}
                 />
                 <ToolOutlined
                     key="tool"
@@ -119,11 +121,6 @@ const CardFerr = ({
                     className={isUnderMaintenance ? styles.maintenance : ''}
                     style={{ fontSize: '20px' }}
                 />
-                {/* Bolinha */}
-                {/* <div
-                    className={`${styles.circle} ${isActive ? styles.active : ''}`}
-                    onClick={toggleActive}
-                /> */}
             </div>
         </Card>
     );

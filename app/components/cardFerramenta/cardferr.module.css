@@ -49,7 +49,9 @@
 }
 
 .unavailable {
-    background-color: red;
+    background-color: #5ba92b;
+    border-radius: 50%;
+    padding: 3%;
 }
 
 .maintenance {
