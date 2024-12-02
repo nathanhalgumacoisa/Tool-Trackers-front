@@ -1,6 +1,6 @@
 .body {
     font-family: Arial, sans-serif;
-    background-color: #850000; /* Background color for contrast */
+    background-color: #850000; 
 }
 
 .container {
@@ -16,7 +16,7 @@
     margin: 0 auto;
     padding: 1rem; 
     margin-top: 6rem;
-    margin-bottom: 4rem;
+    margin-bottom: 0; /* Ajuste esta linha */
 }
 
 .conjunto{
@@ -42,7 +42,7 @@
 .textarea {
     width: 90%;
     max-width: 400px;
-    background-color: rgb(211, 211, 211); /* Cinza claro */
+    background-color: rgb(211, 211, 211); 
     color: rgb(0, 0, 0);
     border: 2px solid transparent;
     border-radius: 50px;
@@ -64,10 +64,10 @@
 }
 
 .title {
-    font-size: 1.2rem; /* Ajustar tamanho da fonte para melhor legibilidade */
-    max-width: 90%; /* Permitir que ocupe mais largura em telas menores */
-    margin: 1px ; /* Usar rem para espaçamento consistente */
-    padding: 1rem; /* Adicionar padding */
+    font-size: 1.2rem; 
+    max-width: 90%; 
+    margin: 1px ; 
+    padding: 1rem;
     text-align: left;
     margin-top: 2rem;
 
@@ -77,16 +77,16 @@
 }
 .input,
 .submitButton {
-    width: 90%; /* Full width on mobile */
+    width: 90%; 
     max-width: 400px; 
-    background-color: rgb(211, 211, 211); /* Cinza claro */
+    background-color: rgb(211, 211, 211); 
     color: rgb(0, 0, 0);
-    border: 2px solid transparent; /* Ajustar borda se necessário */
-    border-radius: 50px; /* Canto arredondado */
-    outline: none; /* Remover contorno padrão */
+    border: 2px solid transparent; 
+    border-radius: 50px; 
+    outline: none; 
     transition: border-color 0.3s;
-    margin: 1rem auto; /* Centralizar e espaçar inputs */
-    padding: 1rem; /* Adicionar padding */
+    margin: 1rem auto; 
+    padding: 1rem; 
     margin-bottom: -1rem;
 }
 
@@ -99,15 +99,15 @@
 .select {
     width: 90%; 
     margin: 1rem auto; 
-    width: 90%; /* Full width on mobile */
+    width: 90%; 
     max-width: 400px; 
-    background-color: rgb(211, 211, 211); /* Cinza claro */
+    background-color: rgb(211, 211, 211); 
     color: rgb(0, 0, 0);
-    border: 2px solid transparent; /* Ajustar borda se necessário */
-    border-radius: 50px; /* Canto arredondado */
-    outline: none; /* Remover contorno padrão */
+    border: 2px solid transparent;
+    border-radius: 50px; 
+    outline: none; 
     transition: border-color 0.3s;
-    margin: 4rem ; /* Centralizar e espaçar inputs */
+    margin: 4rem ; 
     padding: 1rem;
 }
 
@@ -119,7 +119,8 @@
 }
 
 .titulos {
-    margin-top: 20px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 .submitButton {
@@ -128,17 +129,17 @@
     justify-content: center;
     background-color: rgb(156, 0, 0);
     color: rgb(255, 255, 255);
-    border: 2px solid transparent; /* Ajustar borda se necessário */
-    border-radius: 12px; /* Canto arredondado */
+    border: 2px solid transparent; 
+    border-radius: 12px;
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-    margin-top: 1.5rem; /* Espaço acima do botão */
-    padding: 1rem; /* Adicionar padding */
+    margin-top: 1.5rem; 
+    padding: 1rem; 
     max-width: 20%;
     height: 2rem;
     width: 15vw;
     font-size: medium;
     margin-top: 2px;
-    border: 2px solid transparent; /* Ajustar borda se necessário */
+    border: 2px solid transparent; 
 }
 
 .submitButton:hover {
@@ -193,52 +194,41 @@
     background-color: #a70000;
 }
 
-
-/* Ajustes responsivos */
 @media (max-width: 480px) {
-    .title {
-        font-size: 1.5rem; /* Aumentar tamanho da fonte em mobile */
+    .container {
+        width: 80%;
+        padding: 1rem;
+        height:80%;
+    }
+
+    .titulos {
+        margin-top: 0.625rem; 
     }
 
     .input,
-    .select,
+    .select {
+        width: 100%; 
+        max-width: none;
+        margin-bottom: 1rem;
+    }
+
     .submitButton {
-        width: 90vw; /* Largura total em mobile */
-        margin-left: 0; /* Remover margem esquerda */
+        max-width: none; 
+        width: 90%; 
+        font-size: small;
+        margin-top: 1.5rem;
     }
 
-    .text1 {
-        font-size: 1.5rem; /* Ajustar tamanho do texto para mobile */
+    .navButton1,
+    .navButton2 {
+        margin: 1rem; 
     }
-}
 
-.label-input {
-    display: flex;
-    flex-direction: column; /* Coloca label acima do input */
-    width: 100%; /* Faz o input ocupar toda a largura disponível */
-    max-width: 400px; /* Limita a largura máxima */
-    margin: 1rem 0; /* Espaçamento entre os inputs */
-}
+    .modalContent {
+        padding: 10px; 
+    }
 
-.input {
-    width: 60rem; 
-    background-color: rgb(211, 211, 211);
-    color: rgb(0, 0, 0);
-    border: 2px solid transparent; /* Ajustar borda */
-    border-radius: 10px; /* Canto arredondado */
-    outline: none; /* Remover contorno padrão */
-    transition: border-color 0.3s;
-    padding: 1rem;
-}
-
-.select {
-    width: 57rem; 
-    margin-left: 4rem;
-    margin-bottom: -1rem;
-    margin-top: -1rem;
-}
-
-.title {
-    font-size: 15px;
-    color: #333; /* Ajuste a cor conforme necessário */
+    .closeButton {
+        padding: 8px; 
+    }
 }

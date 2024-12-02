@@ -1,22 +1,49 @@
-/* cardferr.module.css */
-.card {
-    width: 100%;
-    border-radius: 10px;
+.body {
+    font-family: Arial, sans-serif;
+    background-color: #850000; /* Background color for contrast */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fdfdfd;
+    border-radius: 1rem;
     box-shadow: 8px 10px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
     overflow: hidden;
     background-color: rgb(205, 201, 201);
 }
 
-.card:hover {
-    transform: scale(1.02);
+.input::placeholder,
+.select option {
+    color: rgb(0, 0, 0); 
+    margin-top: 2rem;
 }
-.text{
-    color: #f0ffff;
+
+.select {
+    width: 90%; 
+    margin: 1rem auto; 
+    width: 90%; /* Full width on mobile */
+    max-width: 400px; 
+    background-color: rgb(211, 211, 211); /* Cinza claro */
+    color: rgb(0, 0, 0);
+    border: 2px solid transparent; /* Ajustar borda se necessário */
+    border-radius: 50px; /* Canto arredondado */
+    outline: none; /* Remover contorno padrão */
+    transition: border-color 0.3s;
+    margin: 4rem ; /* Centralizar e espaçar inputs */
+    padding: 1rem;
 }
-.p{
+
+.h11 {
+    margin-top: 1rem;
+    text-align: center;
+    margin-bottom: 1rem;
     font-family: 'Poppins', sans-serif;
 }
+
 /* A imagem ocupa 50% da altura do card, cobrindo a metade superior */
 .cardImage {
     width: 100%;
@@ -26,30 +53,90 @@
     padding: 0; /* Garantir que não há preenchimento */
 }
 
-.cardActions {
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
-    justify-content: space-between;
-    padding: 10px;
-}
-
-.cardAction {
-    display: flex;
-    align-items: center;
     justify-content: center;
-    width: 11px;
-    height: 15px;
-    border-radius: 50%;
+    align-items: center;
+    z-index: 1000;
+
+}
+
+.modalContent {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+}
+
+.closeButton {
+    background-color: #c2b8b8;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
     cursor: pointer;
-    color: rgb(255, 255, 255);
+    margin-top: 10px;
+}
+
+.closeButton:hover {
+    background-color: #a70000;
 }
 
 
-.available {
-    background-color: green;
+/* Ajustes responsivos */
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.5rem; /* Aumentar tamanho da fonte em mobile */
+    }
+
+    .input,
+    .select,
+    .submitButton {
+        width: 90vw; /* Largura total em mobile */
+        margin-left: 0; /* Remover margem esquerda */
+    }
+
+    .text1 {
+        font-size: 1.5rem; /* Ajustar tamanho do texto para mobile */
+    }
 }
 
-.unavailable {
-    background-color: red;
+.label-input {
+    display: flex;
+    flex-direction: column; /* Coloca label acima do input */
+    width: 100%; /* Faz o input ocupar toda a largura disponível */
+    max-width: 400px; /* Limita a largura máxima */
+    margin: 1rem 0; /* Espaçamento entre os inputs */
+}
+
+.input {
+    width: 60rem; 
+    background-color: rgb(211, 211, 211);
+    color: rgb(0, 0, 0);
+    border: 2px solid transparent; /* Ajustar borda */
+    border-radius: 10px; /* Canto arredondado */
+    outline: none; /* Remover contorno padrão */
+    transition: border-color 0.3s;
+    padding: 1rem;
+}
+
+.select {
+    width: 57rem; 
+    margin-left: 4rem;
+    margin-bottom: -1rem;
+    margin-top: -1rem;
 }
 
 .maintenance {

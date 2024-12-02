@@ -58,3 +58,13 @@
 .li{
   margin-bottom: 2rem;
 }
+
+@media (max-width: 480px) {
+    .container{
+        margin-left: 3.5rem;
+    }
+
+    .nav_search{
+        width: 30rem;
+    }
+}
