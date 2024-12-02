@@ -14,7 +14,7 @@ const App = ({ title, link, image }) => {
     return (
         <Card
             className={styles.card}
-            style={{ width: 250, height: 250, borderRadius: 30, marginLeft: 60 }}
+            style={{ width: 250, height: 250, borderRadius: 30, marginLeft: 60}}
             onClick={handleClick} // Adicionando um manipulador de clique
         >
             <p className={styles.title1}>{title}</p>

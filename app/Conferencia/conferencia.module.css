@@ -1,7 +1,25 @@
-.Card{
+.Card {
     display: flex;
+    flex-wrap: wrap; /* Allow items to wrap */
+    justify-content: space-between; /* Space items evenly */
+    padding: 10px; /* Add some padding */
 }
 
-.vip{
+.vip {
     display: flex;
+    flex-direction: column; /* Stack items vertically */
+    flex: 1 1 300px; /* Allow flexibility with a minimum width */
+    margin: 10px; /* Add spacing between cards */
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .Card {
+        flex-direction: column; /* Stack cards on smaller screens */
+        align-items: center; /* Center items */
+    }
+
+    .vip {
+        flex: 1 1 100%; /* Take full width on small screens */
+    }
 }

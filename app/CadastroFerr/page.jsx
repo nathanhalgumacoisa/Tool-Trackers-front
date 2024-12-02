@@ -21,6 +21,7 @@ const CadastroFerr = () => {
     const [foto_url, setFotoUrl] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [currentStep, setCurrentStep] = useState(0);
+    const [isModalVisible, setIsModalVisible] = useState(false);
 
     const stepInputs = [
         [
@@ -38,7 +39,7 @@ const CadastroFerr = () => {
                 value: ambiente,
                 setter: setAmbiente,
                 type: "select",
-                options: ["oficina mecanica de usinagem", "oficina eletro eletrônica", "espaço maker", "manutencao"],
+                options: ["Oficina mecanica de usinagem", "Oficina eletro eletrônica", "Espaço maker", "Manutencao"],
                 required: true
             },
         ],
@@ -77,7 +78,37 @@ const CadastroFerr = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
         // Lógica de envio dos dados...
+        
+        // Limpar os estados dos inputs
+        setNome('');
+        setImagemUrl('');
+        setConjunto('');
+        setNumero('');
+        setPatrimonio('');
+        setModelo('');
+        setDescricao('');
+        setAmbiente('');
+        setNomeOrganizador('');
+        setNumeroOrganizador('');
+        setNomeSubOrganizador('');
+        setNumeroSubOrganizador('');
+        setFotoUrl('');
+        
+        // Retornar ao primeiro passo
+        setCurrentStep(0);
+        
+        // Exibir mensagem de sucesso
+        setIsModalVisible(true);
+        
+        // Focar no primeiro input após limpar
+        setTimeout(() => {
+            const firstInput = document.querySelector(`input[type="text"], textarea, select`);
+            if (firstInput) {
+                firstInput.focus();
+            }
+        }, 0);
     };
 
     const handleNext = () => {
@@ -96,8 +127,8 @@ const CadastroFerr = () => {
         <div className={styles.conjunto}>
             <Header />
             <form onSubmit={handleSubmit}>
-                <h1 className={styles.h11}>Cadastro de Ferramentas</h1>
                 <div className={styles.container}>
+                <h1 className={styles.h11}>Cadastro de Ferramentas</h1>
                     {stepInputs[currentStep].map((input, index) => (
                         <div key={index}>
                             <label className={styles.titulos}>
@@ -117,7 +148,7 @@ const CadastroFerr = () => {
                                         onChange={(e) => input.setter(e.target.value)}
                                         required={input.required}
                                     >
-                                        <option value="" disabled>Selecione</option>
+                                        <option value="" disabled className={styles.opcoes}>Selecione</option>
                                         {input.options.map((option, idx) => (
                                             <option key={idx} value={option}>{option}</option>
                                         ))}
@@ -135,8 +166,7 @@ const CadastroFerr = () => {
                             </label>
                         </div>
                     ))}
-                </div>
-                <div className={styles.botoes}>
+                    <div className={styles.botoes}>
                     {currentStep > 0 && (
                         <button type="button" onClick={handlePrevious} className={styles.navButton2}>
                             Anterior
@@ -152,9 +182,21 @@ const CadastroFerr = () => {
                         </button>
                     )}
                 </div>
+                </div>
+                
             </form>
 
-            {successMessage && <p>{successMessage}</p>}
+            {isModalVisible && (
+                <div className={styles.modal}>
+                    <div className={styles.modalContent}>
+                        <h2>Ferramenta criada com sucesso</h2>
+                        <button onClick={() => setIsModalVisible(false)} className={styles.closeButton}>
+                            Fechar
+                        </button>
+                    </div>
+                </div>
+            )}
+
         </div>
     );
 };

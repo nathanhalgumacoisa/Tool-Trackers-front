@@ -1,76 +1,89 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 .cardsContainer {
-    display: flex;                /* Ativa o flexbox */
-    justify-content: center;      /* Centraliza horizontalmente */
-    align-items: center;          /* Centraliza verticalmente, se necessário */
+    display: flex;                
+    justify-content: center;      
+    align-items: center;          
     height: 100vh;
     margin-top: 2rem;
- 
+    margin-left: 21%;
+    position: fixed;
 }
-.div1 {
-  
-    margin-top: -1rem;
-    width: 100%;
-    height: 100%; 
-}
+
 
 .content {
-   text-align: center;
-   margin-top: 5%;
-
-    
- 
+    text-align: center;
+    margin-top: 5%;
 }
 
 .buttonContainer {
     margin-top: 8%;
+    display: flex;              
+    flex-direction: column;      
+    align-items: center;         
 }
 
 .title {
     text-align: center; 
     position: fixed;
-    
+    width: 100%;  
+    font-size: small; 
+    margin-bottom: 30%;
+    font-family: 'Poppins', sans-serif;
+        
 }
 
-.button{
-   height: 60px;
-   width: 130px;
-   background-color: #6E0000;
-   border-radius: 10PX;
-   color: aliceblue;
-}
-
-.button2 {
-    margin-left: 5%;
+.button, .button2 {
     height: 60px;
     width: 130px;
     background-color: #6E0000;
     border-radius: 10px;
     color: aliceblue;
+    margin: 0.5rem;             
+}
+
+.imageContainer {
+    position: relative;          
+    width: 100%;                 
+    height: 100%;                
 }
 
 .imagem1 {
-    width: 100%;
-    height: 100%; 
-    
-  }
-
-  .imageContainer {
-    position: relative;           /* Define o contêiner como relativo */
-}
-
-.imagem1 {
-    width: 100%;                 /* Ajusta a largura da imagem */
-    height: 100%;   
-    z-index: -1;             /* Mantém a proporção da imagem */
+    width: 100%;                 
+    height: auto;                
+    z-index: -1;        
+    position: fixed;    
 }
 
 .cards1 {
-    position: absolute;          /* Define o título como absoluto */                /* Ajuste conforme necessário */
+    position: absolute;          
     left: 50%;      
-    margin-top: 7rem;      
+    margin-top: 5rem;      
     font-size: 40px; 
-    transform: translateX(-50%); /* Ajusta a posição para centralizar */
+    transform: translateX(-50%); 
     color: rgb(0, 0, 0);               
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); 
-    z-index: 1;                  /* Garante que o texto fique acima da imagem */
-}
+    font-family: 'Poppins', sans-serif;
+                    
+} 
+    .cards {
+         z-index: -1;  
+    }
+
+    @media (max-width: 480px) {
+        .title {
+            font-size: 1.5rem;
+        }
+    
+        .cards1 {
+            font-size: 20px; 
+            margin-top: 3rem; 
+            margin-right: 40%;
+        
+        }
+    
+        .button, .button2 {
+            width: 80%; 
+        }
+    }

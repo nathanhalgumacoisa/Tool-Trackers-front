@@ -55,7 +55,7 @@ function Register() {
           email,
       });
         alert("Registrado com sucesso!");
-        
+        router.push("/Login");
 
         setEmail('');
          setNome('');
@@ -67,6 +67,7 @@ function Register() {
     };
   
     return (
+      <div className={styles.tudinho}>
       <div>
         <Header />
         <div>
@@ -79,6 +80,7 @@ function Register() {
           {/* <form onSubmit={handleSubmit}> */}
 
           <div className={styles.input_container}>
+            <div className={styles.input_container}>
               <label className={styles.label}>
                 <h2 className={styles.title}>Nome:</h2>
                 <input
@@ -88,6 +90,7 @@ function Register() {
                   onChange={(e) => setNome(e.target.value)}
                 />
               </label>
+              </div>
             </div> 
             <div className={styles.input_container}>
               <label className={styles.label}>
@@ -120,13 +123,14 @@ function Register() {
           <button className={styles.btn_cadastro} onClick={register}>
             <h1 className={styles.title1}>Registrar</h1>
           </button>
-          <p>
+          <p className={styles.login}>
             Já tem uma conta?{" "}
             <Link href="/Login">
               <span className={styles.link}>Entre aqui</span>
             </Link>
           </p>
         </div>
+      </div>
       </div>
     );
   }

@@ -19,7 +19,7 @@
         }
         .textlabel{
             color: black;
-            font-size: 20px;
+            font-size: 17px;
             margin-bottom: 5px;
             margin-top: 2rem;
             margin-left: -19rem;
@@ -29,6 +29,8 @@
   .textlabel{
     color: rgb(255, 255, 255);
     text-align: center;
+    margin-bottom: -2rem;
+    margin-top: 4rem ;
   }
   
   .logintitle {
@@ -40,13 +42,14 @@
   .formDiv02{
     display: flex;
     flex-direction: column;
-    
+    margin-top: -2rem;
+    margin-left: 6rem ;
   }
   .formDiv01{
     display: flex;
     flex-direction: column;
     margin-top: 9rem;
-
+    margin-left: 6rem ;
   }
   .link{
     text-align: center;
@@ -55,7 +58,6 @@
   }
   .cadastro{
     text-align: center;
-    margin-top: 1rem;
     color: rgb(224, 224, 224);
   }
   .inputgroup {
@@ -73,11 +75,12 @@
 
   .button{
     text-align: center;
-    margin-top: 3rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
     width: 6vw;
     height: 2vw;
     align-items: center;
-    margin-left: 57rem;
+    margin-left: 38rem;
     background-color: rgb(185, 185, 185);
     color: rgb(0, 0, 0);
     border-radius: 1rem;
@@ -90,7 +93,7 @@
     text-align: center;
     margin-top: 2rem;
     margin-left: 1rem;
-    margin-bottom: -3rem;
+    margin-bottom: -5rem;
     z-index: 1;
   }
 
@@ -104,8 +107,14 @@
 
   .header{
     width: 100%;
-    height: 500%;
+    height: 100%;
+    
     position: fixed;
     z-index: 0; 
     margin-top: -6rem;
+  }
+
+
+  .form{
+    position: fixed;
   }

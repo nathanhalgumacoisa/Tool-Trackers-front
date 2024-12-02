@@ -6,36 +6,50 @@
     margin-top: 3rem;
     margin-bottom: 6rem;
 }
-
-.input_container {
-    margin-top: 3rem;
+.tudinho{
+    position: fixed;
+}
+.title1{
+    text-align: center;
+    margin-bottom: 2rem;
+    margin-top: -0.6rem;
+    font-size: 1rem;
+}
+.login{
+        color: aliceblue;
+}
+.link{
+    color: rgb(230, 157, 157);
 }
 
+
 .input {
-    width: 60vw;
+    width: 33vw;
+    height: 1rem;
     background-color: rgb(156, 0, 0);
     color: rgb(0, 0, 0);
     border: 2px ; /* Borda vermelha */
     border-radius: 50px; /* Arredondamento */
     outline: none; /* Remove a borda de foco padrão */
- 
     max-width: 21%;
     align-items: center;
     margin: -1rem auto;
-    padding: 1rem;
+    padding: 0.8rem;
     align-items: center;
-    margin-left: 48rem;
+    margin-left: 24rem;
     margin-top: 0.5rem;
     justify-content: center;
         }
 
 .title{
-    font-size: 19px;
+    font-size: 16px;
     align-items: center;
     text-align: center;
     margin-top: 1rem;
-    margin-left: -19rem;
+    margin-left: -12rem;
     color: rgb(255, 255, 255);
+    margin-top: 2.5rem;
+    margin-bottom: -2rem;
 }
 
 .input::placeholder {
@@ -64,20 +78,19 @@
 .btn_cadastro {
     background-color: rgb(185, 185, 185);
     color: rgb(0, 0, 0);
-    border: 2px ; /* Borda vermelha */
+    border: 6rem ; /* Borda vermelha */
     border-radius: 1rem; /* Arredondamento */
     outline: none; /* Remove a borda de foco padrão */
     transition: border-color 0.3s; 
     max-width: 50%;
     align-items: center;
+    height: 1rem;
     margin-top: -4rem;
-    margin-bottom: 2rem;
+    margin-bottom: 0.7rem;
     padding: 1rem;
     margin-left: 2rem;
-    height: 1rem;
     text-align: center;
     align-items: center;
-    text-align: center;
     justify-content: center;
 }
 
@@ -106,7 +119,7 @@
     color: rgb(0, 0, 0);
     font-size: 3rem;
     margin-bottom: 5px;
-    margin-top: 3rem;
+    margin-top: -2rem;
     margin-left: 1rem;
     align-items: center;
     text-align: center;
@@ -121,3 +134,9 @@
     margin-top: 7rem;
     margin-bottom: 6rem;
   }
+.label{
+    margin-top: -5rem;
+}
+.input_container{
+    margin-top: -1rem;
+}
