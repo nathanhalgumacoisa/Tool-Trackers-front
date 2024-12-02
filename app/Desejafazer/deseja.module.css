@@ -7,8 +7,8 @@
     align-items: center;          
     height: 100vh;
     margin-top: 2rem;
-    margin-left: 21%;
     position: fixed;
+
 }
 
 
@@ -64,26 +64,45 @@
     transform: translateX(-50%); 
     color: rgb(0, 0, 0);               
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); 
-    font-family: 'Poppins', sans-serif;
-                    
-} 
+    font-family: 'Poppins', sans-serif;              
+    }
+
     .cards {
-         z-index: -1;  
+         z-index: -1; 
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         margin-top: 25rem;
+         
     }
 
     @media (max-width: 480px) {
         .title {
-            font-size: 1.5rem;
+            font-size: 2.0rem;
+          
         }
     
         .cards1 {
-            font-size: 20px; 
-            margin-top: 3rem; 
-            margin-right: 40%;
+            font-size: 25px; 
+            margin-top: 6rem; 
+            text-align: center;
+            
         
         }
     
         .button, .button2 {
             width: 80%; 
+        }
+        .imagem1{
+            display: none;
+        }
+        .cardsContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-left: 7%;
+         
         }
     }
