@@ -79,3 +79,21 @@
   .imageContainer {
     position: relative;           /* Define o contêiner como relativo */
 }
+@media (max-width: 480px) {
+    .cards1 {
+        font-size: 1.50rem; 
+    }
+    .imagem1{
+        display: none;
+    }
+    .cardsContainer {
+    justify-content: center;      /* Centraliza horizontalmente */
+    flex-direction: column;
+    align-items: center; 
+    height: 35%;  
+    position: fixed;
+    margin-left: 6.45%;
+    margin-top: 70%;
+      
+    }
+}
