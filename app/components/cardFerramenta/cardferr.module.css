@@ -20,7 +20,7 @@
 /* A imagem ocupa 50% da altura do card, cobrindo a metade superior */
 .cardImage {
     width: 100%;
-    height: 50%; /* A altura da imagem vai cobrir metade do card */
+    height: 60%; /* A altura da imagem vai cobrir metade do card */
     object-fit: cover; /* A imagem cobrirá a área sem distorcer, mas pode ser cortada */
     margin: 0; /* Garantir que não há margens */
     padding: 0; /* Garantir que não há preenchimento */
