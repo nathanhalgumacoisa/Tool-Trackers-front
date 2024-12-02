@@ -1,80 +1,244 @@
-/* cardferr.module.css */
-.card {
-    width: 100%;
-    border-radius: 10px;
-    box-shadow: 8px 10px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-    overflow: hidden;
-    background-color: rgb(94, 91, 91);
+.body {
+    font-family: Arial, sans-serif;
+    background-color: #850000; /* Background color for contrast */
 }
 
-.card:hover {
-    transform: scale(1.02);
-}
-.text{
-    color: #f0ffff;
-}
-.p{
-    font-family: 'Poppins', sans-serif;
-}
-/* A imagem ocupa 50% da altura do card, cobrindo a metade superior */
-.cardImage {
-    width: 100%;
-    height: 50%; /* A altura da imagem vai cobrir metade do card */
-    object-fit: cover; /* A imagem cobrirá a área sem distorcer, mas pode ser cortada */
-    margin: 0; /* Garantir que não há margens */
-    padding: 0; /* Garantir que não há preenchimento */
-}
-
-.cardActions {
+.container {
     display: flex;
-    justify-content: space-between;
-    padding: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fdfdfd;
+    border-radius: 1rem;
+    box-shadow: 8px 10px 10px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    text-align: center;
+    margin: 0 auto;
+    padding: 1rem; 
+    margin-top: 6rem;
+    margin-bottom: 4rem;
 }
 
-.cardAction {
+.conjunto{
+    background-color: #920000;
+    height: 70rem;
+}
+
+.navButton1,
+.navButton2 {
+    width: 6rem;
+    margin: 3rem;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(129, 1, 1);
+    border-radius: 11px;
+    height: 2rem;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+    color: #fdfdfd;
+    font-size: medium;
+}
+
+.textarea {
+    width: 90%;
+    max-width: 400px;
+    background-color: rgb(211, 211, 211); /* Cinza claro */
+    color: rgb(0, 0, 0);
+    border: 2px solid transparent;
+    border-radius: 50px;
+    outline: none;
+    transition: border-color 0.3s;
+    margin: 1rem auto;
+    padding: 1rem;
+}
+
+.botoes {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 11px;
-    height: 15px;
-    border-radius: 50%;
-    cursor: pointer;
+}
+
+.h1 {
+    text-align: center;
+    color: #333;
+}
+
+.title {
+    font-size: 1.2rem; /* Ajustar tamanho da fonte para melhor legibilidade */
+    max-width: 90%; /* Permitir que ocupe mais largura em telas menores */
+    margin: 1px ; /* Usar rem para espaçamento consistente */
+    padding: 1rem; /* Adicionar padding */
+    text-align: left;
+    margin-top: 2rem;
+
+}
+.h2{
+    margin-left: 5rem ;
+}
+.input,
+.submitButton {
+    width: 90%; /* Full width on mobile */
+    max-width: 400px; 
+    background-color: rgb(211, 211, 211); /* Cinza claro */
+    color: rgb(0, 0, 0);
+    border: 2px solid transparent; /* Ajustar borda se necessário */
+    border-radius: 50px; /* Canto arredondado */
+    outline: none; /* Remover contorno padrão */
+    transition: border-color 0.3s;
+    margin: 1rem auto; /* Centralizar e espaçar inputs */
+    padding: 1rem; /* Adicionar padding */
+    margin-bottom: -1rem;
+}
+
+.input::placeholder,
+.select option {
+    color: rgb(0, 0, 0); 
+    margin-top: 2rem;
+}
+
+.select {
+    width: 90%; 
+    margin: 1rem auto; 
+    width: 90%; /* Full width on mobile */
+    max-width: 400px; 
+    background-color: rgb(211, 211, 211); /* Cinza claro */
+    color: rgb(0, 0, 0);
+    border: 2px solid transparent; /* Ajustar borda se necessário */
+    border-radius: 50px; /* Canto arredondado */
+    outline: none; /* Remover contorno padrão */
+    transition: border-color 0.3s;
+    margin: 4rem ; /* Centralizar e espaçar inputs */
+    padding: 1rem;
+}
+
+.h11 {
+    margin-top: 1rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.titulos {
+    margin-top: 20px;
+}
+
+.submitButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(156, 0, 0);
     color: rgb(255, 255, 255);
+    border: 2px solid transparent; /* Ajustar borda se necessário */
+    border-radius: 12px; /* Canto arredondado */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    margin-top: 1.5rem; /* Espaço acima do botão */
+    padding: 1rem; /* Adicionar padding */
+    max-width: 20%;
+    height: 2rem;
+    width: 15vw;
+    font-size: medium;
+    margin-top: 2px;
+    border: 2px solid transparent; /* Ajustar borda se necessário */
 }
 
-
-.available {
-    background-color: green;
-}
-
-.unavailable {
-    background-color: red;
-}
-
-.maintenance {
-    color: rgb(228, 228, 0);
-}
-
-@media (max-width: 480px) {
-    .card {
-        padding-right: 20rem;
-        height: 5vh;
-    }
-
-    .text{
-            margin-top: 1rem;
-            margin-bottom: 1rem;  
-            width: 50vw;
-            height: 10vh;
-    }
+.submitButton:hover {
+    background-color: rgb(92, 0, 0);
+    color: rgb(156, 0, 0);
+    border: 2px solid rgb(156, 0, 0);
     
-    .text p{
-        font-size: 1rem;
+}
+
+.opcoes {
+    background-color: #fdfdfd;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
+}
+
+.modalContent {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+}
+
+.closeButton {
+    background-color: #c2b8b8;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.closeButton:hover {
+    background-color: #a70000;
+}
+
+
+/* Ajustes responsivos */
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.5rem; /* Aumentar tamanho da fonte em mobile */
     }
 
-    .cardImage {
-        height: 20vh;
-        width: 60vw;
+    .input,
+    .select,
+    .submitButton {
+        width: 90vw; /* Largura total em mobile */
+        margin-left: 0; /* Remover margem esquerda */
     }
-} 
+
+    .text1 {
+        font-size: 1.5rem; /* Ajustar tamanho do texto para mobile */
+    }
+}
+
+.label-input {
+    display: flex;
+    flex-direction: column; /* Coloca label acima do input */
+    width: 100%; /* Faz o input ocupar toda a largura disponível */
+    max-width: 400px; /* Limita a largura máxima */
+    margin: 1rem 0; /* Espaçamento entre os inputs */
+}
+
+.input {
+    width: 60rem; 
+    background-color: rgb(211, 211, 211);
+    color: rgb(0, 0, 0);
+    border: 2px solid transparent; /* Ajustar borda */
+    border-radius: 10px; /* Canto arredondado */
+    outline: none; /* Remover contorno padrão */
+    transition: border-color 0.3s;
+    padding: 1rem;
+}
+
+.select {
+    width: 57rem; 
+    margin-left: 4rem;
+    margin-bottom: -1rem;
+    margin-top: -1rem;
+}
+
+.title {
+    font-size: 15px;
+    color: #333; /* Ajuste a cor conforme necessário */
+}
