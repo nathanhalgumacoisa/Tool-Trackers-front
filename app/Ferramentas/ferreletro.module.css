@@ -65,8 +65,13 @@
 
 /* Ajustes responsivos */
 @media (max-width: 480px) {
+    .App{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
 
-    /* Ajuste para smartphones */
     .h1 {
         font-size: 1.3rem;
         /* Tamanho menor para cabeçalho */
@@ -96,9 +101,10 @@
 
 .ferramentasGrid {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 16px;
     justify-content: center;
+    align-items: center;
 }
 
 .ferramentasGrid>* {
