@@ -1,12 +1,18 @@
-/* organizadores.module.css */
-
 .container {
     font-family: Arial, sans-serif;
     padding: 20px;
     
 
 }
-
+.h1 {
+    font-size: 1.5rem;
+    /* Tamanho do cabeçalho */
+    margin-top: 5%;
+    /* Margem no topo */
+    text-align: center;
+    /* Centraliza o texto */
+    font-family: 'Poppins', sans-serif;
+}
 .h2Container {
     display: flex;
     flex-direction: column; /* Mudança para coluna para cada título e suas informações */
@@ -16,14 +22,16 @@
 .h2 {
     cursor: pointer;
     font-size: 1.5rem;
-    color: #333;
+    color: #ffffff;
     margin: 10px 0; /* Margem ajustada para melhor espaçamento */
     padding: 10px;
     transition: background-color 0.3s;
+    background-color: #6E0000;
+    border-radius: 5px;
 }
 
 .h2:hover {
-    background-color: #f0f0f0;
+    
     border-radius: 5px;
 }
 

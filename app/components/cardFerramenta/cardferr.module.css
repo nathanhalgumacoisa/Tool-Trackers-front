@@ -5,7 +5,7 @@
     box-shadow: 8px 10px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
     overflow: hidden;
-    background-color: rgb(94, 91, 91);
+    background-color: rgb(205, 201, 201);
 }
 
 .card:hover {
@@ -54,4 +54,16 @@
 
 .maintenance {
     color: rgb(228, 228, 0);
+}
+.circle {
+    width: 20px; /* Tamanho da bolinha */
+    height: 20px; /* Tamanho da bolinha */
+    border-radius: 50%; /* Forma circular */
+    background-color: rgb(248, 245, 245); /* Cor padrão */
+    cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+    display: inline-block; /* Para que a bolinha possa ser clicada */
+}
+
+.circle.active {
+    background-color: green; /* Cor quando ativada */
 }

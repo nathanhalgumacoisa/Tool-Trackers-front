@@ -17,8 +17,8 @@
     .Card {
         flex-direction: column; /* Stack cards on smaller screens */
         align-items: center; /* Center items */
+        
     }
-
     .vip {
         flex: 1 1 100%; /* Take full width on small screens */
     }
