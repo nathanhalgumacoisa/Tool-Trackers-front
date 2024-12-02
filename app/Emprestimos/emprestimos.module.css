@@ -1,77 +1,285 @@
-.h01 {
-    font-size: 2.7rem; /* Large heading */
-    margin-top: 5rem; /* Margin at the top */
-    text-align: center; /* Center the text */
+.body {
+    font-family: Arial, sans-serif;
+    background-color: #850000; /* Background color for contrast */
 }
 
-.h2 {
+.container {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    font-size: 1.4rem; /* Subheading size */
-    margin-top: 5rem; /* Margin at the top */
+    justify-content: center;
+    background-color: #fdfdfd;
+    border-radius: 1rem;
+    box-shadow: 8px 10px 10px rgba(0, 0, 0, 0.1);
+    width: 40%;
+    text-align: center;
+    margin: 0 auto;
+    padding: 1rem; 
+    margin-top: 7rem;
+    margin-bottom: 10rem;
+    height: 75rem;
+    
+}
+
+.conjunto{
+    background-color: #920000;
+    height: 100rem;
+}
+
+.navButton1,
+.navButton2 {
+    width: 6rem;
+    margin: 3rem;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(129, 1, 1);
+    border-radius: 11px;
+    height: 2rem;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+    color: #fdfdfd;
+    font-size: medium;
+}
+
+.textarea {
+    width: 90%;
+    max-width: 400px;
+    background-color: rgb(211, 211, 211); /* Cinza claro */
+    color: rgb(0, 0, 0);
+    border: 2px solid transparent;
+    border-radius: 50px;
+    outline: none;
+    transition: border-color 0.3s;
+    margin: 1rem auto;
+    padding: 1rem;
+}
+
+.botoes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.h1 {
+    text-align: center;
+    color: #333;
+}
+
+.title {
+     /* Ajustar tamanho da fonte para melhor legibilidade */
+    max-width: 90%; /* Permitir que ocupe mais largura em telas menores */
+    margin: 1px ; /* Usar rem para espaçamento consistente */
+    padding: 1rem; /* Adicionar padding */
+    text-align: left;
+    margin-top: 2rem;
+    margin-bottom: -1.4rem;
+
+}
+
+.input,
+.submitButton {
+    width: 90%; /* Full width on mobile */
+    max-width: 400px; 
+    background-color: rgb(211, 211, 211); /* Cinza claro */
+    color: rgb(0, 0, 0);
+    border: 2px solid transparent; /* Ajustar borda se necessário */
+    border-radius: 50px; /* Canto arredondado */
+    outline: none; /* Remover contorno padrão */
+    transition: border-color 0.3s;
+    margin: 1rem auto; /* Centralizar e espaçar inputs */
+    padding: 1rem; /* Adicionar padding */
+    margin-bottom: 1rem;
+    
+}
+
+.input::placeholder,
+.select option {
+    color: rgb(0, 0, 0); 
+    margin-top: 2rem;
+}
+
+.select {
+    width: 90%; 
+    margin: 1rem auto; 
+    width: 90%; /* Full width on mobile */
+    max-width: 400px; 
+    background-color: rgb(211, 211, 211); /* Cinza claro */
+    color: rgb(0, 0, 0);
+    border: 2px solid transparent; /* Ajustar borda se necessário */
+    border-radius: 50px; /* Canto arredondado */
+    outline: none; /* Remover contorno padrão */
+    transition: border-color 0.3s;
+    margin: 4rem ; /* Centralizar e espaçar inputs */
+    padding: 1rem;
+}
+
+.h11 {
+    margin-top: 1rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.titulos {
+    margin-top: 20px;
+}
+
+.submitButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(156, 0, 0);
+    color: rgb(255, 255, 255);
+    border: 2px solid transparent; /* Ajustar borda se necessário */
+    border-radius: 12px; /* Canto arredondado */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    margin-top: 5rem; /* Espaço acima do botão */
+    padding: 1rem; /* Adicionar padding */
+    height: 3rem;
+    width: 8rem;
+    font-size: medium;
+    margin-top: 2px;
+    border: 2px solid transparent; /* Ajustar borda se necessário */
+}
+
+.submitButton:hover {
+    background-color: rgb(92, 0, 0);
+    color: rgb(156, 0, 0);
+    border: 2px solid rgb(156, 0, 0);
+    
+}
+
+.opcoes {
+    background-color: #fdfdfd;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
+}
+
+.modalContent {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+}
+
+.closeButton {
+    background-color: #c2b8b8;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.closeButton:hover {
+    background-color: #a70000;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.5rem; /* Aumentar tamanho da fonte em mobile */
+    }
+
+    .input,
+    .select,
+    .submitButton {
+        width: 90vw; /* Largura total em mobile */
+        margin-left: 0; /* Remover margem esquerda */
+    }
+
+    .text1 {
+        font-size: 1.5rem; /* Ajustar tamanho do texto para mobile */
+    }
+}
+
+.label-input {
+    display: flex;
+    flex-direction: column; /* Coloca label acima do input */
+    width: 100%; /* Faz o input ocupar toda a largura disponível */
+    max-width: 400px; /* Limita a largura máxima */
+    margin: 1rem 0; /* Espaçamento entre os inputs */
 }
 
 .input {
+    width: 60rem; 
+    background-color: rgb(211, 211, 211);
+    color: rgb(0, 0, 0);
+    border: 2px solid transparent; /* Ajustar borda */
+    border-radius: 10px; /* Canto arredondado */
+    outline: none; /* Remover contorno padrão */
+    transition: border-color 0.3s;
+    padding: 1rem;
+}
+
+.select {
+    width: 57rem; 
+    margin-left: 4rem;
+    margin-bottom: -1rem;
+    margin-top: -1rem;
+}
+
+.title {
+    font-size: 15px;
+    color: #333; /* Ajuste a cor conforme necessário */
+}
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
     align-items: center;
-    width: 90%; /* Full width on smaller screens */
-    max-width: 400px; /* Limit max width */
-    height: 2rem; /* Height of input */
-    margin-top: 0.5rem; /* Space above input */
-    border-radius: 10rem; /* Rounded corners */
-    padding: 0.5rem; /* Padding inside input */
-    color: rgb(255, 255, 255); /* Text color */
-    border: 2px solid brown; /* Border color */
-    background-color: rgb(156, 0, 0); 
+    z-index: 1000;
+}
+.modalTitle{
+    margin-top: 1rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+.modalContent {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    height: 25rem;
+    width: 20rem;
 }
 
-.divinputs {
-    margin-left: auto; 
-    margin-right: auto; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
+.closeButton {
+    border: 2px solid rgb(156, 0, 0);
+    background-color: rgb(156, 0, 0);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
 }
 
-.button {
-    margin-top: 2rem; /* Space above button */
-    width: 90%; /* Full width on smaller screens */
-    max-width: 150px; /* Limit max width */
-    height: 2rem; /* Height of button */
-    border-radius: 10rem; /* Rounded corners */
-    background-color: rgb(156, 0, 0); /* Button background color */
-    color: rgb(255, 255, 255); /* Button text color */
-    border: 2px solid brown; /* Button border color */
-    align-items: center; /* Center align button text */
-    display: flex; /* Use flexbox for button */
-    justify-content: center; /* Center text within button */
-    margin-top: 10%;
-    margin-left: 33rem;
-}
-
-.bu01 {
-    align-items: center;
-    margin-left: auto; /* Center button */
-    margin-right: auto; /* Center button */
-    margin-top: 2rem; /* Space above button */
-    margin-bottom: 10rem; /* Space below button */
-}
-
-/* Responsive adjustments */
-@media (max-width: 300px) {
-    .h01 {
-        font-size: 2rem; /* Reduce font size for smaller screens */
-        margin-top: 3rem; /* Adjust margin */
-    }
-
-    .h2 {
-        font-size: 1.2rem; /* Reduce subheading size */
-        margin-top: 3rem; /* Adjust margin */
-    }
-
-    .input {
-        width: 90%; /* Keep input full width */
-    }
-
-    .button {
-        width: 90%; /* Keep button full width */
-    }
+.closeButton:hover {
+    background-color: #0056b3;
 }

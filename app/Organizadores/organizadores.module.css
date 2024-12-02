@@ -4,7 +4,15 @@
     
 
 }
-
+.h1 {
+    font-size: 1.5rem;
+    /* Tamanho do cabeçalho */
+    margin-top: 5%;
+    /* Margem no topo */
+    text-align: center;
+    /* Centraliza o texto */
+    font-family: 'Poppins', sans-serif;
+}
 .h2Container {
     display: flex;
     flex-direction: column; /* Mudança para coluna para cada título e suas informações */

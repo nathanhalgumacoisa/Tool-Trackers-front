@@ -54,6 +54,7 @@ function Organizadores() {
   return (
     <div className={styles.container} key="app-container">
       <Header />
+      <h1 className={styles.h1}> Escolha o organizador do qual deseja conferir as ferramentas</h1>
       <div className={styles.localsContainer}>
 
         {/* Seção Carrinhos */}
