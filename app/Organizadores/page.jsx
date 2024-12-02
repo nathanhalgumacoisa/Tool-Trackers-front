@@ -59,50 +59,51 @@ function Organizadores() {
       <Header />
       <div className={styles.localsContainer}>
         
-      <div className={styles.selectedCarrinho}>
-  <div className={styles.h2Container}>
-    <select 
-      className={styles.h2} 
-      onClick={() => setExpandedCarrinhos(!expandedCarrinhos)} 
-      onChange={handleSelectChange}
-      value={selectedCarrinho}
-    >
-      <option value="">Carrinhos</option>
-      {expandedCarrinhos && locals
-        .filter(local => local.nome_organizador === 'carrinhos')
-        .map((local, index) => (
-          <option 
-            key={`carrinho-${index}-${local.organizador_id}`} 
-            value={local.id}
-          >
-            {local.numero_organizador}
-          </option>
-        ))}
-    </select>
+        <div className={styles.selectedCarrinho}>
+          <div className={styles.h2Container}>
+            <select 
+              className={styles.h2} 
+              onClick={() => setExpandedCarrinhos(!expandedCarrinhos)} 
+              onChange={handleSelectChange}
+              value={selectedCarrinho}
+            >
+              <option value="">Carrinhos</option>
+              {expandedCarrinhos && locals
+                .filter(local => local.nome_organizador === 'carrinhos')
+                .map((local, index) => (
+                  <option 
+                    key={`carrinho-${index}-${local.organizador_id}`} 
+                    value={local.id}
+                  >
+                    {local.numero_organizador}
+                  </option>
+                ))}
+            </select>
 
-    {/* Exibição do Carrinho Selecionado */}
-    {selectedCarrinho && (
-      <div className={styles.selectedCarrinho}>
+            {/* Exibição do Carrinho Selecionado */}
+            {selectedCarrinho && (
+              <div className={styles.selectedCarrinho}>
         <p onClick={() => handleNumOrganizadorClick(selectedCarrinho)}>
-          Carrinho selecionado: {selectedCarrinho}
-        </p>
+                  Carrinho selecionado: {selectedCarrinho}
+                </p>
       </div>
     )}
 
     {/* Exibição do Suborganizador se `expanded` estiver ativo */}
     {expanded[selectedCarrinho]?.sub && locals
       .filter(local => local.id === selectedCarrinho)
-      .map((local) => (
+                    .map((local) => (
         <p 
-          key={`suborganizador-${local.id}`}
+                        key={`suborganizador-${local.id}`} 
           onClick={() => handleImgOrganizadorClick(local.id)} 
           className={styles.mapText}
-        >
-          {local.nome_suborganizador} {local.numero_suborganizador}
-        </p>
+                      >
+                          {local.nome_suborganizador} {local.numero_suborganizador}
+                        </p>
       ))}
-  </div>
-</div>
+          </div>
+        </div>
+
         {/* Seção Armários */}
         <div className={styles.h2Container}>
           <h2 className={styles.h2} onClick={() => setExpandedArmarios(!expandedArmarios)}>Armários</h2>
