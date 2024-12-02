@@ -20,7 +20,8 @@
     transition: transform 0.2s; 
     flex: 1 1 calc(50% - 20px); /* Cada card ocupa 50% da largura menos a margem */
     box-sizing: border-box;     /* Inclui padding e border no cálculo da largura */
-    margin: 10px 0;        
+    margin: 10px 0;      
+    align-items: center;  
  }
 
 .ferramentas:hover {
@@ -101,6 +102,8 @@
     transition: background-color 0.3s; 
     margin-top: 10px;
     margin: 10 0 px; 
+    align-items: center;
+    margin-left: 6rem;
 }
 
 .excluirbutton {
@@ -113,10 +116,31 @@
     transition: background-color 0.3s; 
     margin: 0 10px; 
 }
- .buttonseditar {
+ .buttonsatualizar {
     width: 70px;
     background-color: rgb(189, 189, 189);
+    padding: 0.7rem;
+    background-color: #c20000; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+    margin: 0 10px; 
+ }
+
+ .buttonscancel {
+    width: 70px;
+    background-color: rgb(189, 189, 189);
+    padding: 0.7rem;
+    background-color: #c20000; 
+    color: white; 
+    border: none; 
     border-radius: 5px;
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+    margin: 0 10px; 
+    text-align: center;
  }
 
 .formeditar {
@@ -125,10 +149,23 @@
     flex-direction: column; 
     gap: 10px; 
     width: 260px;
+    align-items: center;
+    margin-left: 2rem;
 }
 
 .inputs {
     font-size: 15px;
+    border-radius: 4rem;
+    text-align: justify;
+    padding: 0.3rem;
+    border-color: #c0c0c0;
+    background-color: #c0c0c0;
+    color: #000000;
+    
+}
+.buttonssubecan{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 /* Animação de Fade In */

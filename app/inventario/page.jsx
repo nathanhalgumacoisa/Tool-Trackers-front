@@ -127,14 +127,14 @@ function Ferramentas() {
                             />
 
 
-                            <CompLoc
+                            {/* <CompLoc
                                 key={ferr.localizacoes_id}
                                 ambiente={ferr.ambiente}
                                 nome_organizador={ferr.nome_organizador}
                                 numero_organizador={ferr.numero_organizador}
                                 nome_suborganizador={ferr.nome_suborganizador}
                                 numero_suborganizador={ferr.numero_suborganizador}
-                            />
+                            /> */}
 
 
                             <button className={styles.editarbutton} onClick={() => editFerr(ferr)}>Editar</button>
@@ -149,8 +149,10 @@ function Ferramentas() {
                                     <input className={styles.inputs} type="text" placeholder="Modelo" value={modelo} onChange={(e) => setModelo(e.target.value)} required />
                                     <input className={styles.inputs} type="text" placeholder="Descrição" value={descricao} onChange={(e) => setDescricao(e.target.value)} required />
 
-                                    <button className={styles.buttonseditar} type="submit">Atualizar</button>
-                                    <button className={styles.buttonseditar} type="button" onClick={() => setEditingFerrId(null)}>Cancelar</button>
+                                    <div className={styles.buttonssubecan}>
+                                    <button className={styles.buttonsatualizar} type="submit">Atualizar</button>
+                                    <button className={styles.buttonscancel} type="button" onClick={() => setEditingFerrId(null)}>Cancelar</button>
+                                    </div>
                                 </form>
                             )}
                         </div>

@@ -54,52 +54,51 @@ function Organizadores() {
   return (
     <div className={styles.container} key="app-container">
       <Header />
+      <h1 className={styles.h1}> Escolha o organizador do qual deseja conferir as ferramentas</h1>
       <div className={styles.localsContainer}>
-        
-      <div className={styles.selectedCarrinho}>
-  <div className={styles.h2Container}>
-    <select 
-      className={styles.h2} 
-      onClick={() => setExpandedCarrinhos(!expandedCarrinhos)} 
-      onChange={handleSelectChange}
-      value={selectedCarrinho}
-    >
-      <option value="">Carrinhos</option>
-      {expandedCarrinhos && locals
-        .filter(local => local.nome_organizador === 'carrinhos')
-        .map((local, index) => (
-          <option 
-            key={`carrinho-${index}-${local.organizador_id}`} 
-            value={local.id}
-          >
-            {local.numero_organizador}
-          </option>
-        ))}
-    </select>
 
-    {/* Exibição do Carrinho Selecionado */}
-    {selectedCarrinho && (
-      <div className={styles.selectedCarrinho}>
-        <p onClick={() => handleNumOrganizadorClick(selectedCarrinho)}>
-          Carrinho selecionado: {selectedCarrinho}
-        </p>
-      </div>
-    )}
+        {/* Seção Carrinhos */}
+        <div className={styles.h2Container}>
+          <h2 className={styles.h2} onClick={() => setExpandedCarrinhos(!expandedCarrinhos)}>Carrinhos</h2>
+          {expandedCarrinhos && locals
+            .filter(local => local.nome_organizador === 'carrinhos')
+            .map((local, index) => (
+              <div key={`carrinho-${index}-${local.organizador_id}`} className={styles.mapItem}>
+                <p onClick={() => handleNumOrganizadorClick(local.id)} className={styles.mapText}>
+                  {local.numero_organizador}
+                </p>
+                {expanded[local.id]?.sub && (
+                  <p onClick={() => handleImgOrganizadorClick(local.id)} className={styles.mapText}>
+                    {local.nome_suborganizador} {local.numero_suborganizador}
+                  </p>
+                )}
+                {expanded[local.id]?.img && (
+                  <img
+                    onClick={() => handleFerramentasClick(local.id)}
+                    style={{ cursor: 'pointer' }}
+                    src={local.foto_url}
+                    className={styles.mapImage}
+                    alt="Imagem do organizador"
 
-    {/* Exibição do Suborganizador se `expanded` estiver ativo */}
-    {expanded[selectedCarrinho]?.sub && locals
-      .filter(local => local.id === selectedCarrinho)
-      .map((local) => (
-        <p 
-          key={`suborganizador-${local.id}`}
-          onClick={() => handleImgOrganizadorClick(local.id)} 
-          className={styles.mapText}
-        >
-          {local.nome_suborganizador} {local.numero_suborganizador}
-        </p>
-      ))}
-  </div>
-</div>
+                  />
+                )}
+                {expanded[local.id]?.ferr && (
+                 <CardFerr
+                 
+                 nome={local.nome}
+                 imagem_url={local.imagem_url}
+                 conjunto={local.conjunto}
+                 numero={local.numero}
+                 patrimonio={local.patrimonio}
+                 modelo={local.modelo}
+                 descricao={local.descricao}
+               />
+                )}
+              </div>
+            ))} 
+
+        </div>
+
         {/* Seção Armários */}
         <div className={styles.h2Container}>
           <h2 className={styles.h2} onClick={() => setExpandedArmarios(!expandedArmarios)}>Armários</h2>
